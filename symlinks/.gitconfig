@@ -1,0 +1,4 @@
+[user]
+    email = jaro.schmidt@gmail.com
+[core]
+    editor = atom --wait
