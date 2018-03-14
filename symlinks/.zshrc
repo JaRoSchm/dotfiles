@@ -7,6 +7,9 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# add z command
+source $(brew --prefix)/etc/profile.d/z.sh
+
 # Set name of the theme to load.
 ZSH_THEME="robbyrussell"
 
@@ -17,7 +20,7 @@ source $ZSH/oh-my-zsh.sh
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew python conda)
+plugins=(brew tmux python)
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh

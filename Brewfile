@@ -12,6 +12,7 @@ brew 'git'
 brew 'nano'
 brew 'tmux'
 brew 'mas'
+brew 'z'
 
 # Apps
 cask 'appcleaner'
