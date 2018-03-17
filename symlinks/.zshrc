@@ -31,7 +31,7 @@ plugins=(brew tmux python)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias condaupdate="conda update --all; conda clean --all"
-alias brewupdate="brew update; brew upgrade; brew cleanup; brew cask upgrade; brew cask cleanup"
+alias brewupdate="brew update; brew upgrade; brew cleanup; brew cask outdated --greedy; brew cask upgrade --greedy; brew cask cleanup"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
