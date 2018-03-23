@@ -1,4 +1,7 @@
 [user]
+    name = Jan Robert Schmidt
     email = jaro.schmidt@gmail.com
 [core]
     editor = atom --wait
+[push]
+    default = current
