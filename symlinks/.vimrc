@@ -21,6 +21,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'airblade/vim-gitgutter'
+"Plugin 'davidhalter/jedi-vim'
+Plugin 'ervandew/supertab'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -39,6 +41,12 @@ set guifont=Anonymous\ Pro\ for\ Powerline:h15
 
 " Set encoding
 set encoding=utf-8
+
+" Use system clipboard
+set clipboard=unnamed
+
+" Jedi completion
+let g:jedi#use_tabs_not_buffers = 1
 
 " tabs in Airline
 let g:airline#extensions#tabline#enabled = 1
