@@ -39,6 +39,9 @@ set showmatch " show the matching part of the pair for [] {} and ()
 set ruler "Position number at bottom right 
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
 
+" visual autocomplete for command menu
+set wildmenu
+
 " Set encoding
 set encoding=utf-8
 
