@@ -28,6 +28,7 @@ Plugin 'ervandew/supertab'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+set scrolloff=5         " Leave 5 lines of buffer when scrolling
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -35,8 +36,8 @@ set expandtab
 set autoindent
 set fileformat=unix
 
-set showmatch " show the matching part of the pair for [] {} and ()
-set ruler "Position number at bottom right 
+set showmatch           " show the matching part of the pair for [] {} and ()
+set ruler               " Position number at bottom right
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
 
 " F9 for saving and executing python
@@ -85,7 +86,6 @@ let python_highlight_all = 1
 
 syntax on
 set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
-"set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\
 "\ [%l/%L\ (%p%%)
 filetype plugin indent on
 au FileType py set autoindent
