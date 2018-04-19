@@ -1,32 +1,25 @@
-set nocompatible              " required
-filetype off                  " required
+" Autoinstall vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/bundle')
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Declare the list of plugins.
+Plug 'w0rp/ale'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'jiangmiao/auto-pairs'
+Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" add all your plugins here (note older versions of Vundle
-" used Bundle instead of Plugin)
-
-Plugin 'w0rp/ale'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'airblade/vim-gitgutter'
-"Plugin 'davidhalter/jedi-vim'
-Plugin 'ervandew/supertab'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
 
 set scrolloff=5         " Leave 5 lines of buffer when scrolling
 set tabstop=4
@@ -34,6 +27,7 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
+filetype plugin indent on
 set fileformat=unix
 
 set showmatch           " show the matching part of the pair for [] {} and ()
@@ -83,13 +77,10 @@ augroup END
 
 " enable all Python syntax highlighting features
 let python_highlight_all = 1
-
+filetype plugin indent on
 syntax on
 set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
-"\ [%l/%L\ (%p%%)
-filetype plugin indent on
 au FileType py set autoindent
-au FileType py set smartindent
 au FileType py set textwidth=79 " PEP-8 Friendly
 
 " Colour Theme
