@@ -7,7 +7,7 @@
 Icon
 
 # Vim Plugins
-symlinks/.vim/bundle/*
+symlinks/.vim/bundle
 
 # Thumbnails
 ._*
