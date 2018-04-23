@@ -35,7 +35,7 @@ set ruler               " Position number at bottom right
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
 
 " F9 for saving and executing python
-autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+autocmd FileType python nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
 
 " visual autocomplete for command menu
 set wildmenu
