@@ -123,3 +123,5 @@ COMPLETION_WAITING_DOTS="true"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 export PATH="/usr/local/sbin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -96,3 +96,6 @@ set updatetime=250
 let g:ale_linters = {
 \   'python': ['flake8', 'pycodestyle', 'isort'],
 \}
+
+" add fzf support
+set rtp+=/usr/local/opt/fzf
