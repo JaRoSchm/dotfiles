@@ -10,13 +10,17 @@ call plug#begin('~/.vim/bundle')
 
 " Declare the list of plugins.
 Plug 'w0rp/ale'
+Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -30,41 +34,78 @@ set autoindent
 filetype plugin indent on
 set fileformat=unix
 
-set showmatch           " show the matching part of the pair for [] {} and ()
-set ruler               " Position number at bottom right
+set nobackup             " No backups left after done editing
+set nowritebackup        " No backups made while editing
+
+set incsearch            " Search as you type
+set showmatch            " show the matching part of the pair for [] {} and ()
+set ruler                " Position number at bottom right
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
+set wildmenu             " visual autocomplete for command menu
+set encoding=utf-8       " Set encoding
+set clipboard=unnamed    " Use system clipboard
+
+set autoread
+set autowrite
+set hidden
 
 " F9 for saving and executing python
 autocmd FileType python nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
 
-" visual autocomplete for command menu
-set wildmenu
+" lightline configuration
+set laststatus=2
 
-" Set encoding
-set encoding=utf-8
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component_function': {
+\   'gitbranch': 'gitbranch#name'
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ }
 
-" Use system clipboard
-set clipboard=unnamed
+" Functions for Ale in Lightline
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
 
-" Jedi completion
-let g:jedi#use_tabs_not_buffers = 1
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
 
-" tabs in Airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline_powerline_fonts = 1 
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓' : ''
+endfunction
 
-" Airline theme
-let g:airline_theme='minimalist'
+autocmd User ALELint call s:MaybeUpdateLightline()
 
-" Close window if last remaining window is NerdTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" open Nerdtree at start
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
 
 " relative linenumbers
 set number relativenumber
@@ -91,11 +132,15 @@ let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 
 " Gitgutter
 set updatetime=250
+let g:gitgutter_sign_added = '∙'
+let gitgutter_sign_modified = '∙'
+let g:gitgutter_sign_removed = '∙'
+let g:gitgutter_sign_modified_removed = '∙'
 
 " Linters for Python
 let g:ale_linters = {
 \   'python': ['flake8', 'pycodestyle', 'isort'],
 \}
 
-" add fzf support
-set rtp+=/usr/local/opt/fzf
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
