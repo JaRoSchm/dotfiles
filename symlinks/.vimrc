@@ -22,8 +22,15 @@ Plug 'ervandew/supertab'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
+" Color schemes
+Plug 'morhetz/gruvbox'
+Plug 'romainl/Apprentice'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
+
+" Activate 256 colors
+set t_Co=256
 
 set scrolloff=5         " Leave 5 lines of buffer when scrolling
 set tabstop=4
@@ -124,8 +131,11 @@ set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 au FileType py set autoindent
 au FileType py set textwidth=79 " PEP-8 Friendly
 
-" Colour Theme
-colors smyck
+" Colour scheme
+colorscheme apprentice
+" colorscheme smyck
+" colorscheme gruvbox
+set background=dark    " Setting dark mode
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
