@@ -25,6 +25,8 @@ Plug 'junegunn/fzf.vim'
 " Color schemes
 Plug 'morhetz/gruvbox'
 Plug 'romainl/Apprentice'
+Plug 'JarrodCTaylor/spartan'
+Plug 'ewilazarus/preto'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -132,7 +134,9 @@ au FileType py set autoindent
 au FileType py set textwidth=79 " PEP-8 Friendly
 
 " Colour scheme
-colorscheme apprentice
+" colorscheme apprentice
+colorscheme spartan
+" colorscheme preto
 " colorscheme smyck
 " colorscheme gruvbox
 set background=dark    " Setting dark mode
