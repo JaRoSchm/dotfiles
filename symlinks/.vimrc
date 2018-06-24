@@ -65,7 +65,7 @@ autocmd FileType python nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 
 set laststatus=2
 
 let g:lightline = {
-\ 'colorscheme': 'wombat',
+\ 'colorscheme': 'jellybeans',
 \ 'active': {
 \   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
 \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
@@ -139,7 +139,7 @@ colorscheme spartan
 " colorscheme preto
 " colorscheme smyck
 " colorscheme gruvbox
-set background=dark    " Setting dark mode
+" set background=dark    " Setting dark mode
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
