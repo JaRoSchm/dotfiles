@@ -88,6 +88,17 @@ let g:lightline = {
 \   'linter_warnings': 'warning',
 \   'linter_errors': 'error'
 \ },
+\ 'mode_map': {
+\   'n' : 'N',
+\   'i' : 'I',
+\   'R' : 'R',
+\   'v' : 'V',
+\   'V' : 'V',
+\   "\<C-v>": 'V',
+\   's' : 'S',
+\   'S' : 'S',
+\   "\<C-s>": 'S'
+\ },
 \ }
 
 " faster mode switching
