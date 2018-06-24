@@ -67,11 +67,16 @@ set laststatus=2
 let g:lightline = {
 \ 'colorscheme': 'jellybeans',
 \ 'active': {
-\   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
+\   'left': [['mode', 'paste'], ['gitbranch'], ['bufferline']],
 \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
 \ },
 \ 'component_function': {
 \   'gitbranch': 'gitbranch#name'
+\ },
+\ 'component': {
+\   'bufferline': '%{bufferline#refresh_status()}%{g:bufferline_status_info.before .
+\                  g:bufferline_status_info.current .
+\                  g:bufferline_status_info.after}'
 \ },
 \ 'component_expand': {
 \   'linter_warnings': 'LightlineLinterWarnings',
@@ -84,6 +89,18 @@ let g:lightline = {
 \   'linter_errors': 'error'
 \ },
 \ }
+
+" faster mode switching
+set timeoutlen=1000 ttimeoutlen=0
+
+" Don't show mode
+set noshowmode
+
+" Don't show bufferline
+let g:bufferline_echo = 0
+autocmd VimEnter *
+  \ let &statusline='%{bufferline#refresh_status()}'
+    \ .bufferline#get_status_string()
 
 " Functions for Ale in Lightline
 function! LightlineLinterWarnings() abort
