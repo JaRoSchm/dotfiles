@@ -63,7 +63,7 @@ bindkey -M vicmd "j" down-line-or-beginning-search
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias condaupdate="conda update --all --yes; conda clean --all --yes"
-alias brewupdate="brew update; brew upgrade; brew cask outdated --greedy; brew cask upgrade; brew cleanup; brew cask cleanup"
+alias brewupdate="brew update; brew upgrade; brew cask outdated --greedy; brew cask upgrade; brew cleanup"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
