@@ -11,8 +11,8 @@ call plug#begin('~/.vim/bundle')
 " Declare the list of plugins.
 Plug 'w0rp/ale'
 Plug 'tpope/vim-commentary'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'scrooloose/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'bling/vim-bufferline'
@@ -21,6 +21,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'vimwiki/vimwiki'
 
 " Color schemes
 Plug 'morhetz/gruvbox'
@@ -170,7 +171,7 @@ colorscheme spartan
 " set background=dark    " Setting dark mode
 
 " NERDTree configuration
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
+" let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 
 " Gitgutter
 set updatetime=250
