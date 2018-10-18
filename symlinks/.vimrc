@@ -18,7 +18,7 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
-Plug 'ervandew/supertab'
+Plug 'ajh17/VimCompletesMe'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
@@ -48,6 +48,8 @@ set nobackup             " No backups left after done editing
 set nowritebackup        " No backups made while editing
 
 set incsearch            " Search as you type
+" enable backspace
+set backspace=indent,eol,start
 set showmatch            " show the matching part of the pair for [] {} and ()
 set ruler                " Position number at bottom right
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
