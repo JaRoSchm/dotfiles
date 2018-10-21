@@ -11,17 +11,23 @@ call plug#begin('~/.vim/bundle')
 " Declare the list of plugins.
 Plug 'w0rp/ale'
 Plug 'tpope/vim-commentary'
-" Plug 'scrooloose/nerdtree'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/VimCompletesMe'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki'
+
+" Check if fzf is isntalled and install it if not
+if !empty(glob("/usr/local/opt/fzf"))
+    Plug '/usr/local/opt/fzf'
+else
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+endif
+
+Plug 'junegunn/fzf.vim'
 
 " Color schemes
 Plug 'morhetz/gruvbox'
@@ -32,24 +38,39 @@ Plug 'ewilazarus/preto'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
-" Activate 256 colors
-set t_Co=256
+" set leader key to space
+let mapleader=" "
 
+" mappings
+map <leader>h :History<cr>      " History with fzf
+map <leader>b :Buffers<cr>      " Buffers with fzf
+map <leader>f :Files<cr>        " Files with fzf
+map <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
+map <leader>s :Snippets         " Snippets with UltiSnips
+command! W w                    " Save with :W
+command! Q q                    " quite with :Q
+
+set t_Co=256            " Activate 256 colors
 set scrolloff=5         " Leave 5 lines of buffer when scrolling
+
+" indention configuration
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
 filetype plugin indent on
+
 set fileformat=unix
 
 set nobackup             " No backups left after done editing
 set nowritebackup        " No backups made while editing
 
 set incsearch            " Search as you type
+
 " enable backspace
 set backspace=indent,eol,start
+
 set showmatch            " show the matching part of the pair for [] {} and ()
 set ruler                " Position number at bottom right
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
@@ -60,6 +81,9 @@ set clipboard=unnamed    " Use system clipboard
 set autoread
 set autowrite
 set hidden
+
+" remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
 
 " F9 for saving and executing python
 autocmd FileType python nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
@@ -165,15 +189,7 @@ au FileType py set autoindent
 au FileType py set textwidth=79 " PEP-8 Friendly
 
 " Colour scheme
-" colorscheme apprentice
 colorscheme spartan
-" colorscheme preto
-" colorscheme smyck
-" colorscheme gruvbox
-" set background=dark    " Setting dark mode
-
-" NERDTree configuration
-" let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 
 " Gitgutter
 set updatetime=250
