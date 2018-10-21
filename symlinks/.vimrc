@@ -19,6 +19,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/VimCompletesMe'
 Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 " Check if fzf is isntalled and install it if not
 if !empty(glob("/usr/local/opt/fzf"))
@@ -41,12 +43,14 @@ call plug#end()
 " set leader key to space
 let mapleader=" "
 
+
 " mappings
 map <leader>h :History<cr>      " History with fzf
 map <leader>b :Buffers<cr>      " Buffers with fzf
 map <leader>f :Files<cr>        " Files with fzf
 map <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
-map <leader>s :Snippets         " Snippets with UltiSnips
+map <leader>s :Snippets<cr>     " Snippets with UltiSnips
+map / :BLines<cr>               " fuzzy search
 command! W w                    " Save with :W
 command! Q q                    " quite with :Q
 
@@ -205,3 +209,7 @@ let g:ale_linters = {
 
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
+
+" show preview for :Files command
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
