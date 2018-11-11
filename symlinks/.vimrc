@@ -16,19 +16,28 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
-Plug 'ajh17/VimCompletesMe'   " completion without snippets
 Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'donRaphaco/neotex'    " latex preview
 
-" Check if fzf is isntalled and install it if not
+" Completion plugin and snippets
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'zchee/deoplete-jedi'
+Plug 'Shougo/neosnippet.vim'    " until deoppet.nvim is released
+Plug 'Shougo/neosnippet-snippets'
+
+" Check if fzf is installed and install it if not
 if !empty(glob("/usr/local/opt/fzf"))
     Plug '/usr/local/opt/fzf'
 else
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 endif
-
 Plug 'junegunn/fzf.vim'
 
 " Color schemes
@@ -42,7 +51,6 @@ call plug#end()
 
 " set leader key to space
 let mapleader=" "
-
 
 " mappings
 map <leader>h :History<cr>      " History with fzf
@@ -86,6 +94,9 @@ set clipboard=unnamed    " Use system clipboard
 set autoread
 set autowrite
 set hidden
+
+set foldmethod=indent    " Folding for Python
+set foldlevel=99
 
 " remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -215,6 +226,22 @@ let g:ale_sign_error = '✗'
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+" settings for completion with tap
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
 
-" Remove UltiSnips mapping to tab
-let g:UltiSnipsExpandTrigger = '<Nop>'
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#manual_complete()
+
+set completeopt-=preview
+
+" snippet selection with ctrl k
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
