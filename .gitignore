@@ -32,3 +32,6 @@ Temporary Items
 
 # Tags file
 tags
+.tags
+tags/
+tags.lock
