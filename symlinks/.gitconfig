@@ -2,6 +2,8 @@
     name = Jan Robert Schmidt
     email = jaro.schmidt@gmail.com
 [core]
-    editor = atom --wait
+    editor = "vim"
 [push]
     default = current
+[commit]
+    verbose = true

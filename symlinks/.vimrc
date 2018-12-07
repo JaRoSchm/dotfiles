@@ -19,6 +19,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'donRaphaco/neotex'    " latex preview
+Plug 'ludovicchabant/vim-gutentags'
 
 " Completion plugin and snippets
 if has('nvim')
@@ -44,7 +45,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/Apprentice'
 Plug 'JarrodCTaylor/spartan'
-Plug 'ewilazarus/preto'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -59,6 +59,7 @@ map <leader>f :Files<cr>        " Files with fzf
 map <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
 " Snippets with UltiSnips
 map <leader>s :Snippets<cr>
+map <leader>t :Tags<cr>
 map / :BLines<cr>               " fuzzy search
 command! W w                    " Save with :W
 command! Q q                    " quite with :Q
