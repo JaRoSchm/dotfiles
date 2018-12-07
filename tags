@@ -3258,6 +3258,7 @@ ale#fix#registry#ResetToDefaults	symlinks/.vim/bundle/ale/autoload/ale/fix/regis
 ale#fix#registry#Suggest	symlinks/.vim/bundle/ale/autoload/ale/fix/registry.vim	/^function! ale#fix#registry#Suggest(filetype) abort$/;"	f
 ale#fix#registry#SuggestedFixers	symlinks/.vim/bundle/ale/autoload/ale/fix/registry.vim	/^function! ale#fix#registry#SuggestedFixers(filetype) abort$/;"	f
 ale#fixers#autopep8#Fix	symlinks/.vim/bundle/ale/autoload/ale/fixers/autopep8.vim	/^function! ale#fixers#autopep8#Fix(buffer) abort$/;"	f
+ale#fixers#bibclean#Fix	symlinks/.vim/bundle/ale/autoload/ale/fixers/bibclean.vim	/^function! ale#fixers#bibclean#Fix(buffer) abort$/;"	f
 ale#fixers#black#Fix	symlinks/.vim/bundle/ale/autoload/ale/fixers/black.vim	/^function! ale#fixers#black#Fix(buffer) abort$/;"	f
 ale#fixers#brittany#Fix	symlinks/.vim/bundle/ale/autoload/ale/fixers/brittany.vim	/^function! ale#fixers#brittany#Fix(buffer) abort$/;"	f
 ale#fixers#brittany#GetExecutable	symlinks/.vim/bundle/ale/autoload/ale/fixers/brittany.vim	/^function! ale#fixers#brittany#GetExecutable(buffer) abort$/;"	f
@@ -3373,7 +3374,6 @@ ale#handlers#redpen#HandleRedpenOutput	symlinks/.vim/bundle/ale/autoload/ale/han
 ale#handlers#ruby#EscapeExecutable	symlinks/.vim/bundle/ale/autoload/ale/handlers/ruby.vim	/^function! ale#handlers#ruby#EscapeExecutable(executable, bundle_exec) abort$/;"	f
 ale#handlers#ruby#HandleSyntaxErrors	symlinks/.vim/bundle/ale/autoload/ale/handlers/ruby.vim	/^function! ale#handlers#ruby#HandleSyntaxErrors(buffer, lines) abort$/;"	f
 ale#handlers#rust#HandleRustErrors	symlinks/.vim/bundle/ale/autoload/ale/handlers/rust.vim	/^function! ale#handlers#rust#HandleRustErrors(buffer, lines) abort$/;"	f
-ale#handlers#sasslint#GetCommand	symlinks/.vim/bundle/ale/autoload/ale/handlers/sasslint.vim	/^function! ale#handlers#sasslint#GetCommand(buffer) abort$/;"	f
 ale#handlers#scala#HandleScalacLintFormat	symlinks/.vim/bundle/ale/autoload/ale/handlers/scala.vim	/^function! ale#handlers#scala#HandleScalacLintFormat(buffer, lines) abort$/;"	f
 ale#handlers#sh#GetShellType	symlinks/.vim/bundle/ale/autoload/ale/handlers/sh.vim	/^function! ale#handlers#sh#GetShellType(buffer) abort$/;"	f
 ale#handlers#sml#GetCmFile	symlinks/.vim/bundle/ale/autoload/ale/handlers/sml.vim	/^function! ale#handlers#sml#GetCmFile(buffer) abort$/;"	f
@@ -3602,6 +3602,12 @@ ale_linters#apiblueprint#drafter#HandleErrors	symlinks/.vim/bundle/ale/ale_linte
 ale_linters#asm#gcc#GetCommand	symlinks/.vim/bundle/ale/ale_linters/asm/gcc.vim	/^function! ale_linters#asm#gcc#GetCommand(buffer) abort$/;"	f
 ale_linters#asm#gcc#Handle	symlinks/.vim/bundle/ale/ale_linters/asm/gcc.vim	/^function! ale_linters#asm#gcc#Handle(buffer, lines) abort$/;"	f
 ale_linters#awk#gawk#GetCommand	symlinks/.vim/bundle/ale/ale_linters/awk/gawk.vim	/^function! ale_linters#awk#gawk#GetCommand(buffer) abort$/;"	f
+ale_linters#bib#bibclean#GetCommand	symlinks/.vim/bundle/ale/ale_linters/bib/bibclean.vim	/^function! ale_linters#bib#bibclean#GetCommand(buffer) abort$/;"	f
+ale_linters#bib#bibclean#Handle	symlinks/.vim/bundle/ale/ale_linters/bib/bibclean.vim	/^function! ale_linters#bib#bibclean#Handle(buffer, lines) abort$/;"	f
+ale_linters#bib#bibclean#get_type	symlinks/.vim/bundle/ale/ale_linters/bib/bibclean.vim	/^function! ale_linters#bib#bibclean#get_type(str) abort$/;"	f
+ale_linters#bib#bibclean#match_entry	symlinks/.vim/bundle/ale/ale_linters/bib/bibclean.vim	/^function! ale_linters#bib#bibclean#match_entry(line) abort$/;"	f
+ale_linters#bib#bibclean#match_msg	symlinks/.vim/bundle/ale/ale_linters/bib/bibclean.vim	/^function! ale_linters#bib#bibclean#match_msg(line) abort$/;"	f
+ale_linters#bib#bibclean#match_value	symlinks/.vim/bundle/ale/ale_linters/bib/bibclean.vim	/^function! ale_linters#bib#bibclean#match_value(line) abort$/;"	f
 ale_linters#c#clang#GetCommand	symlinks/.vim/bundle/ale/ale_linters/c/clang.vim	/^function! ale_linters#c#clang#GetCommand(buffer, output) abort$/;"	f
 ale_linters#c#clangd#GetCommand	symlinks/.vim/bundle/ale/ale_linters/c/clangd.vim	/^function! ale_linters#c#clangd#GetCommand(buffer) abort$/;"	f
 ale_linters#c#clangd#GetProjectRoot	symlinks/.vim/bundle/ale/ale_linters/c/clangd.vim	/^function! ale_linters#c#clangd#GetProjectRoot(buffer) abort$/;"	f
@@ -3848,6 +3854,9 @@ ale_linters#python#prospector#Handle	symlinks/.vim/bundle/ale/ale_linters/python
 ale_linters#python#pycodestyle#GetCommand	symlinks/.vim/bundle/ale/ale_linters/python/pycodestyle.vim	/^function! ale_linters#python#pycodestyle#GetCommand(buffer) abort$/;"	f
 ale_linters#python#pycodestyle#GetExecutable	symlinks/.vim/bundle/ale/ale_linters/python/pycodestyle.vim	/^function! ale_linters#python#pycodestyle#GetExecutable(buffer) abort$/;"	f
 ale_linters#python#pycodestyle#Handle	symlinks/.vim/bundle/ale/ale_linters/python/pycodestyle.vim	/^function! ale_linters#python#pycodestyle#Handle(buffer, lines) abort$/;"	f
+ale_linters#python#pydocstyle#GetCommand	symlinks/.vim/bundle/ale/ale_linters/python/pydocstyle.vim	/^function! ale_linters#python#pydocstyle#GetCommand(buffer) abort$/;"	f
+ale_linters#python#pydocstyle#GetExecutable	symlinks/.vim/bundle/ale/ale_linters/python/pydocstyle.vim	/^function! ale_linters#python#pydocstyle#GetExecutable(buffer) abort$/;"	f
+ale_linters#python#pydocstyle#Handle	symlinks/.vim/bundle/ale/ale_linters/python/pydocstyle.vim	/^function! ale_linters#python#pydocstyle#Handle(buffer, lines) abort$/;"	f
 ale_linters#python#pyflakes#GetCommand	symlinks/.vim/bundle/ale/ale_linters/python/pyflakes.vim	/^function! ale_linters#python#pyflakes#GetCommand(buffer) abort$/;"	f
 ale_linters#python#pyflakes#GetExecutable	symlinks/.vim/bundle/ale/ale_linters/python/pyflakes.vim	/^function! ale_linters#python#pyflakes#GetExecutable(buffer) abort$/;"	f
 ale_linters#python#pyflakes#Handle	symlinks/.vim/bundle/ale/ale_linters/python/pyflakes.vim	/^function! ale_linters#python#pyflakes#Handle(buffer, lines) abort$/;"	f
@@ -3884,11 +3893,14 @@ ale_linters#rust#cargo#VersionCheck	symlinks/.vim/bundle/ale/ale_linters/rust/ca
 ale_linters#rust#rls#GetCommand	symlinks/.vim/bundle/ale/ale_linters/rust/rls.vim	/^function! ale_linters#rust#rls#GetCommand(buffer) abort$/;"	f
 ale_linters#rust#rls#GetProjectRoot	symlinks/.vim/bundle/ale/ale_linters/rust/rls.vim	/^function! ale_linters#rust#rls#GetProjectRoot(buffer) abort$/;"	f
 ale_linters#rust#rustc#RustcCommand	symlinks/.vim/bundle/ale/ale_linters/rust/rustc.vim	/^function! ale_linters#rust#rustc#RustcCommand(buffer) abort$/;"	f
+ale_linters#sass#sasslint#GetCommand	symlinks/.vim/bundle/ale/ale_linters/sass/sasslint.vim	/^function! ale_linters#sass#sasslint#GetCommand(buffer) abort$/;"	f
+ale_linters#sass#sasslint#GetExecutable	symlinks/.vim/bundle/ale/ale_linters/sass/sasslint.vim	/^function! ale_linters#sass#sasslint#GetExecutable(buffer) abort$/;"	f
 ale_linters#scala#sbtserver#GetAddress	symlinks/.vim/bundle/ale/ale_linters/scala/sbtserver.vim	/^function! ale_linters#scala#sbtserver#GetAddress(buffer) abort$/;"	f
 ale_linters#scala#sbtserver#GetProjectRoot	symlinks/.vim/bundle/ale/ale_linters/scala/sbtserver.vim	/^function! ale_linters#scala#sbtserver#GetProjectRoot(buffer) abort$/;"	f
 ale_linters#scala#scalastyle#GetCommand	symlinks/.vim/bundle/ale/ale_linters/scala/scalastyle.vim	/^function! ale_linters#scala#scalastyle#GetCommand(buffer) abort$/;"	f
 ale_linters#scala#scalastyle#Handle	symlinks/.vim/bundle/ale/ale_linters/scala/scalastyle.vim	/^function! ale_linters#scala#scalastyle#Handle(buffer, lines) abort$/;"	f
 ale_linters#scss#sasslint#GetCommand	symlinks/.vim/bundle/ale/ale_linters/scss/sasslint.vim	/^function! ale_linters#scss#sasslint#GetCommand(buffer) abort$/;"	f
+ale_linters#scss#sasslint#GetExecutable	symlinks/.vim/bundle/ale/ale_linters/scss/sasslint.vim	/^function! ale_linters#scss#sasslint#GetExecutable(buffer) abort$/;"	f
 ale_linters#scss#scsslint#Handle	symlinks/.vim/bundle/ale/ale_linters/scss/scsslint.vim	/^function! ale_linters#scss#scsslint#Handle(buffer, lines) abort$/;"	f
 ale_linters#scss#stylelint#GetCommand	symlinks/.vim/bundle/ale/ale_linters/scss/stylelint.vim	/^function! ale_linters#scss#stylelint#GetCommand(buffer) abort$/;"	f
 ale_linters#sh#language_server#GetCommand	symlinks/.vim/bundle/ale/ale_linters/sh/language_server.vim	/^function! ale_linters#sh#language_server#GetCommand(buffer) abort$/;"	f
