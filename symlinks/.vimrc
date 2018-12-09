@@ -9,9 +9,10 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " Declare the list of plugins.
-Plug 'w0rp/ale'
+Plug 'w0rp/ale'             " linting
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'itchyny/vim-gitbranch'
 Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
@@ -57,8 +58,6 @@ map <leader>h :History<cr>      " History with fzf
 map <leader>b :Buffers<cr>      " Buffers with fzf
 map <leader>f :Files<cr>        " Files with fzf
 map <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
-" Snippets with UltiSnips
-map <leader>s :Snippets<cr>
 map <leader>t :Tags<cr>
 map / :BLines<cr>               " fuzzy search
 command! W w                    " Save with :W
@@ -123,14 +122,17 @@ let g:lightline = {
 \                  g:bufferline_status_info.after}'
 \ },
 \ 'component_expand': {
-\   'linter_warnings': 'LightlineLinterWarnings',
-\   'linter_errors': 'LightlineLinterErrors',
-\   'linter_ok': 'LightlineLinterOK'
+\   'linter_checking': 'lightline#ale#checking',
+\   'linter_warnings': 'lightline#ale#warning',
+\   'linter_errors': 'lightline#ale#errors',
+\   'linter_ok': 'lightline#ale#ok'
 \ },
 \ 'component_type': {
 \   'readonly': 'error',
+\   'linter_checking': 'left',
 \   'linter_warnings': 'warning',
-\   'linter_errors': 'error'
+\   'linter_errors': 'error',
+\   'linter_ok': 'left'
 \ },
 \ 'mode_map': {
 \   'n' : 'N',
@@ -145,6 +147,10 @@ let g:lightline = {
 \ },
 \ }
 
+let g:lightline#ale#indicator_warnings = "◆ "
+let g:lightline#ale#indicator_errors = "✗ "
+let g:lightline#ale#indicator_ok = "✓ "
+
 " faster mode switching
 set timeoutlen=1000 ttimeoutlen=0
 
@@ -156,37 +162,6 @@ let g:bufferline_echo = 0
 autocmd VimEnter *
   \ let &statusline='%{bufferline#refresh_status()}'
     \ .bufferline#get_status_string()
-
-" Functions for Ale in Lightline
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
-endfunction
-
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
-endfunction
-
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✓' : ''
-endfunction
-
-autocmd User ALELint call s:MaybeUpdateLightline()
-
-" Update and show lightline but only if it's visible (e.g., not in Goyo)
-function! s:MaybeUpdateLightline()
-  if exists('#lightline')
-    call lightline#update()
-  end
-endfunction
 
 " relative linenumbers
 set number relativenumber
@@ -215,6 +190,7 @@ let gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
 
+" ALE configuration
 " Linters for Python
 let g:ale_linters = {
 \   'python': ['flake8', 'pycodestyle', 'isort'],
@@ -230,6 +206,7 @@ command! -bang -nargs=? -complete=dir Files
 " settings for completion with tap
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 1
+let g:neosnippet#enable_snipmate_compatibility = 1
 
 function! s:check_back_space() abort "{{{
   let col = col('.') - 1
