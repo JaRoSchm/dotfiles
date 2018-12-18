@@ -9,6 +9,7 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " Declare the list of plugins.
+Plug 'tpope/vim-apathy'     " set path variable for different file types
 Plug 'w0rp/ale'             " linting
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
@@ -17,7 +18,6 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'donRaphaco/neotex'    " latex preview
 Plug 'ludovicchabant/vim-gutentags'
