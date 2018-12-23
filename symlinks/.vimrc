@@ -27,10 +27,15 @@ Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-ultisnips'
 
 " Completion plugin and snippets
 " if has('nvim')
@@ -213,27 +218,25 @@ let g:ale_sign_error = '✗'
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+
 """""""""""""""
-" Configuration of NCM
+" Configuration of NCM and snippets
 
-" function! Smart_TabComplete()
-"   let line = getline('.')                         " current line
+" Use tab oder <C-x> for completion
+let g:ncm2#auto_popup = 0
+imap <C-x> <Plug>(ncm2_manual_trigger)
 
-"   let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-"                                                   " line to one character right
-"                                                   " of the cursor
-"   let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-"   if (strlen(substr)==0)                          " nothing to match on empty string
-"     return "\<tab>"
-"   else
-"     return "\<C-X>"
-"   endif
-" endfunction
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ ncm2#_on_complete(1)
 
 set completeopt=noinsert,menuone,noselect
-let g:ncm2#auto_popup = 0
-imap <C-X> <Plug>(ncm2_manual_trigger)
-" inoremap <TAB> <c-r>=Smart_TabComplete()<CR>
 
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -245,32 +248,8 @@ set shortmess+=c
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
-" Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-
-"""""""""""""""
-" Configuration of deoplete
-
-" settings for completion with tap
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#disable_auto_complete = 1
-" let g:neosnippet#enable_snipmate_compatibility = 1
-
-" function! s:check_back_space() abort "{{{
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction"}}}
-"
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ deoplete#manual_complete()
-
-" set completeopt-=preview
-
-" snippet selection with ctrl k
-" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" xmap <C-k>     <Plug>(neosnippet_expand_target)
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+let g:UltiSnipsExpandTrigger="<F4>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
