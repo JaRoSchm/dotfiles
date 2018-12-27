@@ -37,18 +37,6 @@ Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-ultisnips'
 
-" Completion plugin and snippets
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" Plug 'zchee/deoplete-jedi'
-" Plug 'Shougo/neosnippet.vim'    " until deoppet.nvim is released
-" Plug 'Shougo/neosnippet-snippets'
-
 " Check if fzf is installed and install it if not
 if !empty(glob("/usr/local/opt/fzf"))
     Plug '/usr/local/opt/fzf'
@@ -69,17 +57,19 @@ call plug#end()
 let mapleader=" "
 
 " mappings
-map <leader>h :History<cr>      " History with fzf
-map <leader>b :Buffers<cr>      " Buffers with fzf
-map <leader>f :Files<cr>        " Files with fzf
-map <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
-map <leader>t :Tags<cr>
-map / :BLines<cr>               " fuzzy search
+nnoremap <leader>h :History<cr>      " History with fzf
+nnoremap <leader>b :Buffers<cr>      " Buffers with fzf
+nnoremap <leader>f :Files<cr>        " Files with fzf
+nnoremap <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
+nnoremap <leader>t :Tags<cr>
+nnoremap / :BLines<cr>               " fuzzy search
 command! W w                    " Save with :W
 command! Q q                    " quite with :Q
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>   " jump to directory of file
 
-set t_Co=256            " Activate 256 colors
-set scrolloff=5         " Leave 5 lines of buffer when scrolling
+set keywordprg=:help    " documentation for .vimrc with K
+set t_Co=256
+set scrolloff=5
 
 " indention configuration
 set tabstop=4
@@ -91,26 +81,26 @@ filetype plugin indent on
 
 set fileformat=unix
 
-set nobackup             " No backups left after done editing
-set nowritebackup        " No backups made while editing
+set nobackup
+set nowritebackup
 
-set incsearch            " Search as you type
+set incsearch
 
 " enable backspace
 set backspace=indent,eol,start
 
-set showmatch            " show the matching part of the pair for [] {} and ()
-set ruler                " Position number at bottom right
+set showmatch
+set ruler
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
-set wildmenu             " visual autocomplete for command menu
-set encoding=utf-8       " Set encoding
-set clipboard=unnamed    " Use system clipboard
+set wildmenu
+set encoding=utf-8
+set clipboard=unnamed
 
 set autoread
 set autowrite
 set hidden
 
-set foldmethod=indent    " Folding for Python
+set foldmethod=indent
 set foldlevel=99
 
 " remove trailing whitespace on save
@@ -166,10 +156,8 @@ let g:lightline#ale#indicator_warnings = "◆ "
 let g:lightline#ale#indicator_errors = "✗ "
 let g:lightline#ale#indicator_ok = "✓ "
 
-" faster mode switching
 set timeoutlen=1000 ttimeoutlen=0
 
-" Don't show mode
 set noshowmode
 
 " Don't show bufferline
