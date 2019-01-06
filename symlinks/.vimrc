@@ -196,7 +196,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 " ALE configuration
 " Linters for Python
 let g:ale_linters = {
-\   'python': ['flake8', 'pycodestyle', 'isort'],
+\   'python': ['flake8', 'isort'],
 \}
 
 let g:ale_sign_warning = '▲'

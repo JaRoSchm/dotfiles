@@ -35,3 +35,6 @@ tags
 .tags
 tags/
 tags.lock
+
+# VIM file
+.netrwhist
