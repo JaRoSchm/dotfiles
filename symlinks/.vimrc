@@ -184,7 +184,7 @@ au FileType py set autoindent
 au FileType py set textwidth=79 " PEP-8 Friendly
 
 " Colour scheme
-colorscheme spartan
+colorscheme jaroschm
 
 " Gitgutter
 set updatetime=250
@@ -222,7 +222,7 @@ endfunction"}}}
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
-      \ ncm2#_on_complete(1)
+      \ ncm2#manual_trigger()
 
 set completeopt=noinsert,menuone,noselect
 
