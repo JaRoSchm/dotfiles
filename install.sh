@@ -41,11 +41,6 @@ ln -sfv "$DOTFILES_DIR/symlinks/.condarc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.gitconfig" ~
 # ln -sfv "$DOTFILES_DIR/symlinks/.mackup.cfg" ~
 
-# install jupyterthemes
-pip install jupyterthemes
-pip install --upgrade jupyterthemes
-jt -t monokai -ofs 11 -f anonymous -T -N
-
 # Set macOS preferences
 # We will run this last because this will reload the shell
 source .macos
