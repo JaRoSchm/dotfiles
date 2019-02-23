@@ -19,7 +19,7 @@ Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
-Plug 'donRaphaco/neotex'    " latex preview
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'ludovicchabant/vim-gutentags'
 
 " Completion
@@ -52,6 +52,20 @@ Plug 'JarrodCTaylor/spartan'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
+
+" Sets only once the value of g:env to the running environment
+" from romainl
+" https://gist.github.com/romainl/4df4cde3498fada91032858d7af213c2
+function! Config_setEnv() abort
+    if exists('g:env')
+        return
+    endif
+    if has('win64') || has('win32') || has('win16')
+        let g:env = 'WINDOWS'
+    else
+       let g:env = toupper(substitute(system('uname'), '\n', '', ''))
+    endif
+endfunction
 
 " set leader key to space
 let mapleader=" "
@@ -241,3 +255,14 @@ let g:UltiSnipsExpandTrigger="<F4>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
+
+
+"""""""""""""""
+" LaTeX configuration
+
+call Config_setEnv()
+if (g:env =~# 'DARWIN')
+    " Enable MacOS specific settings/plugins
+    " autocmd Filetype tex setl updatetime=1
+    let g:livepreview_previewer = 'open -a Skim'
+endif
