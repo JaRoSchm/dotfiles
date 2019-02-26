@@ -31,8 +31,8 @@ let g:colors_name="jaroschm"
 " Color palette
 " 234 245 239 236 66 58 255 29 88 101
 let defaultBackground = 234
-let defaultForeground = 245
-let gray              = 239
+let defaultForeground = 248
+let gray              = 241
 let smoke             = 236
 let persian           = 66
 let messenger         = 101 " 58 60 95
@@ -41,7 +41,7 @@ let arcadian          = 29
 let leonidas          = 88
 let dilios            = 58
 
-let s:colormap={255: '#EEEEEE', 234: '#1c1c1c', 239: '#4e4e4e', 245: '#8a8a8a', 236: '#303030', 66: '#5F8787', 101: '#87875F', 29: '#00875F', 88: '#870000', 58: '#5F5F00', 'none': 'NONE'}
+let s:colormap={255: '#EEEEEE', 234: '#1c1c1c', 239: '#4e4e4e', 245: '#8a8a8a', 236: '#303030', 66: '#5F8787', 101: '#87875F', 29: '#00875F', 88: '#870000', 58: '#5F5F00', 248:  '#a8a8a8', 'none': 'NONE', 241: '#626262'}
 
 function! s:HL(item, fgColor, bgColor, style)
     execute 'hi ' . a:item . ' ctermfg=' . a:fgColor . ' ctermbg=' . a:bgColor . ' guifg= ' . s:colormap[a:fgColor] . ' guibg= ' . s:colormap[a:bgColor] . ' cterm=' . a:style

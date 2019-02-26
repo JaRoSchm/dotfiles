@@ -46,9 +46,8 @@ endif
 Plug 'junegunn/fzf.vim'
 
 " Color schemes
-Plug 'morhetz/gruvbox'
-Plug 'romainl/Apprentice'
 Plug 'JarrodCTaylor/spartan'
+Plug 'ewilazarus/preto'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
