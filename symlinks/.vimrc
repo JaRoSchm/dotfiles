@@ -23,19 +23,23 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'ludovicchabant/vim-gutentags'
 
 " Completion
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
+call Config_setEnv()
+if (g:env =~# 'DARWIN')
+    " Enable MacOS specific settings/plugins
+    Plug 'ncm2/ncm2'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+
+    Plug 'ncm2/ncm2-bufword'
+    Plug 'ncm2/ncm2-path'
+    Plug 'ncm2/ncm2-tagprefix'
+    Plug 'ncm2/ncm2-jedi'
+    Plug 'ncm2/ncm2-ultisnips'
+endif
 
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tagprefix'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-ultisnips'
 
 " Check if fzf is installed and install it if not
 if !empty(glob("/usr/local/opt/fzf"))
@@ -226,38 +230,43 @@ command! -bang -nargs=? -complete=dir Files
 """""""""""""""
 " Configuration of NCM and snippets
 
-" Use tab oder <C-x> for completion
-let g:ncm2#auto_popup = 0
-imap <C-x> <Plug>(ncm2_manual_trigger)
+call Config_setEnv()
+if (g:env =~# 'DARWIN')
+    " Enable MacOS specific settings/plugins
+    "
+    " Use tab or <C-x> for completion
+    let g:ncm2#auto_popup = 0
+    imap <C-x> <Plug>(ncm2_manual_trigger)
 
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+    function! s:check_back_space() abort "{{{
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction"}}}
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ ncm2#manual_trigger()
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ ncm2#manual_trigger()
 
-set completeopt=noinsert,menuone,noselect
+    set completeopt=noinsert,menuone,noselect
 
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+    " enable ncm2 for all buffers
+    autocmd BufEnter * call ncm2#enable_for_buffer()
 
-" suppress the annoying 'match x of y', 'The only match' and 'Pattern not
-" found' messages
-set shortmess+=c
+    " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
+    " found' messages
+    set shortmess+=c
 
-" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-inoremap <c-c> <ESC>
+    " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+    inoremap <c-c> <ESC>
 
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+endif
+
 let g:UltiSnipsExpandTrigger="<F4>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
-
 
 """""""""""""""
 " LaTeX configuration
@@ -265,6 +274,5 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 call Config_setEnv()
 if (g:env =~# 'DARWIN')
     " Enable MacOS specific settings/plugins
-    " autocmd Filetype tex setl updatetime=1
     let g:livepreview_previewer = 'open -a Skim'
 endif
