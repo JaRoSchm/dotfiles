@@ -1,3 +1,5 @@
+[color]
+    ui = true
 [user]
     name = Jan Robert Schmidt
     email = jaro.schmidt@gmail.com
@@ -7,3 +9,7 @@
     default = current
 [commit]
     verbose = true
+
+# define a handy abbrev for CPG repositories (sitting on ptpcp4)
+[url "git@141.30.17.24:"]
+    insteadOf = cpg:
