@@ -209,9 +209,11 @@ let g:gitgutter_sign_modified_removed = '∙'
 " ALE configuration
 " Linters for Python
 let g:ale_linters = {
-\   'python': ['flake8', 'isort'],
+\   'python': ['flake8', 'isort', 'mypy'],
 \   'latex': ['chktex', 'lacheck'],
 \}
+
+let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
