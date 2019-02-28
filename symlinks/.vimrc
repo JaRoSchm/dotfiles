@@ -213,7 +213,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 " ALE configuration
 " Linters for Python
 let g:ale_linters = {
-\   'python': ['flake8', 'isort', 'mypy'],
+\   'python': ['flake8', 'isort'],
 \   'latex': ['chktex', 'lacheck'],
 \}
 
