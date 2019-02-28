@@ -125,3 +125,66 @@ COMPLETION_WAITING_DOTS="true"
 export PATH="/usr/local/sbin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+##############################
+# For CPG:
+
+export REPOSITORIES=$HOME/Devel/Repositories
+export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
+export PATH=${REPOSITORIES}/CPG/bin:$PATH
+
+alias iterator="${REPOSITORIES}/iterator/iterator "
+alias explorator="python ${REPOSITORIES}/explorator/explorator "
+
+export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
+export BIBINPUTS=${REPOSITORIES}/CPG/other/latex_and_bibtex/bibstyles:${BIBINPUTS}
+export BSTINPUTS=$REPOSITORIES/Bibtex/bibstyles:${REPOSITORIES}/CPG/other/latex_and_bibtex/bibstyles:${BSTINPUTS}
+
+export TEXINPUTS=${REPOSITORIES}/CPG/other/latex_and_bibtex/styles:${TEXINPUTS}
+
+# This directory not necessarily exists!!!
+export ARTICLE_STORAGE=~/Downloads
+# If local user and the one one ptpcp4 have different logins, you can
+# use this variable to adjust it.
+export ARTICLE_STORAGE_USER="jschmidt"
+
+# Set the following variables to a different viewer if necessary:
+PDF_VIEWER_FOR_GET_ARTICLE="open -a Preview"
+PDF_VIEWER_FOR_CHECK_BIBTEX="open -a Preview"
+
+# and add the following before 'compinit'
+# (for the TAB completion of the Iterator):
+fpath=(${REPOSITORIES}/iterator/util/shutils $fpath)
+
+# Try completion for explorator:
+# add custom completion scripts
+fpath=(~/.zsh/completion $fpath)
+fpath=(~/Devel/Repositories/explorator/util/shutils $fpath)
+
+# export CPG_ANACONDA_PATH=/scratch/$USER/CPG_anaconda/
+# For a different destination (e.g. for your laptop not having scratch) use:
+export CPG_ANACONDA_PATH=~/anaconda/
+# Make conda available:
+# . ${CPG_ANACONDA_PATH}/etc/profile.d/conda.sh
+# Activate:
+# conda activate CPG_stable
+alias cpg="conda activate CPG_stable_v "
+
+# Explorator:
+ETS_TOOLKIT="qt4"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/janrobertschmidt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/janrobertschmidt/anaconda/etc/profile.d/conda.sh" ]; then
+        . "/Users/janrobertschmidt/anaconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/janrobertschmidt/anaconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

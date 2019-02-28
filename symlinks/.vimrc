@@ -36,20 +36,15 @@ Plug 'vimwiki/vimwiki'
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'ludovicchabant/vim-gutentags'
 
-" Completion
-call Config_setEnv()
-if (g:env =~# 'DARWIN')
-    " Enable MacOS specific settings/plugins
-    Plug 'ncm2/ncm2'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
-    Plug 'ncm2/ncm2-bufword'
-    Plug 'ncm2/ncm2-path'
-    Plug 'ncm2/ncm2-tagprefix'
-    Plug 'ncm2/ncm2-jedi'
-    Plug 'ncm2/ncm2-ultisnips'
-endif
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tagprefix'
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-ultisnips'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -230,38 +225,33 @@ command! -bang -nargs=? -complete=dir Files
 """""""""""""""
 " Configuration of NCM and snippets
 
-call Config_setEnv()
-if (g:env =~# 'DARWIN')
-    " Enable MacOS specific settings/plugins
-    "
-    " Use tab or <C-x> for completion
-    let g:ncm2#auto_popup = 0
-    imap <C-x> <Plug>(ncm2_manual_trigger)
+" Use tab or <C-x> for completion
+let g:ncm2#auto_popup = 0
+imap <C-x> <Plug>(ncm2_manual_trigger)
 
-    function! s:check_back_space() abort "{{{
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction"}}}
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
 
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ ncm2#manual_trigger()
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ ncm2#manual_trigger()
 
-    set completeopt=noinsert,menuone,noselect
+set completeopt=noinsert,menuone,noselect
 
-    " enable ncm2 for all buffers
-    autocmd BufEnter * call ncm2#enable_for_buffer()
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
 
-    " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
-    " found' messages
-    set shortmess+=c
+" suppress the annoying 'match x of y', 'The only match' and 'Pattern not
+" found' messages
+set shortmess+=c
 
-    " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-    inoremap <c-c> <ESC>
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
 
-    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-endif
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
 let g:UltiSnipsExpandTrigger="<F4>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
@@ -276,3 +266,10 @@ if (g:env =~# 'DARWIN')
     " Enable MacOS specific settings/plugins
     let g:livepreview_previewer = 'open -a Skim'
 endif
+
+""""""""""""""
+" Gutentags configuration
+
+" do not autogenerate tags file
+let g:gutentags_generate_on_missing = 0
+let g:gutentags_generate_on_new = 0
