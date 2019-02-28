@@ -172,6 +172,8 @@ alias cpg="conda activate CPG_stable_v "
 
 # Explorator:
 ETS_TOOLKIT="qt4"
+# get rid of error "double free or corruption (!prev)"
+export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
