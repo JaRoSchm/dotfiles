@@ -89,7 +89,7 @@ nnoremap <leader>t :Tags<cr>
 nnoremap <leader>/ :BLines<cr>       " fuzzy search
 command! W w                    " Save with :W
 command! Q q                    " quite with :Q
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>   " jump to directory of file
+nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>   " jump to directory of file
 
 set keywordprg=:help    " documentation for .vimrc with K
 set t_Co=256
@@ -266,7 +266,7 @@ if (g:env =~# 'DARWIN')
     " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
     inoremap <c-c> <ESC>
 
-    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+    inoremap <silent> <expr> <cr> ncm2_ultisnips#expand_or("\<cr>", 'n')
 endif
 
 call Config_setEnv()
@@ -275,11 +275,21 @@ if (g:env =~# 'LINUX')
     set shortmess+=c
     set belloff+=ctrlg
     let g:jedi#popup_on_dot=0
+
+    let g:mucomplete#chains={}
+    let g:mucomplete#chains.default=['path', 'ulti',  'omni', 'keyn', 'tags']
+
+    let g:AutoPairsMapCR=0
+
+    " Expand snippet with enter
+    inoremap <silent> <expr> <plug>MyCR
+        \ mucomplete#ultisnips#expand_snippet("\<cr>")
+    imap <cr> <plug>MyCR
 endif
 
 let g:UltiSnipsExpandTrigger="<F4>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-k>"
+let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
 """""""""""""""
