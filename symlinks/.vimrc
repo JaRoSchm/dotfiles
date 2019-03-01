@@ -51,6 +51,13 @@ if (g:env =~# 'DARWIN')
     Plug 'ncm2/ncm2-ultisnips'
 endif
 
+call Config_setEnv()
+if (g:env =~# 'LINUX')
+    " Enable Linux specific settings/plugins
+    Plug 'lifepillar/vim-mucomplete'
+    Plug 'davidhalter/jedi-vim/'
+endif
+
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -228,7 +235,7 @@ command! -bang -nargs=? -complete=dir Files
 
 
 """""""""""""""
-" Configuration of NCM and snippets
+" Configuration of completion and snippets
 
 call Config_setEnv()
 if (g:env =~# 'DARWIN')
@@ -260,6 +267,14 @@ if (g:env =~# 'DARWIN')
     inoremap <c-c> <ESC>
 
     inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+endif
+
+call Config_setEnv()
+if (g:env =~# 'LINUX')
+    set completeopt=noinsert,menuone,noselect,longest
+    set shortmess+=c
+    set belloff+=ctrlg
+    let g:jedi#popup_on_dot=0
 endif
 
 let g:UltiSnipsExpandTrigger="<F4>"
