@@ -134,7 +134,7 @@ export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
 
 alias iterator="${REPOSITORIES}/iterator/iterator "
-alias explorator="python ${REPOSITORIES}/explorator/explorator "
+alias explorator="cpg; python ${REPOSITORIES}/explorator/explorator "
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
 export BIBINPUTS=${REPOSITORIES}/CPG/other/latex_and_bibtex/bibstyles:${BIBINPUTS}
@@ -171,7 +171,7 @@ export CPG_ANACONDA_PATH=~/anaconda/
 alias cpg="conda activate CPG_stable_v "
 
 # Explorator:
-ETS_TOOLKIT="qt4"
+export ETS_TOOLKIT="qt4"
 # get rid of error "double free or corruption (!prev)"
 export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
 
@@ -190,3 +190,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export PATH="/usr/local/opt/llvm/bin:$PATH"
