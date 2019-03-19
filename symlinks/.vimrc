@@ -77,6 +77,9 @@ Plug 'ewilazarus/preto'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
+" activate mouse for copying
+set mouse=a
+
 " set leader key to space
 let mapleader=" "
 
