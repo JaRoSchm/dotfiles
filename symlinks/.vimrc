@@ -77,9 +77,6 @@ Plug 'ewilazarus/preto'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
-" activate mouse for copying
-set mouse=a
-
 " set leader key to space
 let mapleader=" "
 
@@ -134,7 +131,8 @@ set foldlevel=99
 autocmd BufWritePre * :%s/\s\+$//e
 
 " F9 for saving and executing python
-autocmd FileType python nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
+" autocmd FileType python nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
+autocmd FileType python nnoremap <buffer> <F9> :exec '!ipython --pdb' shellescape(@%, 1)<cr>
 
 " lightline configuration
 set laststatus=2
