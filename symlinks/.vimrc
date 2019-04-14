@@ -1,17 +1,3 @@
-" Sets only once the value of g:env to the running environment
-" from romainl
-" https://gist.github.com/romainl/4df4cde3498fada91032858d7af213c2
-function! Config_setEnv() abort
-    if exists('g:env')
-        return
-    endif
-    if has('win64') || has('win32') || has('win16')
-        let g:env = 'WINDOWS'
-    else
-       let g:env = toupper(substitute(system('uname'), '\n', '', ''))
-    endif
-endfunction
-
 " Autoinstall vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -33,30 +19,9 @@ Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-Plug 'ludovicchabant/vim-gutentags'
 
-" Completion
-" call Config_setEnv()
-" if (g:env =~# 'DARWIN')
-"     " Enable MacOS specific settings/plugins
-"     Plug 'ncm2/ncm2'
-"     Plug 'roxma/nvim-yarp'
-"     Plug 'roxma/vim-hug-neovim-rpc'
-
-"     Plug 'ncm2/ncm2-bufword'
-"     Plug 'ncm2/ncm2-path'
-"     Plug 'ncm2/ncm2-tagprefix'
-"     Plug 'ncm2/ncm2-jedi'
-"     Plug 'ncm2/ncm2-ultisnips'
-" endif
-
-" call Config_setEnv()
-" if (g:env =~# 'LINUX')
-    " Enable Linux specific settings/plugins
-    Plug 'lifepillar/vim-mucomplete'
-    Plug 'davidhalter/jedi-vim/'
-" endif
+Plug 'lifepillar/vim-mucomplete'
+Plug 'davidhalter/jedi-vim/'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -225,6 +190,9 @@ let g:ale_linters = {
 \   'latex': ['chktex', 'lacheck'],
 \}
 
+let g:ale_fixers = {'python': ['black']}
+let g:ale_python_black_options = '-l 79'
+
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 let g:ale_sign_warning = '▲'
@@ -238,73 +206,22 @@ command! -bang -nargs=? -complete=dir Files
 """""""""""""""
 " Configuration of completion and snippets
 
-" call Config_setEnv()
-" if (g:env =~# 'DARWIN')
-"     " Enable MacOS specific settings/plugins
-"         " Use tab or <C-x> for completion
-"     let g:ncm2#auto_popup = 0
-"     imap <C-x> <Plug>(ncm2_manual_trigger)
+set completeopt=noinsert,menuone,noselect,longest
+set shortmess+=c
+set belloff+=ctrlg
+let g:jedi#popup_on_dot=0
 
-"     function! s:check_back_space() abort "{{{
-"       let col = col('.') - 1
-"       return !col || getline('.')[col - 1]  =~ '\s'
-"     endfunction"}}}
+let g:mucomplete#chains={}
+let g:mucomplete#chains.default=['path', 'ulti',  'omni', 'keyn', 'tags']
 
-"     inoremap <silent><expr> <TAB>
-"           \ pumvisible() ? "\<C-n>" :
-"           \ <SID>check_back_space() ? "\<TAB>" :
-"           \ ncm2#manual_trigger()
+let g:AutoPairsMapCR=0
 
-"     set completeopt=noinsert,menuone,noselect
-
-"     " enable ncm2 for all buffers
-"     autocmd BufEnter * call ncm2#enable_for_buffer()
-
-"     " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
-"     " found' messages
-"     set shortmess+=c
-
-"     " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-"     inoremap <c-c> <ESC>
-
-    " inoremap <silent> <expr> <cr> ncm2_ultisnips#expand_or("\<cr>", 'n')
-" endif
-
-" call Config_setEnv()
-" if (g:env =~# 'LINUX')
-    set completeopt=noinsert,menuone,noselect,longest
-    set shortmess+=c
-    set belloff+=ctrlg
-    let g:jedi#popup_on_dot=0
-
-    let g:mucomplete#chains={}
-    let g:mucomplete#chains.default=['path', 'ulti',  'omni', 'keyn', 'tags']
-
-    let g:AutoPairsMapCR=0
-
-    " Expand snippet with enter
-    inoremap <silent> <expr> <plug>MyCR
-        \ mucomplete#ultisnips#expand_snippet("\<cr>")
-    imap <cr> <plug>MyCR
-" endif
+" Expand snippet with enter
+inoremap <silent> <expr> <plug>MyCR
+    \ mucomplete#ultisnips#expand_snippet("\<cr>")
+imap <cr> <plug>MyCR
 
 let g:UltiSnipsExpandTrigger="<F4>"
 let g:UltiSnipsJumpForwardTrigger="<C-k>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
-
-"""""""""""""""
-" LaTeX configuration
-
-call Config_setEnv()
-if (g:env =~# 'DARWIN')
-    " Enable MacOS specific settings/plugins
-    let g:livepreview_previewer = 'open -a Skim'
-endif
-
-""""""""""""""
-" Gutentags configuration
-
-" do not autogenerate tags file
-let g:gutentags_generate_on_missing = 0
-let g:gutentags_generate_on_new = 0
