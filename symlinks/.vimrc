@@ -50,6 +50,7 @@ nnoremap <leader>h :History<cr>      " History with fzf
 nnoremap <leader>b :Buffers<cr>      " Buffers with fzf
 nnoremap <leader>f :Files<cr>        " Files with fzf
 nnoremap <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
+nnoremap <leader>af :ALEFix<cr>
 nnoremap <leader>t :Tags<cr>
 nnoremap <leader>/ :BLines<cr>       " fuzzy search
 command! W w                    " Save with :W
