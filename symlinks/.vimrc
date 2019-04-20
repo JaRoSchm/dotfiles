@@ -38,6 +38,8 @@ Plug 'junegunn/fzf.vim'
 " Color schemes
 Plug 'JarrodCTaylor/spartan'
 Plug 'ewilazarus/preto'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'bruth/vim-newsprint-theme'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -175,7 +177,12 @@ au FileType py set autoindent
 au FileType py set textwidth=79 " PEP-8 Friendly
 
 " Colour scheme
-colorscheme jaroschm
+" colorscheme jaroschm " dark
+colorscheme paramount " light and dark
+" colorscheme newsprint
+" colorscheme preto
+
+set background=dark
 
 " Gitgutter
 set updatetime=250
