@@ -114,7 +114,8 @@ augroup END
 " Colour scheme
 set background=dark
 " colorscheme jaroschm " dark
-colorscheme paramount " light and dark
+" colorscheme paramount " light and dark
+colorscheme paramount_mod " light and dark
 " colorscheme newsprint
 " colorscheme preto
 
