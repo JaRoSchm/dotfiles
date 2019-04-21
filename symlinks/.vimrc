@@ -55,6 +55,10 @@ nnoremap <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
 nnoremap <leader>af :ALEFix<cr>
 nnoremap <leader>t :Tags<cr>
 nnoremap <leader>/ :BLines<cr>       " fuzzy search
+" German spellchecking
+nnoremap <leader>sg :setlocal spell spelllang=de_de<cr>
+" English spellcheking
+nnoremap <leader>se :setlocal spell spelllang=en_gb<cr>
 command! W w                    " Save with :W
 command! Q q                    " quite with :Q
 nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>   " jump to directory of file
@@ -64,9 +68,6 @@ set t_Co=256
 set scrolloff=5
 
 " indention configuration
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 set expandtab
 set autoindent
 filetype plugin indent on
@@ -75,6 +76,9 @@ set fileformat=unix
 
 set nobackup
 set nowritebackup
+
+filetype plugin indent on
+syntax on
 
 set incsearch
 
@@ -98,11 +102,25 @@ set foldlevel=99
 " remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-" F9 for saving and executing python
-" autocmd FileType python nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
-autocmd FileType python nnoremap <buffer> <F9> :exec '!ipython --pdb' shellescape(@%, 1)<cr>
+" relative linenumbers
+set number relativenumber
 
-" lightline configuration
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+" Colour scheme
+set background=dark
+" colorscheme jaroschm " dark
+colorscheme paramount " light and dark
+" colorscheme newsprint
+" colorscheme preto
+
+"""""""""""""""
+" Configuration of lightline
+
 set laststatus=2
 
 let g:lightline = {
@@ -136,12 +154,12 @@ let g:lightline = {
 \   'n' : 'N',
 \   'i' : 'I',
 \   'R' : 'R',
-\   'v' : 'V',
+\   'v' : 'v',
 \   'V' : 'V',
-\   "\<C-v>": 'V',
-\   's' : 'S',
+\   "\<C-v>": 'C-v',
+\   's' : 's',
 \   'S' : 'S',
-\   "\<C-s>": 'S'
+\   "\<C-s>": 'C-s'
 \ },
 \ }
 
@@ -159,39 +177,19 @@ autocmd VimEnter *
   \ let &statusline='%{bufferline#refresh_status()}'
     \ .bufferline#get_status_string()
 
-" relative linenumbers
-set number relativenumber
 
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+"""""""""""""""
+" Configuration of gitgutter
 
-" enable all Python syntax highlighting features
-let python_highlight_all = 1
-filetype plugin indent on
-syntax on
-set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
-au FileType py set autoindent
-au FileType py set textwidth=79 " PEP-8 Friendly
-
-" Colour scheme
-" colorscheme jaroschm " dark
-colorscheme paramount " light and dark
-" colorscheme newsprint
-" colorscheme preto
-
-set background=dark
-
-" Gitgutter
 set updatetime=250
 let g:gitgutter_sign_added = '∙'
 let gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
 
-" ALE configuration
+"""""""""""""""
+" Configuration of ALE
+
 " Linters for Python
 let g:ale_linters = {
 \   'python': ['flake8', 'isort'],
@@ -205,6 +203,9 @@ let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
+
+"""""""""""""""
+" Configuration of fzf
 
 " show preview for :Files command
 command! -bang -nargs=? -complete=dir Files
