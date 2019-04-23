@@ -12,6 +12,8 @@ call plug#begin('~/.vim/bundle')
 Plug 'tpope/vim-apathy'     " set path variable for different file types
 Plug 'w0rp/ale'             " linting
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 Plug 'itchyny/vim-gitbranch'
