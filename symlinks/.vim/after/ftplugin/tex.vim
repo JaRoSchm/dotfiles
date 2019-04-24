@@ -1,3 +1,4 @@
 set textwidth=80
 
-autocmd BufWritePost *.tex Make!
+let g:makejob_hide_preview_window = 1
+autocmd BufWritePost *.tex MakeJob!
