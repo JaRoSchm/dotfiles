@@ -19,16 +19,13 @@ brew upgrade
 brew tap homebrew/bundle
 brew bundle
 
-# Install sync-settings for Atom
-apm install sync-settings
-
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Install Anaconda
 cd ~/Downloads
-curl -O http://repo.continuum.io/archive/Anaconda3-5.1.0-MacOSX-x86_64.sh
-bash ./Anaconda3-5.1.0-MacOSX-x86_64.sh
+curl -O https://repo.anaconda.com/archive/Anaconda3-2019.03-MacOSX-x86_64.sh
+bash ./Anaconda3-2019.03-MacOSX-x86_64.sh
 conda update --all --yes
 cd ~
 
@@ -39,7 +36,9 @@ chsh -s $(which zsh)
 ln -sfv "$DOTFILES_DIR/symlinks/.zshrc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.condarc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.gitconfig" ~
-# ln -sfv "$DOTFILES_DIR/symlinks/.mackup.cfg" ~
+ln -sfv "$DOTFILES_DIR/symlinks/.tmux.conf" ~
+ln -sfv "$DOTFILES_DIR/symlinks/.vimrc" ~
+ln -sfv "$DOTFILES_DIR/symlinks/.vim" ~
 
 # Set macOS preferences
 # We will run this last because this will reload the shell
