@@ -5,6 +5,17 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+function! Config_setEnv() abort
+    if exists('g:env')
+        return
+    endif
+    if has('win64') || has('win32') || has('win16')
+        let g:env = 'WINDOWS'
+    else
+       let g:env = toupper(substitute(system('uname'), '\n', '', ''))
+    endif
+endfunction
+
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/bundle')
 
@@ -42,6 +53,7 @@ Plug 'JarrodCTaylor/spartan'
 Plug 'ewilazarus/preto'
 Plug 'owickstrom/vim-colors-paramount'
 Plug 'bruth/vim-newsprint-theme'
+Plug 'wolverian/minimal'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -113,10 +125,21 @@ augroup numbertoggle
 augroup END
 
 " Colour scheme
-set background=dark
+call Config_setEnv()
+if (g:env =~# 'LINUX')
+    set background=light
+    colorscheme minimal_mod
+endif
+
+call Config_setEnv()
+if (g:env =~# 'DARWIN')
+    " Enable MacOS specific settings/plugins
+    set background=dark
+    colorscheme paramount_mod " light and dark
+endif
+
 " colorscheme jaroschm " dark
 " colorscheme paramount " light and dark
-colorscheme paramount_mod " light and dark
 " colorscheme newsprint
 " colorscheme preto
 
