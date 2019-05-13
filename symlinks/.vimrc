@@ -149,7 +149,7 @@ endif
 set laststatus=2
 
 let g:lightline = {
-\ 'colorscheme': 'jellybeans',
+\ 'colorscheme': 'wombat',
 \ 'active': {
 \   'left': [['mode', 'paste'], ['gitbranch'], ['bufferline']],
 \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
