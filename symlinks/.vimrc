@@ -125,19 +125,7 @@ augroup numbertoggle
 augroup END
 
 " Colour scheme
-call Config_setEnv()
-if (g:env =~# 'LINUX')
-    set background=light
-    colorscheme minimal_mod
-endif
-
-call Config_setEnv()
-if (g:env =~# 'DARWIN')
-    " Enable MacOS specific settings/plugins
-    set background=dark
-    colorscheme paramount_mod " light and dark
-endif
-
+colorscheme minimal_mod
 " colorscheme jaroschm " dark
 " colorscheme paramount " light and dark
 " colorscheme newsprint
