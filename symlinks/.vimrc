@@ -5,6 +5,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Find used operating system
 function! Config_setEnv() abort
     if exists('g:env')
         return
@@ -61,18 +62,23 @@ call plug#end()
 " set leader key to space
 let mapleader=" "
 
-" mappings
+" mappings for fzf
 nnoremap <leader>h :History<cr>      " History with fzf
 nnoremap <leader>b :Buffers<cr>      " Buffers with fzf
 nnoremap <leader>f :Files<cr>        " Files with fzf
-nnoremap <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
-nnoremap <leader>af :ALEFix<cr>
 nnoremap <leader>t :Tags<cr>
 nnoremap <leader>/ :BLines<cr>       " fuzzy search
+
+" mappings for ALE
+nnoremap <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
+nnoremap <leader>af :ALEFix<cr>
+
 " German spellchecking
 nnoremap <leader>sg :setlocal spell spelllang=de_de<cr>
 " English spellcheking
 nnoremap <leader>se :setlocal spell spelllang=en_gb<cr>
+
+" more mappings
 command! W w                    " Save with :W
 command! Q q                    " quite with :Q
 nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>   " jump to directory of file
@@ -93,9 +99,12 @@ set nowritebackup
 
 syntax on
 
+" search options
 set incsearch
+set ignorecase
+set smartcase
 
-" enable backspace
+" enable backspace in insert mode
 set backspace=indent,eol,start
 
 set showmatch
@@ -109,6 +118,7 @@ set autoread
 set autowrite
 set hidden
 
+" fold settings
 set foldmethod=indent
 set foldlevel=99
 
@@ -124,7 +134,7 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-" Colour scheme
+" colour scheme
 colorscheme minimal_mod
 " colorscheme jaroschm " dark
 " colorscheme paramount " light and dark
@@ -203,7 +213,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 """""""""""""""
 " Configuration of ALE
 
-" Linters for Python
+" Linters for Python and Latex
 let g:ale_linters = {
 \   'python': ['flake8', 'isort'],
 \   'latex': ['chktex', 'lacheck'],
