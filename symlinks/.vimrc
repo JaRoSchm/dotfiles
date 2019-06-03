@@ -112,7 +112,14 @@ set ruler
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
 set wildmenu
 set encoding=utf-8
-set clipboard=unnamedplus
+
+call Config_setEnv()
+if (g:env =~# 'LINUX')
+    set clipboard=unnamedplus
+endif
+if (g:env =~# 'DARWIN')
+    set clipboard=unnamed
+endif
 
 set autoread
 set autowrite

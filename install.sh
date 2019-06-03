@@ -22,12 +22,17 @@ brew bundle
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-# Install Anaconda
-cd ~/Downloads
-curl -O https://repo.anaconda.com/archive/Anaconda3-2019.03-MacOSX-x86_64.sh
-bash ./Anaconda3-2019.03-MacOSX-x86_64.sh
-conda update --all --yes
-cd ~
+# Install Xcode Command Line Tools
+xcode-select --install
+
+# Python setup
+python3 -m pip install --user pipx
+python3 -m userpath append ~/.local/bin
+source ~/.zshrc
+pipx install black
+
+sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+pyenv install anaconda3-2019.03
 
 # Make ZSH the default shell environment
 chsh -s $(which zsh)

@@ -1,6 +1,3 @@
-# Path to Anaconda
-export PATH=~/anaconda/bin:$PATH
-
 # Path to zsh completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -175,19 +172,12 @@ export ETS_TOOLKIT="qt4"
 # get rid of error "double free or corruption (!prev)"
 export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/janrobertschmidt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/janrobertschmidt/anaconda/etc/profile.d/conda.sh" ]; then
-        . "/Users/janrobertschmidt/anaconda/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/janrobertschmidt/anaconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+eval "$(pyenv init -)"
+
+# Use anaconda python as standard
+pyenv global anaconda3-2019.03
+
+# use pipx
+export PATH=~/.local/bin:$PATH
