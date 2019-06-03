@@ -112,7 +112,7 @@ set ruler
 set guifont=Anonymous\ Pro\ for\ Powerline:h15
 set wildmenu
 set encoding=utf-8
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 set autoread
 set autowrite
