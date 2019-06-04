@@ -176,8 +176,5 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 eval "$(pyenv init -)"
 
-# Use anaconda python as standard
-pyenv global anaconda3-2019.03
-
 # use pipx
 export PATH=~/.local/bin:$PATH
