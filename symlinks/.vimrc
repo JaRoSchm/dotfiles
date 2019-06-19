@@ -67,6 +67,7 @@ nnoremap <leader>h :History<cr>      " History with fzf
 nnoremap <leader>b :Buffers<cr>      " Buffers with fzf
 nnoremap <leader>f :Files<cr>        " Files with fzf
 nnoremap <leader>t :Tags<cr>
+nnoremap <leader>bt :BTags<cr>
 nnoremap <leader>/ :BLines<cr>       " fuzzy search
 
 " mappings for ALE
