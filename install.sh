@@ -41,8 +41,6 @@ python3 -m pip install --user pipx
 python3 -m userpath append ~/.local/bin
 source ~/.zshrc
 pipx install black
-pipx install ipython
-pipx install jupyter
 
 curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 source ~/.zshrc
