@@ -22,7 +22,7 @@ call plug#begin('~/.vim/bundle')
 
 " Declare the list of plugins.
 Plug 'tpope/vim-apathy'     " set path variable for different file types
-Plug 'w0rp/ale'             " linting
+Plug 'dense-analysis/ale'   " linting
 Plug 'tpope/vim-commentary'
 Plug 'https://git.danielmoch.com/vim-makejob.git'
 Plug 'tpope/vim-surround'
