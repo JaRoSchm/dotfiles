@@ -36,6 +36,7 @@ Plug 'vimwiki/vimwiki'
 
 Plug 'lifepillar/vim-mucomplete'
 Plug 'davidhalter/jedi-vim/'
+Plug 'JuliaEditorSupport/julia-vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'

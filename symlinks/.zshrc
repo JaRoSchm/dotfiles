@@ -166,7 +166,7 @@ export CPG_ANACONDA_PATH=~/anaconda/
 # . ${CPG_ANACONDA_PATH}/etc/profile.d/conda.sh
 # Activate:
 # conda activate CPG_stable
-alias cpg="conda activate CPG_stable_v "
+alias cpg="conda activate CPG_stable"
 
 # Explorator:
 export ETS_TOOLKIT="qt4"
@@ -185,3 +185,19 @@ export PATH=~/.poetry/bin:$PATH
 
 
 compinit
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/janrobertschmidt/.pyenv/versions/anaconda3-2019.03/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/janrobertschmidt/.pyenv/versions/anaconda3-2019.03/etc/profile.d/conda.sh" ]; then
+        . "/Users/janrobertschmidt/.pyenv/versions/anaconda3-2019.03/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/janrobertschmidt/.pyenv/versions/anaconda3-2019.03/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
