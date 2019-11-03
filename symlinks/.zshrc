@@ -131,8 +131,9 @@ export REPOSITORIES=$HOME/Devel/Repositories
 export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
 
-alias iterator="${REPOSITORIES}/iterator/iterator "
-alias explorator="cpg; python ${REPOSITORIES}/explorator/explorator "
+alias pullall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
+alias iterator="conda activate explorator; pythonw ${REPOSITORIES}/iterator/iterator "
+alias explorator="conda activate explorator; CC=gcc-9 python ${REPOSITORIES}/explorator/explorator "
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
 export BIBINPUTS=${REPOSITORIES}/CPG/other/latex_and_bibtex/bibstyles:${BIBINPUTS}
