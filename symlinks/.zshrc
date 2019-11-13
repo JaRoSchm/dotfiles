@@ -176,14 +176,11 @@ export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
-eval "$(pyenv init -)"
-
 # use pipx
 export PATH=~/.local/bin:$PATH
 
 # use poetry
 export PATH=~/.poetry/bin:$PATH
-
 
 compinit
 
@@ -202,3 +199,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+eval "$(pyenv init -)"
