@@ -57,8 +57,6 @@ plugins=(brew tmux python)
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias condaupdate="conda update --all --yes; conda clean --all --yes"
 alias brewupdate="brew update; brew upgrade; brew cask outdated --greedy; brew cask upgrade; brew cleanup"
 alias pyupdate="poetry self:update; pipx upgrade-all; pip install --upgrade --user pipx"
@@ -175,6 +173,7 @@ export ETS_TOOLKIT="qt4"
 export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+#############################################
 
 # use pipx
 export PATH=~/.local/bin:$PATH
@@ -199,4 +198,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-eval "$(pyenv init -)"
+if command -v pyenv 1>/dev/null 2>&1; then
+ eval "$(pyenv init - zsh)"
+fi
