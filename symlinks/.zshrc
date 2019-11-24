@@ -57,7 +57,7 @@ plugins=(brew tmux python)
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias condaupdate="conda update --all --yes; conda clean --all --yes; conda update conda; conda update conda-build"
+alias condaupdate="conda update --all --yes; conda clean --all --yes; conda update conda"
 alias brewupdate="brew update; brew upgrade; brew cask outdated --greedy; brew cask upgrade; brew cleanup"
 alias pyupdate="poetry self:update; pipx upgrade-all; pip install --upgrade --user pipx"
 
@@ -130,8 +130,8 @@ export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
 
 alias pullall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
-alias iterator="conda activate explorator; pythonw ${REPOSITORIES}/iterator/iterator "
-alias explorator="conda activate explorator; CC=gcc-9 python ${REPOSITORIES}/explorator/explorator "
+alias iterator="conda activate cpg; pythonw ${REPOSITORIES}/iterator/iterator "
+alias explorator="conda activate cpg; CC=gcc-9 python ${REPOSITORIES}/explorator/explorator "
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
 export BIBINPUTS=${REPOSITORIES}/CPG/other/latex_and_bibtex/bibstyles:${BIBINPUTS}
