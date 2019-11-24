@@ -160,7 +160,7 @@ fpath=(~/Devel/Repositories/explorator/util/shutils $fpath)
 
 # export CPG_ANACONDA_PATH=/scratch/$USER/CPG_anaconda/
 # For a different destination (e.g. for your laptop not having scratch) use:
-export CPG_ANACONDA_PATH=~/anaconda/
+export CPG_ANACONDA_PATH=~/miniconda3/
 # Make conda available:
 # . ${CPG_ANACONDA_PATH}/etc/profile.d/conda.sh
 # Activate:
@@ -185,14 +185,14 @@ compinit
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/janrobertschmidt/.pyenv/versions/anaconda3-2019.03/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/janrobertschmidt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/janrobertschmidt/.pyenv/versions/anaconda3-2019.03/etc/profile.d/conda.sh" ]; then
-        . "/Users/janrobertschmidt/.pyenv/versions/anaconda3-2019.03/etc/profile.d/conda.sh"
+    if [ -f "/Users/janrobertschmidt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/janrobertschmidt/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/janrobertschmidt/.pyenv/versions/anaconda3-2019.03/bin:$PATH"
+        export PATH="/Users/janrobertschmidt/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -200,4 +200,5 @@ unset __conda_setup
 
 if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init - zsh)"
+ eval "$(pyenv virtualenv-init - zsh)"
 fi

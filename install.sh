@@ -46,8 +46,13 @@ curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.p
 source ~/.zshrc
 poetry completions zsh > /usr/local/share/zsh-completions/_poetry
 
-sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
-pyenv install anaconda3-2019.03
+# install anaconda
+# following: https://stackoverflow.com/a/58045893
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+source Miniconda3-latest-MacOSX-x86_64.sh
+source ~/miniconda3/bin/activate
+conda init zsh
+conda config --set auto_activate_base false
 
 # Set macOS preferences
 # We will run this last because this will reload the shell
