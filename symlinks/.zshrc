@@ -60,6 +60,9 @@ plugins=(brew tmux python)
 alias condaupdate="conda update --all --yes; conda clean --all --yes; conda update conda"
 alias brewupdate="brew update; brew upgrade; brew cask outdated --greedy; brew cask upgrade; brew cleanup"
 alias pyupdate="poetry self:update; pipx upgrade-all; pip install --upgrade --user pipx"
+alias cat="bat"
+export BAT_THEME="GitHub"
+alias find="fd"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -120,6 +123,8 @@ COMPLETION_WAITING_DOTS="true"
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 export PATH="/usr/local/sbin:$PATH"
 
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ##############################
@@ -202,3 +207,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init - zsh)"
  eval "$(pyenv virtualenv-init - zsh)"
 fi
+
+# Created by `userpath` on 2019-11-27 12:32:52
+export PATH="$PATH:/Users/janrobertschmidt/.local/bin"
