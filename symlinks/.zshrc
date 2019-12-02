@@ -62,7 +62,6 @@ alias brewupdate="brew update; brew upgrade; brew cask outdated --greedy; brew c
 alias pyupdate="poetry self:update; pipx upgrade-all; pip install --upgrade --user pipx"
 alias cat="bat"
 export BAT_THEME="GitHub"
-alias find="fd"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
