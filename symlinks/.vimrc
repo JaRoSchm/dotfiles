@@ -226,6 +226,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 let g:ale_linters = {
 \   'python': ['flake8', 'isort'],
 \   'latex': ['chktex', 'lacheck'],
+\   'julia': ['languageserver'],
 \}
 
 let g:ale_fixers = {'python': ['black']}
