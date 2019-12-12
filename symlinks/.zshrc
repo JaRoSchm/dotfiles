@@ -57,7 +57,7 @@ plugins=(brew tmux python)
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias condaupdate="conda update --all --yes; conda clean --all --yes; conda update conda"
+alias condaupdate="conda update --all --yes; conda clean --all --yes;"
 alias brewupdate="brew update; brew upgrade; brew cask outdated --greedy; brew cask upgrade; brew cleanup"
 alias pyupdate="poetry self update; pipx upgrade-all; pip install --upgrade --user pipx"
 alias cat="bat"
