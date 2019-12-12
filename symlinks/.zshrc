@@ -127,6 +127,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ##############################
+# For Julia:
+export JULIA_NUM_THREADS=4
+
+##############################
 # For CPG:
 
 export REPOSITORIES=$HOME/Devel/Repositories
