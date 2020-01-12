@@ -33,6 +33,7 @@ Plug 'bling/vim-bufferline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
+Plug 'lervag/vimtex'
 
 Plug 'lifepillar/vim-mucomplete'
 Plug 'davidhalter/jedi-vim/'
