@@ -34,6 +34,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
+Plug 'neovimhaskell/haskell-vim'
 
 Plug 'lifepillar/vim-mucomplete'
 Plug 'davidhalter/jedi-vim/'
@@ -228,6 +229,8 @@ let g:ale_linters = {
 \   'python': ['flake8', 'isort'],
 \   'latex': ['chktex', 'lacheck'],
 \   'julia': ['languageserver'],
+\   'java': ['javac'],
+\   'haskell': ['ghc'],
 \}
 
 let g:ale_fixers = {'python': ['black']}
