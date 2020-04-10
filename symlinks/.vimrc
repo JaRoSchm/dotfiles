@@ -233,7 +233,12 @@ let g:ale_linters = {
 \   'haskell': ['ghc'],
 \}
 
-let g:ale_fixers = {'python': ['black'], 'java': ['google_java_format']}
+let g:ale_fixers = {
+\   'python': ['black'],
+\   'java': ['google_java_format'],
+\   'haskell': ['stylish-haskell'],
+\}
+
 let g:ale_python_black_options = '-l 79'
 
 let g:ale_python_mypy_options = '--ignore-missing-imports'
