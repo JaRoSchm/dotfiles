@@ -98,8 +98,9 @@ filetype plugin indent on
 
 set fileformat=unix
 
-set nobackup
-set nowritebackup
+set backupdir=$HOME/.vim/backupfiles//,/tmp//
+set directory=$HOME/.vim/swapfiles//,/tmp//
+set undodir=$HOME/.vim/undofiles//,/tmp//
 
 syntax on
 
