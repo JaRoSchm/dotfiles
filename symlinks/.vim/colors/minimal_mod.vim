@@ -27,6 +27,8 @@ hi ModeMsg		guifg=#424242	gui=NONE	ctermfg=black
 hi MoreMsg		guifg=#424242	gui=NONE	ctermfg=black
 hi Error		guifg=#424242		guifg=#424242	gui=underline	ctermfg=black
 
+hi SignColumn ctermbg=White guibg=#FFFFFF
+
 hi Todo			guifg=#424242		guifg=#424242	ctermfg=black	ctermfg=black
 hi Cursor		guifg=#424242		guifg=#424242		ctermfg=black	ctermfg=black
 hi Search		guifg=#424242		guifg=#424242	ctermfg=black	ctermfg=black
