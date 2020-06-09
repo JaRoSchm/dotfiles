@@ -13,3 +13,5 @@
 # define a handy abbrev for CPG repositories (sitting on ptpcp4)
 [url "git@141.30.17.24:"]
     insteadOf = cpg:
+[pull]
+	rebase = false
