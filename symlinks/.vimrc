@@ -35,6 +35,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'majutsushi/tagbar'
 
 Plug 'lifepillar/vim-mucomplete'
 Plug 'davidhalter/jedi-vim/'
