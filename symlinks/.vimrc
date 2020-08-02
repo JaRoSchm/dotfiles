@@ -37,8 +37,11 @@ Plug 'lervag/vimtex'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'majutsushi/tagbar'
 
-Plug 'lifepillar/vim-mucomplete'
-Plug 'davidhalter/jedi-vim/'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'JuliaEditorSupport/julia-vim'
 
 " Snippets
@@ -259,22 +262,83 @@ command! -bang -nargs=? -complete=dir Files
 """""""""""""""
 " Configuration of completion and snippets
 
-set completeopt=noinsert,menuone,noselect,longest
-set shortmess+=c
-set belloff+=ctrlg
-let g:jedi#popup_on_dot=0
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
 
-let g:mucomplete#chains={}
-let g:mucomplete#chains.default=['path', 'ulti',  'omni', 'keyn', 'tags']
+if executable('julia')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'LanguageServer.jl',
+        \ 'cmd': {server_info->['julia', '--startup-file=no', '--history-file=no', '-e', '
+                \       using LanguageServer;
+                \       using Pkg;
+                \       import StaticLint;
+                \       import SymbolServer;
+                \       env_path = dirname(Pkg.Types.Context().env.project_file);
+                \
+                \       server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
+                \       server.runlinter = true;
+                \       run(server);
+                \   ']},
+        \ 'allowlist': ['julia'],
+        \ })
+endif
 
-let g:AutoPairsMapCR=0
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
 
-" Expand snippet with enter
-inoremap <silent> <expr> <plug>MyCR
-    \ mucomplete#ultisnips#expand_snippet("\<cr>")
-imap <cr> <plug>MyCR
+    " refer to doc to add more commands
+endfunction
 
-let g:UltiSnipsExpandTrigger="<F4>"
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+let g:asyncomplete_auto_popup = 0
+let g:lsp_diagnostics_enabled = 0
+
+function! Check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ Check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+if has('python3')
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+endif
+
+let g:UltiSnipsExpandTrigger="<cr>"
 let g:UltiSnipsJumpForwardTrigger="<C-k>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
