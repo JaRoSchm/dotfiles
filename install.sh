@@ -35,6 +35,7 @@ ln -sfv "$DOTFILES_DIR/symlinks/.gitconfig" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.tmux.conf" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.vimrc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.vim" ~
+ln -sfv "$DOTFILES_DIR/symlinks/.p10k.zsh" ~
 
 # Python setup
 python3 -m pip install --user pipx
