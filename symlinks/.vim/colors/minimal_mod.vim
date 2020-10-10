@@ -36,7 +36,7 @@ hi IncSearch	        guifg=#424242	ctermfg=black
 hi LineNr		guifg=#424242	ctermfg=black
 hi title		guifg=#424242	                        gui=bold        cterm=bold
 
-hi StatusLine           guifg=#000000     ctermfg=black           cterm=none gui=none  guibg=black   ctermbg=black
+hi StatusLine           guifg=#000000     ctermfg=black           cterm=none gui=none  guibg=white   ctermbg=white
 hi StatusLineNC         guifg=#000000        ctermfg=black              cterm=none gui=none  guibg=#cccbca ctermbg=white
 hi VertSplit            guifg=#424242   ctermfg=black           gui=none
 
