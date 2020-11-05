@@ -71,7 +71,7 @@ export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
 
 alias iterator="conda activate cpg; pythonw ${REPOSITORIES}/iterator/iterator "
-alias explorator="conda activate cpg; CC=gcc-10 python ${REPOSITORIES}/explorator/explorator "
+alias explorator="conda activate CPG_stable; CC=gcc-10 python ${REPOSITORIES}/explorator/explorator "
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
 export BIBINPUTS=${REPOSITORIES}/CPG/other/latex_and_bibtex/bibstyles:${BIBINPUTS}

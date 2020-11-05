@@ -2,7 +2,8 @@
     ui = true
 [user]
     name = Jan Robert Schmidt
-    email = jaro.schmidt@gmail.com
+    ; email = jaro.schmidt@gmail.com
+    email = jan_robert.schmidt@tu-dresden.de
 [core]
     editor = "vim"
 [push]
