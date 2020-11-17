@@ -84,8 +84,8 @@ export ARTICLE_STORAGE=~/Downloads
 export ARTICLE_STORAGE_USER="jschmidt"
 
 # Set the following variables to a different viewer if necessary:
-PDF_VIEWER_FOR_GET_ARTICLE="open -a Preview"
-PDF_VIEWER_FOR_CHECK_BIBTEX="open -a Preview"
+export PDF_VIEWER_FOR_GET_ARTICLE="open -a Preview"
+export PDF_VIEWER_FOR_CHECK_BIBTEX="open -a Preview"
 
 # and add the following before 'compinit'
 # (for the TAB completion of the Iterator):
