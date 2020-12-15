@@ -12,7 +12,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 export ZSH=$HOME/.oh-my-zsh
 
 # add z command
-source $(brew --prefix)/etc/profile.d/z.sh
+# source $(brew --prefix)/etc/profile.d/z.sh
 
 # Set name of the theme to load.
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -71,7 +71,7 @@ export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
 
 alias iterator="conda activate cpg; pythonw ${REPOSITORIES}/iterator/iterator "
-alias explorator="conda activate CPG_stable; CC=gcc-10 python ${REPOSITORIES}/explorator/explorator "
+alias explorator="conda activate explorator; CC=gcc-10 python ${REPOSITORIES}/explorator/explorator "
 alias cdr="cd ~/Devel/Repositories/"
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
@@ -143,3 +143,12 @@ fi
 ##############################
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Created by `userpath` on 2020-12-11 14:09:31
+export PATH="$PATH:/Users/janrobertschmidt/.local/bi"
+
+# Created by `userpath` on 2020-12-11 14:10:07
+export PATH="$PATH:/Users/janrobertschmidt/.local/bin"
+
+# Created by `userpath` on 2020-12-11 14:11:16
+export PATH="$PATH:/Users/janrobertschmidt/Library/Python/3.9/bin"
