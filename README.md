@@ -2,6 +2,6 @@
 sudo softwareupdate -i -a
 xcode-select --install
 
-git clone https://github.com/JaRoSchm/dotfiles ~/dotfiles
+git clone git@github.com:JaRoSchm/dotfiles.git
 source ~/dotfiles/install.sh
 ```
