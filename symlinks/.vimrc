@@ -249,8 +249,6 @@ let g:ale_fixers = {
 \   'haskell': ['stylish-haskell'],
 \}
 
-let g:ale_python_black_options = '-l 79'
-
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 let g:ale_sign_warning = '▲'
