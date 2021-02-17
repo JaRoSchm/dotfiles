@@ -302,6 +302,14 @@ if executable('pyls')
         \ })
 endif
 
+if executable('texlab')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'texlab',
+        \ 'cmd': {server_info->['texlab']},
+        \ 'allowlist': ['tex', 'latex', 'bib'],
+        \ })
+endif
+
 if executable('julia')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'LanguageServer.jl',
