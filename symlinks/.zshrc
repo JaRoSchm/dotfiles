@@ -34,7 +34,7 @@ alias condaupdate="conda update --all --yes; conda clean --all --yes;"
 alias brewupdate="brew update; brew upgrade; brew cask outdated --greedy; brew cask upgrade; brew cleanup"
 alias pyupdate="poetry self update; pipx upgrade-all; pip install --upgrade --user pipx"
 alias pullall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
-alias cat="bat"
+# alias cat="bat"
 
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=7
@@ -69,6 +69,7 @@ export JULIA_NUM_THREADS=4
 export REPOSITORIES=$HOME/Devel/Repositories
 export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
+export EDITOR=vim
 
 alias iterator="conda activate cpg; pythonw ${REPOSITORIES}/iterator/iterator "
 alias explorator="conda activate explorator; CC=gcc-10 python ${REPOSITORIES}/explorator/explorator "
@@ -79,7 +80,7 @@ export BIBINPUTS=${REPOSITORIES}/CPG/other/latex_and_bibtex/bibstyles:${BIBINPUT
 export BSTINPUTS=$REPOSITORIES/Bibtex/bibstyles:${REPOSITORIES}/CPG/other/latex_and_bibtex/bibstyles:${BSTINPUTS}
 export TEXINPUTS=${REPOSITORIES}/CPG/other/latex_and_bibtex/styles:${TEXINPUTS}
 
-export ARTICLE_STORAGE=~/Downloads
+export ARTICLE_STORAGE=~/Devel/ArticleStorage
 # If local user and the one one ptpcp4 have different logins, you can
 # use this variable to adjust it.
 export ARTICLE_STORAGE_USER="jschmidt"

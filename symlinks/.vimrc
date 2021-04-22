@@ -39,6 +39,7 @@ Plug 'majutsushi/tagbar'
 
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'rhysd/vim-lsp-ale'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
@@ -236,7 +237,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 
 " Linters for Python and Latex
 let g:ale_linters = {
-\   'python': ['flake8', 'isort'],
+\   'python': ['vim-lsp', 'flake8', 'isort'],
 \   'latex': ['chktex', 'lacheck'],
 \   'julia': ['languageserver'],
 \   'java': ['javac'],
