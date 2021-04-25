@@ -237,9 +237,9 @@ let g:gitgutter_sign_modified_removed = '∙'
 
 " Linters for Python and Latex
 let g:ale_linters = {
-\   'python': ['vim-lsp', 'flake8', 'isort'],
-\   'latex': ['chktex', 'lacheck'],
-\   'julia': ['languageserver'],
+\   'python': ['vim-lsp'],
+\   'latex': ['vim-lsp'],
+\   'julia': ['vim-lsp'],
 \   'java': ['javac'],
 \   'haskell': ['ghc'],
 \}

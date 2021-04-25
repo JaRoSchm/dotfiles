@@ -5,5 +5,5 @@ brew install pipx
 pipx ensurepath
 pipx install black
 pipx install flake8
-pipx install python-language-server
+pipx install 'python-language-server[all]'
 # install miniconda
