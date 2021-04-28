@@ -113,9 +113,6 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 ##############################
 # For Python:
 
-# use pipx
-export PATH=~/.local/bin:$PATH
-
 # use poetry
 export PATH=~/.poetry/bin:$PATH
 
@@ -135,6 +132,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# use pipx
+export PATH=~/.local/bin:$PATH
 
 if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init - zsh)"
