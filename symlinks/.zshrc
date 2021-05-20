@@ -72,7 +72,7 @@ export PATH=${REPOSITORIES}/CPG/bin:$PATH
 export EDITOR=vim
 
 alias iterator="conda activate cpg; pythonw ${REPOSITORIES}/iterator/iterator "
-alias explorator="conda activate explorator; CC=gcc-10 python ${REPOSITORIES}/explorator/explorator "
+alias explorator="conda activate explorator; CC=gcc-11 python ${REPOSITORIES}/explorator/explorator "
 alias cdr="cd ~/Devel/Repositories/"
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
@@ -98,6 +98,7 @@ fpath=(~/Devel/Repositories/explorator/util/shutils $fpath)
 
 # For a different destination (e.g. for your laptop not having scratch) use:
 export CPG_ANACONDA_PATH=~/miniconda3/
+export SCRATCH=~/scratch/
 
 # Activate:
 # conda activate CPG_stable
