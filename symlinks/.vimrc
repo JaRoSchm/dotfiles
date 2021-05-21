@@ -294,11 +294,11 @@ call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_opti
 \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
 \ }))
 
-if executable('pyls')
+if executable('pylsp')
     " pip install python-language-server
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
+        \ 'name': 'pylsp',
+        \ 'cmd': {server_info->['pylsp']},
         \ 'allowlist': ['python'],
         \ })
 endif
@@ -341,7 +341,8 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
-
+    imap <buffer> <expr><c-f> lsp#scroll(+4)
+    imap <buffer> <expr><c-d> lsp#scroll(-4)
     " refer to doc to add more commands
 endfunction
 
