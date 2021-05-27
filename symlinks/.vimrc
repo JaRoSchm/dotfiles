@@ -315,16 +315,9 @@ endif
 if executable('julia')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'LanguageServer.jl',
-        \ 'cmd': {server_info->['julia', '--startup-file=no', '--history-file=no', '-e', '
-                \       using LanguageServer;
-                \       using Pkg;
-                \       import StaticLint;
-                \       import SymbolServer;
-                \       env_path = dirname(Pkg.Types.Context().env.project_file);
-                \
-                \       server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
-                \       server.runlinter = true;
-                \       run(server);
+        \ 'cmd': {server_info->['julia', '-e', '
+                \       using LanguageServer, LanguageServer.SymbolServer;
+                \       runserver()
                 \   ']},
         \ 'allowlist': ['julia'],
         \ })
