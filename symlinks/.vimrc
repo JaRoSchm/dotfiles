@@ -35,7 +35,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
-Plug 'neovimhaskell/haskell-vim'
 Plug 'majutsushi/tagbar'
 
 Plug 'prabirshrestha/async.vim'
