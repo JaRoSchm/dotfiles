@@ -90,7 +90,7 @@ nnoremap <leader>af :ALEFix<cr>
 " German spellchecking
 nnoremap <leader>sg :setlocal spell spelllang=de_de<cr>
 " English spellcheking
-nnoremap <leader>se :setlocal spell spelllang=en_gb<cr>
+nnoremap <leader>se :setlocal spell spelllang=en_us<cr>
 
 " more mappings
 command! W w                    " Save with :W
