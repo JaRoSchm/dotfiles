@@ -71,8 +71,8 @@ export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
 export EDITOR=vim
 
-alias iterator="conda activate cpg; pythonw ${REPOSITORIES}/iterator/iterator "
-alias explorator="conda activate explorator; CC=gcc-11 python ${REPOSITORIES}/explorator/explorator "
+alias iterator="conda activate CPG_stable; CC=gcc-11 pythonw ${REPOSITORIES}/iterator/iterator "
+alias explorator="conda activate CPG_stable; CC=gcc-11 python ${REPOSITORIES}/explorator/explorator "
 alias cdr="cd ~/Devel/Repositories/"
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
@@ -105,7 +105,7 @@ export SCRATCH=~/scratch/
 alias cpg="conda activate CPG_stable"
 
 # Explorator:
-export ETS_TOOLKIT="qt4"
+export ETS_TOOLKIT="qt"
 # get rid of error "double free or corruption (!prev)"
 export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
 
@@ -118,21 +118,6 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH=~/.poetry/bin:$PATH
 
 compinit
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/janrobertschmidt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/janrobertschmidt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/janrobertschmidt/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/janrobertschmidt/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 # use pipx
 export PATH=~/.local/bin:$PATH
@@ -154,3 +139,19 @@ export PATH="$PATH:/Users/janrobertschmidt/.local/bin"
 
 # Created by `userpath` on 2020-12-11 14:11:16
 export PATH="$PATH:/Users/janrobertschmidt/Library/Python/3.9/bin"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/janrobertschmidt/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/janrobertschmidt/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/janrobertschmidt/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/janrobertschmidt/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
