@@ -300,6 +300,9 @@ if executable('pylsp')
         \ 'name': 'pylsp',
         \ 'cmd': {server_info->['pylsp']},
         \ 'allowlist': ['python'],
+        \ 'workspace_config': {'pylsp': {'plugins':
+                \ {'pycodestyle': {'maxLineLength': 88}}
+                \ }},
         \ })
 endif
 
