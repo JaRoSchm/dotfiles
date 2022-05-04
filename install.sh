@@ -53,8 +53,8 @@ poetry completions zsh > /usr/local/share/zsh-completions/_poetry
 
 # install anaconda
 # following: https://stackoverflow.com/a/58045893
-curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-source Miniconda3-latest-MacOSX-x86_64.sh
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+source Miniconda3-latest-MacOSX-arm64.sh
 source ~/miniconda3/bin/activate
 conda init zsh
 conda config --set auto_activate_base false
