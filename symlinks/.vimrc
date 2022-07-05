@@ -311,6 +311,7 @@ if executable('texlab')
         \ 'name': 'texlab',
         \ 'cmd': {server_info->['texlab']},
         \ 'allowlist': ['tex', 'latex', 'bib'],
+        \ 'workspace_config': {'texlab': {}},
         \ })
 endif
 
