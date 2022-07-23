@@ -106,6 +106,7 @@ alias cpg="conda activate CPG_stable"
 
 # Explorator:
 export ETS_TOOLKIT="qt"
+export QT_API="pyside6"
 # get rid of error "double free or corruption (!prev)"
 export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
 
