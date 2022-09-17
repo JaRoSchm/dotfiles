@@ -124,7 +124,7 @@ set backspace=indent,eol,start
 
 set showmatch
 set ruler
-set guifont=Anonymous\ Pro\ for\ Powerline:h15
+set guifont=Anonymous\ Pro\ for\ Powerline\ Regular\ 15
 set wildmenu
 set encoding=utf-8
 

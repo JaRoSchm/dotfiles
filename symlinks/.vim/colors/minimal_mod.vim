@@ -5,52 +5,52 @@ if exists("syntax_on")
 endif
 let g:colors_name = "minimal_mod"
 
-hi Normal		guifg=#424242	ctermfg=black           guibg=#F4F3F1
-hi NonText		guifg=#424242	ctermfg=black
-hi comment		guifg=darkgray  ctermfg=darkgray	gui=italic
-hi constant		guifg=#424242	ctermfg=black
-hi string               guifg=darkgray  ctermfg=darkgray
-hi identifier	        guifg=#424242   ctermfg=black
-hi statement	        guifg=#424242	ctermfg=black	        gui=bold cterm=bold
+hi Normal		guifg=black	ctermfg=black           guibg=white ctermbg=white
+hi NonText		guifg=black	ctermfg=black
+hi comment		guifg=gray40    ctermfg=darkgray
+hi constant		guifg=black	ctermfg=black
+hi string               guifg=gray40    ctermfg=darkgray
+hi identifier	        guifg=black     ctermfg=black
+hi statement	        guifg=gray40	ctermfg=darkgray	gui=bold cterm=bold
 hi define                                                       gui=bold cterm=bold
-hi preproc		guifg=#424242	ctermfg=black
-hi type			guifg=#424242	ctermfg=black	        gui=bold cterm=bold
-hi special		guifg=#424242	ctermfg=black
-hi Underlined	        guifg=#424242	ctermfg=black	        gui=underline	cterm=underline
-hi label		guifg=#424242	ctermfg=black
-hi operator		guifg=#424242	ctermfg=black
-hi delimiter            guifg=darkgray  ctermfg=darkgray        gui=NONE cterm=NONE
+hi preproc		guifg=black	ctermfg=black
+hi type			guifg=black	ctermfg=black	        gui=bold cterm=bold
+hi special		guifg=black	ctermfg=black
+hi Underlined	        guifg=black	ctermfg=black	        gui=underline	cterm=underline
+hi label		guifg=black	ctermfg=black
+hi operator		guifg=black	ctermfg=black
+hi delimiter            guifg=gray40    ctermfg=darkgray        gui=NONE cterm=NONE
 
-hi ErrorMsg		guifg=#424242	ctermfg=black
-hi WarningMsg	        guifg=#424242	ctermfg=black	        gui=bold cterm=bold
-hi ModeMsg		guifg=#424242	ctermfg=black           gui=NONE
-hi MoreMsg		guifg=#424242	ctermfg=black           gui=NONE
-hi Error		guifg=#424242	ctermfg=black           gui=underline
+hi ErrorMsg		guifg=black	ctermfg=black
+hi WarningMsg	        guifg=black	ctermfg=black	        gui=bold cterm=bold
+hi ModeMsg		guifg=black	ctermfg=black
+hi MoreMsg		guifg=black	ctermfg=black
+hi Error		guifg=black	ctermfg=black
 
-hi SignColumn                                                   ctermbg=White guibg=#FFFFFF
+hi SignColumn                                                   ctermbg=White guibg=White
 
-hi Todo			guifg=#424242	ctermfg=black   ctermbg=grey
-hi Cursor		guifg=#424242	ctermfg=black
-hi Search		guifg=#424242	ctermfg=black
-hi IncSearch	        guifg=#424242	ctermfg=black
-hi LineNr		guifg=#424242	ctermfg=black
-hi title		guifg=#424242	                        gui=bold        cterm=bold
+hi Todo			guifg=black	ctermfg=black           ctermbg=grey guibg=grey
+hi Cursor		guifg=black	ctermfg=black
+hi Search		guifg=black	ctermfg=black
+hi IncSearch	        guifg=black	ctermfg=black
+hi LineNr		guifg=black	ctermfg=black
+hi title		                                        gui=bold        cterm=bold
 
-hi StatusLine           guifg=#000000     ctermfg=black           cterm=none gui=none  guibg=white   ctermbg=white
-hi StatusLineNC         guifg=#000000        ctermfg=black              cterm=none gui=none  guibg=#cccbca ctermbg=white
-hi VertSplit            guifg=#424242   ctermfg=black           gui=none
+hi StatusLine           guifg=black     ctermfg=black           cterm=none gui=none  guibg=white   ctermbg=white
+hi StatusLineNC         guifg=black     ctermfg=black           cterm=none gui=none  guibg=white   ctermbg=white
+hi VertSplit            guifg=black     ctermfg=black           gui=none
 
-hi Visual		guifg=#424242   ctermfg=black           term=reverse  ctermfg=black
+hi Visual		guifg=black     ctermfg=black           term=reverse  ctermfg=black
 
-hi DiffChange	        guifg=#424242   ctermfg=black
-hi DiffText		guifg=#424242	ctermfg=black
-hi DiffAdd		guifg=#424242   ctermfg=black
-hi DiffDelete           guifg=#424242	ctermfg=black
+hi DiffChange	        guifg=black     ctermfg=black
+hi DiffText		guifg=black	ctermfg=black
+hi DiffAdd		guifg=black     ctermfg=black
+hi DiffDelete           guifg=black	ctermfg=black
 
-hi Folded		guifg=#424242   ctermfg=black
-hi FoldColumn	        guifg=#424242   ctermfg=black
-hi cIf0			guifg=#424242	ctermfg=black
+hi Folded		guifg=black     ctermfg=black
+hi FoldColumn	        guifg=black     ctermfg=black
+hi cIf0			guifg=black  	ctermfg=black
 
-hi TagbarHighlight      ctermbg=grey    ctermfg=black
-hi TagbarScope          ctermbg=white   ctermfg=black   cterm=bold
-hi TagbarSignature      ctermbg=white   ctermfg=black
+hi TagbarHighlight      guibg=grey      ctermbg=grey            guifg=black     ctermfg=black
+hi TagbarScope          ctermbg=white   ctermfg=black           cterm=bold      gui=bold
+hi TagbarSignature      ctermbg=white   ctermfg=black           guibg=white     guifg=black
