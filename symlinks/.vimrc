@@ -338,8 +338,8 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
-    imap <buffer> <expr><c-f> lsp#scroll(+4)
-    imap <buffer> <expr><c-d> lsp#scroll(-4)
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
     " refer to doc to add more commands
 endfunction
 
