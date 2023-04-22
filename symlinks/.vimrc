@@ -254,6 +254,7 @@ let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
+let g:ale_virtualtext_cursor = '0'
 
 """""""""""""""
 " Configuration of fzf
