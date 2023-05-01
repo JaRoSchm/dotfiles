@@ -378,3 +378,8 @@ if has('python3')
     let g:UltiSnipsJumpForwardTrigger="<C-k>"
     let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 endif
+
+"""""""""""""""
+" Configuration of tagbar
+
+let g:tagbar_sort = 0
