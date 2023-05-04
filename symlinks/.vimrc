@@ -50,6 +50,7 @@ Plug 'JuliaEditorSupport/julia-vim'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'github/copilot.vim'
 
 " Check if fzf is installed and install it if not
 if !empty(glob("/usr/local/opt/fzf"))
