@@ -17,14 +17,14 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load.
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Activate Oh-My-Zsh
-source $ZSH/oh-my-zsh.sh
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(tmux python pip conda-zsh-completion)
+plugins=(zsh-vi-mode python pip)
+
+# Activate Oh-My-Zsh
+source $ZSH/oh-my-zsh.sh
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
