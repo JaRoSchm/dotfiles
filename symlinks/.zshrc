@@ -102,7 +102,7 @@ export SCRATCH=~/scratch/
 
 # Activate:
 # conda activate CPG_stable
-alias cpg="conda activate CPG_stable"
+alias cpg="mamba activate CPG_stable"
 
 # Explorator:
 export ETS_TOOLKIT="qt"
