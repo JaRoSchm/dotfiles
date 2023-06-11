@@ -384,3 +384,9 @@ endif
 " Configuration of tagbar
 
 let g:tagbar_sort = 0
+
+"""""""""""""""
+" Configuration of copilot
+
+imap <silent><script><expr> <Right> copilot#Accept("\<Right>")
+let g:copilot_no_tab_map = v:true
