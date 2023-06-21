@@ -36,7 +36,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'majutsushi/tagbar'
+Plug 'JuliaEditorSupport/julia-vim'
 
+" Completion
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'rhysd/vim-lsp-ale'
@@ -45,7 +47,6 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'prabirshrestha/asyncomplete-file.vim'
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
-Plug 'JuliaEditorSupport/julia-vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -72,21 +73,6 @@ call plug#end()
 
 " set leader key to space
 let mapleader=" "
-
-" mappings for fzf
-" History with fzf
-nnoremap <leader>h :History<cr>
-" Buffers with fzf
-nnoremap <leader>b :Buffers<cr>
-" Files with fzf
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :Tags<cr>
-nnoremap <leader>bt :BTags<cr>
-nnoremap <leader>/ :BLines<cr>       " fuzzy search
-
-" mappings for ALE
-nnoremap <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
-nnoremap <leader>af :ALEFix<cr>
 
 " German spellchecking
 nnoremap <leader>sg :setlocal spell spelllang=de_de<cr>
@@ -257,6 +243,18 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 let g:ale_virtualtext_cursor = '0'
 
+" Don't highlight the code
+let g:ale_set_highlights = 0
+
+" Don't run during insert mode
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 1
+
+" mappings for ALE
+nnoremap <leader>ta :ALEToggle<cr>   " Toggle linting with ALE
+nnoremap <leader>af :ALEFix<cr>
+
+
 """""""""""""""
 " Configuration of fzf
 
@@ -264,6 +262,13 @@ let g:ale_virtualtext_cursor = '0'
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+" mappings for fzf
+nnoremap <leader>h :History<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>t :Tags<cr>
+nnoremap <leader>bt :BTags<cr>
+nnoremap <leader>/ :BLines<cr>
 
 """""""""""""""
 " Configuration of vimtex
@@ -271,30 +276,7 @@ command! -bang -nargs=? -complete=dir Files
 let g:tex_flavor = 'latex'
 
 """""""""""""""
-" Configuration of completion and snippets
-
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    \ 'name': 'file',
-    \ 'whitelist': ['*'],
-    \ 'priority': 10,
-    \ 'completor': function('asyncomplete#sources#file#completor')
-    \ }))
-
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-    \ 'name': 'buffer',
-    \ 'allowlist': ['*'],
-    \ 'blocklist': ['go'],
-    \ 'completor': function('asyncomplete#sources#buffer#completor'),
-    \ 'config': {
-    \    'max_buffer_size': 5000000,
-    \  },
-    \ }))
-
-call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-\ 'name': 'ultisnips',
-\ 'whitelist': ['*'],
-\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-\ }))
+" Configuration of vim-lsp
 
 if executable('pylsp')
     " pip install python-language-server
@@ -355,6 +337,32 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
+"""""""""""""""
+" Configuration of asyncomplete
+
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'allowlist': ['*'],
+    \ 'blocklist': ['go'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ 'config': {
+    \    'max_buffer_size': 5000000,
+    \  },
+    \ }))
+
+call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+\ 'name': 'ultisnips',
+\ 'whitelist': ['*'],
+\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+\ }))
+
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
@@ -373,6 +381,9 @@ inoremap <silent><expr> <TAB>
   \ Check_back_space() ? "\<TAB>" :
   \ asyncomplete#force_refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+"""""""""""""""
+" Configuration of UltiSnips
 
 if has('python3')
     let g:UltiSnipsExpandTrigger="<c-e>"
