@@ -56,8 +56,9 @@ export BAT_THEME="GitHub"
 
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# load fzf after zsh-vi-mode
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 ##############################
 # For Julia:
