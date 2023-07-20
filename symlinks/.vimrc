@@ -47,6 +47,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'prabirshrestha/asyncomplete-file.vim'
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'yami-beta/asyncomplete-omni.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -272,8 +273,15 @@ nnoremap <leader>/ :BLines<cr>
 
 """""""""""""""
 " Configuration of vimtex
-"
+
+if empty(v:servername) && exists('*remote_startserver')
+  call remote_startserver('VIM')
+endif
+
 let g:tex_flavor = 'latex'
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_complete_enabled = 1
 
 """""""""""""""
 " Configuration of vim-lsp
@@ -311,7 +319,7 @@ if executable('julia')
 endif
 
 function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
+    " setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
@@ -343,7 +351,7 @@ augroup END
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
     \ 'name': 'file',
     \ 'whitelist': ['*'],
-    \ 'priority': 10,
+    \ 'priority': 2,
     \ 'completor': function('asyncomplete#sources#file#completor')
     \ }))
 
@@ -351,6 +359,7 @@ call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options
     \ 'name': 'buffer',
     \ 'allowlist': ['*'],
     \ 'blocklist': ['go'],
+    \ 'priority': -2,
     \ 'completor': function('asyncomplete#sources#buffer#completor'),
     \ 'config': {
     \    'max_buffer_size': 5000000,
@@ -358,10 +367,24 @@ call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options
     \ }))
 
 call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-\ 'name': 'ultisnips',
-\ 'whitelist': ['*'],
-\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-\ }))
+    \ 'name': 'ultisnips',
+    \ 'whitelist': ['*'],
+    \ 'priority': 1,
+    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+    \ }))
+
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+    \ 'name': 'omni',
+    \ 'allowlist': ['*'],
+    \ 'blocklist': ['c', 'cpp', 'html'],
+    \ 'completor': function('asyncomplete#sources#omni#completor'),
+    \ 'priority': -1,
+    \ 'config': {
+    \   'show_source_kind': 1,
+    \ },
+    \ }))
+
+" lsp has priority 0
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -381,6 +404,32 @@ inoremap <silent><expr> <TAB>
   \ Check_back_space() ? "\<TAB>" :
   \ asyncomplete#force_refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" remove duplicates and sort by priority
+function! s:my_asyncomplete_preprocessor(options, matches) abort
+    let l:dict = {}
+    for [l:source_name, l:matches] in items(a:matches)
+        let l:source_priority = get(asyncomplete#get_source_info(l:source_name),'priority',0)
+        for l:item in l:matches['items']
+            if stridx(l:item['word'], a:options['base']) == 0
+                let l:item['priority'] = l:source_priority
+                if has_key(l:dict,l:item['word'])
+                    let l:old_item = get(l:dict, l:item['word'])
+                    if l:old_item['priority'] <  l:source_priority
+                        let l:dict[item['word']] = l:item
+                    endif
+                else
+                    let l:dict[item['word']] = l:item
+                endif
+            endif
+        endfor
+    endfor
+    let l:items =  sort(values(l:dict),{a, b -> b['priority'] - a['priority']})
+    call asyncomplete#preprocess_complete(a:options, l:items)
+endfunction
+
+let g:asyncomplete_preprocessor = [function('s:my_asyncomplete_preprocessor')]
+
 
 """""""""""""""
 " Configuration of UltiSnips
