@@ -274,9 +274,9 @@ nnoremap <leader>/ :BLines<cr>
 """""""""""""""
 " Configuration of vimtex
 
-if empty(v:servername) && exists('*remote_startserver')
-  call remote_startserver('VIM')
-endif
+" if empty(v:servername) && exists('*remote_startserver')
+"   call remote_startserver('VIM')
+" endif
 
 let g:tex_flavor = 'latex'
 let g:vimtex_view_general_viewer = 'okular'
