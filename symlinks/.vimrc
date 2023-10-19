@@ -298,6 +298,15 @@ if executable('pylsp')
         \ })
 endif
 
+if executable('ruff-lsp')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff-lsp',
+        \ 'cmd': {server_info->['ruff-lsp']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
 if executable('texlab')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'texlab',
