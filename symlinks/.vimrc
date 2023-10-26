@@ -225,7 +225,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 
 " Linters for Python and Latex
 let g:ale_linters = {
-\   'python': ['pylsp', 'ruff-lsp', 'refurb'],
+\   'python': ['pylsp', 'refurb'],
 \   'latex': ['texlab', 'lacheck', 'proselint'],
 \   'julia': ['LanguageServer.jl'],
 \   'java': ['javac'],
@@ -286,13 +286,13 @@ let g:vimtex_complete_enabled = 0
 """""""""""""""
 " Configuration of vim-lsp
 
-if executable('ruff-lsp')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'ruff-lsp',
-        \ 'cmd': {server_info->['ruff-lsp']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
+" if executable('ruff-lsp')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'ruff-lsp',
+"         \ 'cmd': {server_info->['ruff-lsp']},
+"         \ 'allowlist': ['python'],
+"         \ })
+" endif
 
 if executable('pylsp')
     " pip install python-language-server
