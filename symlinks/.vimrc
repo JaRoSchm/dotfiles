@@ -233,7 +233,7 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   'python': ['black'],
+\   'python': ['ruff_format'],
 \   'java': ['google_java_format'],
 \   'haskell': ['stylish-haskell'],
 \}
