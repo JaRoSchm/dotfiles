@@ -306,6 +306,14 @@ if executable('pylsp')
         \ })
 endif
 
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'allowlist': ['cpp'],
+        \ })
+endif
+
 if executable('texlab')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'texlab',
