@@ -225,7 +225,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 
 " Linters for Python and Latex
 let g:ale_linters = {
-\   'python': ['pylsp', 'refurb'],
+\   'python': ['ruff-lsp', 'pylsp'],
 \   'latex': ['texlab', 'lacheck', 'proselint'],
 \   'julia': ['LanguageServer.jl'],
 \   'java': ['javac'],
@@ -286,11 +286,20 @@ let g:vimtex_complete_enabled = 0
 """""""""""""""
 " Configuration of vim-lsp
 
-" if executable('ruff-lsp')
+if executable('ruff-lsp')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff-lsp',
+        \ 'cmd': {server_info->['ruff-lsp']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+" if executable('ruff')
 "     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'ruff-lsp',
-"         \ 'cmd': {server_info->['ruff-lsp']},
+"         \ 'name': 'ruff-server',
+"         \ 'cmd': {server_info->['ruff', 'server', '--preview']},
 "         \ 'allowlist': ['python'],
+"         \ 'workspace_config': {'configurationPreference': 'filesystemFirst'},
 "         \ })
 " endif
 
@@ -301,8 +310,16 @@ if executable('pylsp')
         \ 'cmd': {server_info->['pylsp']},
         \ 'allowlist': ['python'],
         \ 'workspace_config': {'pylsp': {'plugins':
-                \ {'pycodestyle': {'maxLineLength': 88}}
-                \ }},
+                \ {'autopep8': {'enabled': v:false},
+                \  'flake8': {'enabled': v:false},
+                \  'mccabe': {'enabled': v:false},
+                \  'pycodestyle': {'enabled': v:false},
+                \  'pyflakes': {'enabled': v:false},
+                \  'pylint': {'enabled': v:false},
+                \  'yapf': {'enabled': v:false},
+                \  'ruff': {'enabled': v:false, 'formatEnabled': v:false},
+                \  'rope_autoimport': {'enabled': v:true},
+                \ }}},
         \ })
 endif
 
@@ -355,6 +372,13 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> <expr><c-j> lsp#scroll(+4)
     nnoremap <buffer> <expr><c-k> lsp#scroll(-4)
     " refer to doc to add more commands
+
+    let l:capabilities = lsp#get_server_capabilities('pylsp')
+    if !empty(l:capabilities)
+      " let l:capabilities.diagnosticProvider = v:false
+      let l:capabilities.documentFormattingProvider = v:false
+      let l:capabilities.documentRangeFormattingProvider = v:false
+    endif
 endfunction
 
 augroup lsp_install

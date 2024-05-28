@@ -39,14 +39,7 @@ ln -sfv "$DOTFILES_DIR/symlinks/.vim" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.p10k.zsh" ~
 ln -sfv "$DOTFILES_DIR/symlinks/proselint.json" "$HOME/.config/proselint/config.json"
 
-# Python setup
-python3 -m pip install --user pipx
-
-python3 -m pipx ensurepath
 source ~/.zshrc
-pipx install black
-pipx install youtube-dl
-pipx install python-language-server
 
 curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 source ~/.zshrc
