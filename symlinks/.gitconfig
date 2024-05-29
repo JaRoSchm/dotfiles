@@ -6,7 +6,7 @@
     email = jan_robert.schmidt@tu-dresden.de
 [core]
     editor = "vim"
-    excludesfile = /home/jschmidt/.gitignore
+    excludesfile = /Users/janrobertschmidt/.gitignore
 [push]
     default = current
 [commit]
@@ -16,4 +16,4 @@
 [url "git@141.30.17.24:"]
     insteadOf = cpg:
 [pull]
-	rebase = false
+    rebase = false
