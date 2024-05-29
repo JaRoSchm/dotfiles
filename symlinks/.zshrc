@@ -72,8 +72,8 @@ export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
 export EDITOR=vim
 
-alias iterator="conda activate CPG_stable; CC=gcc-12 pythonw ${REPOSITORIES}/iterator/iterator "
-alias explorator="conda activate CPG_stable; CC=gcc-12 python ${REPOSITORIES}/explorator/explorator "
+alias iterator="conda activate CPG_stable; CC=gcc-14 pythonw ${REPOSITORIES}/iterator/iterator "
+alias explorator="conda activate CPG_stable; CC=gcc-14 python ${REPOSITORIES}/explorator/explorator "
 alias cdr="cd ~/Devel/Repositories/"
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
