@@ -32,6 +32,7 @@ chsh -s $(which zsh)
 ln -sfv "$DOTFILES_DIR/symlinks/.zshrc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.condarc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.gitconfig" ~
+ln -sfv "$DOTFILES_DIR/symlinks/.gitignore" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.tmux.conf" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.vimrc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.gvimrc" ~

@@ -6,6 +6,7 @@
     email = jan_robert.schmidt@tu-dresden.de
 [core]
     editor = "vim"
+    excludesfile = /home/jschmidt/.gitignore
 [push]
     default = current
 [commit]
