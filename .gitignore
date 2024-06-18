@@ -8,6 +8,8 @@ Icon
 
 # Vim Plugins
 symlinks/.vim/bundle/*
+symlinks/.vim/autoload/plug.vim
+symlinks/.vim/autoload/plug.vim.old
 
 # Thumbnails
 ._*
