@@ -25,7 +25,7 @@ Plug 'tpope/vim-apathy'     " set path variable for different file types
 Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'   " linting
 Plug 'tpope/vim-commentary'
-Plug 'https://git.danielmoch.com/vim-makejob.git'
+Plug 'djmoch/vim-makejob'
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'

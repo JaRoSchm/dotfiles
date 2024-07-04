@@ -39,6 +39,7 @@ ln -sfv "$DOTFILES_DIR/symlinks/.gvimrc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.vim" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.p10k.zsh" ~
 ln -sfv "$DOTFILES_DIR/symlinks/proselint.json" "$HOME/.config/proselint/config.json"
+ln -sfv "$DOTFILES_DIR/symlinks/nvim" "$HOME/.config"
 
 source ~/.zshrc
 

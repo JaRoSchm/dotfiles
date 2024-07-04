@@ -46,3 +46,10 @@ symlinks/.vim/undofiles/*
 !symlinks/.vim/undofiles/.gitkeep
 symlinks/.vim/backupfiles/*
 !symlinks/.vim/backupfiles/.gitkeep
+
+symlinks/nvim/swapfiles/*
+!symlinks/nvim/swapfiles/.gitkeep
+symlinks/nvim/undofiles/*
+!symlinks/nvim/undofiles/.gitkeep
+symlinks/nvim/backupfiles/*
+!symlinks/nvim/backupfiles/.gitkeep
