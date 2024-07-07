@@ -1,4 +1,6 @@
--- TODO!!!!!!!! look at https://seniormars.com/posts/neovim-workflow/
+-- TODO:
+-- look at https://seniormars.com/posts/neovim-workflow/
+-- go through .vimrc and add missing stuff
 
 -- leader key to space
 vim.g.mapleader = " "
@@ -16,6 +18,12 @@ vim.opt.smartcase = true
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.updatetime = 300
+
+-- single status line
+vim.opt.laststatus = 3
+
+-- current dir as working dir
+vim.opt.autochdir = true
 
 -- directories
 vim.opt.undodir = vim.fn.stdpath('config') .. '/undofiles'
@@ -59,10 +67,11 @@ Plug('tpope/vim-apathy')
 Plug('tpope/vim-fugitive')
 Plug('tpope/vim-surround')
 Plug('majutsushi/tagbar')
-Plug('djmoch/vim-makejob')
 Plug('cohama/lexima.vim')
 Plug('lervag/vimtex')
 Plug('github/copilot.vim')
+Plug('neomake/neomake')
+Plug('lewis6991/gitsigns.nvim')
 
 -- lsp
 Plug('neovim/nvim-lspconfig')
@@ -93,6 +102,13 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, {noremap = true, silent = true
 vim.keymap.set("n", "gr", vim.lsp.buf.references, {noremap = true, silent = true})
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {noremap = true, silent = true})
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {noremap = true, silent = true})
+vim.api.nvim_create_user_command('W', 'w', {})
+vim.api.nvim_create_user_command('Wq', 'wq', {})
+vim.api.nvim_create_user_command('Q', 'q', {})
+vim.api.nvim_create_user_command('Qa', 'qa', {})
+
+-- clear hightlight from search after pressing <Esc>
+vim.keymap.set("n", "<Esc>", ":noh<CR>", {noremap = true, silent = true})
 
 function GermanSpellChecking()
   vim.opt.spelllang = 'de_de'
@@ -112,7 +128,6 @@ vim.keymap.set("n", "<leader>sg", GermanSpellChecking, {noremap = true, silent =
 vim.keymap.set("n", "<leader>se", EnglishSpellChecking, {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>so", SpellCheckingOff, {noremap = true, silent = true})
 
-
 -- colorscheme
 vim.opt.termguicolors = true
 vim.opt.background = 'light'
@@ -126,28 +141,54 @@ vim.lsp.inlay_hint.enable()
 vim.diagnostic.config({
   virtual_text = false,
   underline = true,
-  signs = true,
+  -- Highlight entire line for errors
+  -- Highlight the line number for warnings
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '✗',
+      [vim.diagnostic.severity.WARN] = '◆',
+    },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+    },
+    numhl = {
+      [vim.diagnostic.severity.WARN] = 'WarningMsg',
+    },
+  },
   update_in_insert = true,
 })
 
-function ShowDiagnosticsInCommandLine()
-    local diagnostics = vim.diagnostic.get(0, {lnum = vim.fn.line('.') - 1})
-    if #diagnostics > 0 then
-        -- Sort diagnostics by severity
-        table.sort(diagnostics, function(a, b)
-            return a.severity < b.severity
-        end)
+local function truncate_message(message)
+  local max_length = vim.v.echospace
 
-        local messages = {}
-        for _, diagnostic in ipairs(diagnostics) do
-            local source = diagnostic.source or 'Unknown'
-            local code = diagnostic.code or ''
-            table.insert(messages, string.format("[%s] %s: %s", source, code, diagnostic.message))
-        end
-        vim.cmd('echohl | echo "' .. table.concat(messages, ' | ') .. '" | echohl None')
-    else
-        vim.cmd('echo ""')
-    end
+  if #message > max_length then
+    return message:sub(1, max_length - 3) .. "..."
+  end
+
+  return message
+end
+
+function ShowDiagnosticsInCommandLine()
+  local diagnostics = vim.diagnostic.get(0, {lnum = vim.fn.line('.') - 1})
+
+  if #diagnostics == 0 then
+    return
+  end
+
+  -- Sort diagnostics by severity
+  table.sort(diagnostics, function(a, b)
+    return a.severity < b.severity
+  end)
+
+  local messages = {}
+  for _, diagnostic in ipairs(diagnostics) do
+    local source = diagnostic.source or 'Unknown'
+    local code = diagnostic.code or ''
+    table.insert(messages, string.format("[%s] %s: %s", source, code, diagnostic.message))
+  end
+  local message = table.concat(messages, ' | ')
+  message = truncate_message(message)
+  vim.api.nvim_echo({ { message, "WarningMsg" } }, false, {})
 end
 
 vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
@@ -156,7 +197,7 @@ vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
 })
 
 
-
+-- LSP config
 local on_attach = function(client, bufnr)
   if client.name == 'pylsp' then
     client.server_capabilities.documentFormattingProvider = false
@@ -175,7 +216,7 @@ require('lspconfig').ruff.setup {
   }
 }
 require('lspconfig').pylsp.setup {
-  on_attach = on_attach, 
+  on_attach = on_attach,
   settings = {
     pylsp = {
       plugins = {
@@ -202,7 +243,7 @@ require('lspconfig').pylsp.setup {
         },
         ruff = {
           enabled = false,
-	  formatEnabled = false
+          formatEnabled = false
         },
         rope_autoimport = {
           enabled = true
@@ -216,6 +257,18 @@ require('lspconfig').pylsp.setup {
       ignore = { '*' },
     },
   },
+}
+
+require('lspconfig').texlab.setup {
+  on_attach = on_attach,
+}
+
+require('lspconfig').clangd.setup {
+  on_attach = on_attach,
+}
+
+require('lspconfig').julials.setup {
+  on_attach = on_attach,
 }
 
 -- snippets
@@ -285,16 +338,18 @@ cmp.setup({
 
     })
 })
-  
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+
+-- Completion: Use buffer source for `/` and `?` (if you enabled `native_menu`,
+-- this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
   }
 })
-  
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+
+-- Completion: Use cmdline & path source for ':' (if you enabled `native_menu`,
+-- this won't work anymore).
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -304,8 +359,8 @@ cmp.setup.cmdline(':', {
   }),
   matching = { disallow_symbol_nonprefix_matching = false }
 })
-  
--- Set up lspconfig.
+
+-- Completion: Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require('lspconfig')['ruff'].setup {
   capabilities = capabilities
@@ -313,7 +368,15 @@ require('lspconfig')['ruff'].setup {
 require('lspconfig')['pylsp'].setup {
   capabilities = capabilities
 }
-
+require('lspconfig')['texlab'].setup {
+  capabilities = capabilities
+}
+require('lspconfig')['clangd'].setup {
+  capabilities = capabilities
+}
+require('lspconfig')['julials'].setup {
+  capabilities = capabilities
+}
 
 -- copilot
 vim.keymap.set('i', '<Right>', 'copilot#Accept("\\<CR>")', {
@@ -330,3 +393,11 @@ vim.g.vimtex_complete_enabled = 0
 
 -- tagbar
 vim.g.tagbar_sort = 0
+
+-- neomake
+vim.g.neomake_open_list = 2
+
+-- gitsigns
+require('gitsigns').setup({
+  signs_staged_enable = false,
+})
