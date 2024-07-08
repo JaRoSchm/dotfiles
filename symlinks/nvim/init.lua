@@ -1,13 +1,16 @@
--- TODO:
--- look at https://seniormars.com/posts/neovim-workflow/
--- go through .vimrc and add missing stuff
-
 -- leader key to space
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- some distance while scrolling
 vim.opt.scrolloff = 5
+
+-- use utf-8 encoding
+vim.opt.encoding = 'utf-8'
+
+-- fold settings
+vim.opt.foldmethod = 'indent'
+vim.opt.foldlevel = 99
 
 -- search options
 vim.opt.incsearch = true
@@ -19,8 +22,15 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.updatetime = 300
 
+-- show invisible characters
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
 -- single status line
 vim.opt.laststatus = 3
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
 
 -- current dir as working dir
 vim.opt.autochdir = true
@@ -38,6 +48,21 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- use system clipboard
 vim.opt.clipboard = 'unnamedplus'
+
+-- border around floating windows
+vim.diagnostic.config({
+  float = {
+    border = 'single',
+  },
+})
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  { border = 'single' }
+)
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  { border = 'single' }
+)
 
 -- relative line numbers with auto switching
 vim.opt.relativenumber = true
@@ -66,6 +91,7 @@ vim.call('plug#begin')
 Plug('tpope/vim-apathy')
 Plug('tpope/vim-fugitive')
 Plug('tpope/vim-surround')
+Plug('tpope/vim-sleuth') -- Detect tabstop and shiftwidth automatically
 Plug('majutsushi/tagbar')
 Plug('cohama/lexima.vim')
 Plug('lervag/vimtex')
@@ -75,6 +101,7 @@ Plug('lewis6991/gitsigns.nvim')
 
 -- lsp
 Plug('neovim/nvim-lspconfig')
+Plug('ray-x/lsp_signature.nvim')
 
 -- snippets
 Plug('garymjr/nvim-snippets')
@@ -90,6 +117,9 @@ Plug('hrsh7th/nvim-cmp')
 
 -- colorscheme
 Plug('projekt0n/github-nvim-theme')
+
+-- statusline
+Plug('nvim-lualine/lualine.nvim')
 
 vim.call('plug#end')
 
@@ -108,7 +138,8 @@ vim.api.nvim_create_user_command('Q', 'q', {})
 vim.api.nvim_create_user_command('Qa', 'qa', {})
 
 -- clear hightlight from search after pressing <Esc>
-vim.keymap.set("n", "<Esc>", ":noh<CR>", {noremap = true, silent = true})
+vim.opt.hlsearch = true
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", {noremap = true, silent = true})
 
 function GermanSpellChecking()
   vim.opt.spelllang = 'de_de'
@@ -155,7 +186,7 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.WARN] = 'WarningMsg',
     },
   },
-  update_in_insert = true,
+  -- update_in_insert = true,
 })
 
 local function truncate_message(message)
@@ -329,14 +360,26 @@ cmp.setup({
     end,
   }),
   sources = cmp.config.sources({
+      { name = 'nvim_lsp_signature_help' },
       { name = 'nvim_lsp' },
       { name = 'snippets' },
-      { name = 'nvim_lsp_signature_help' },
       { name = 'path' },
     }, {
       { name = 'buffer' },
 
-    })
+    }
+  ),
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  -- limit width of completion menu
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
+    return vim_item
+  end
+}
 })
 
 -- Completion: Use buffer source for `/` and `?` (if you enabled `native_menu`,
@@ -400,4 +443,36 @@ vim.g.neomake_open_list = 2
 -- gitsigns
 require('gitsigns').setup({
   signs_staged_enable = false,
+})
+
+-- lsp signature
+require('lsp_signature').setup({
+  bind = true,
+  handler_opts = {
+    border = 'single',
+  },
+  doc_lines = 0,
+  floating_window_above_cur_line = true,
+  hint_prefix = {
+    above = "↙ ",  -- when the hint is on the line above the current line
+    current = "← ",  -- when the hint is on the same line
+    below = "↖ "  -- when the hint is on the line below the current line
+  }
+})
+
+-- statusline
+require('lualine').setup({
+  options = {
+    theme = 'onelight',
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {
+      { 'buffers', mode = 4 },
+    },
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
 })
