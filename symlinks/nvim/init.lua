@@ -92,12 +92,19 @@ Plug('tpope/vim-apathy')
 Plug('tpope/vim-fugitive')
 Plug('tpope/vim-surround')
 Plug('tpope/vim-sleuth') -- Detect tabstop and shiftwidth automatically
+Plug('tpope/vim-repeat')
 Plug('majutsushi/tagbar')
 Plug('cohama/lexima.vim')
 Plug('lervag/vimtex')
 Plug('github/copilot.vim')
 Plug('neomake/neomake')
 Plug('lewis6991/gitsigns.nvim')
+Plug('stevearc/oil.nvim') -- edit filesystem like a file
+
+-- telescope and dependencies
+Plug('nvim-lua/plenary.nvim')
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+Plug('nvim-telescope/telescope.nvim')
 
 -- lsp
 Plug('neovim/nvim-lspconfig')
@@ -124,18 +131,23 @@ Plug('nvim-lualine/lualine.nvim')
 vim.call('plug#end')
 
 -- keymaps
-vim.keymap.set("n", "<leader>df", vim.lsp.buf.format, {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>tb", ":TagbarToggle<CR>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {noremap = true, silent = true})
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, {noremap = true, silent = true})
-vim.keymap.set("n", "gr", vim.lsp.buf.references, {noremap = true, silent = true})
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {noremap = true, silent = true})
-vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>df', vim.lsp.buf.format, {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>tb', ':TagbarToggle<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {noremap = true, silent = true})
+vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, {noremap = true, silent = true})
+vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {noremap = true, silent = true})
+vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, {noremap = true, silent = true})
+vim.keymap.set('n', 'gt', require('telescope.builtin').lsp_type_definitions, {noremap = true, silent = true})
 vim.api.nvim_create_user_command('W', 'w', {})
 vim.api.nvim_create_user_command('Wq', 'wq', {})
 vim.api.nvim_create_user_command('Q', 'q', {})
 vim.api.nvim_create_user_command('Qa', 'qa', {})
+vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, {})
+vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, {})
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {})
+vim.keymap.set('n', 'z=', require('telescope.builtin').spell_suggest, {noremap = true, silent = true})
 
 -- clear hightlight from search after pressing <Esc>
 vim.opt.hlsearch = true
@@ -476,3 +488,9 @@ require('lualine').setup({
     lualine_z = {'location'}
   },
 })
+
+-- telescope
+require('telescope').setup()
+
+-- oil
+require("oil").setup()
