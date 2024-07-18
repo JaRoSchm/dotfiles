@@ -46,6 +46,8 @@ COMPLETION_WAITING_DOTS="true"
 
 export PATH="/usr/local/sbin:$PATH"
 
+alias vim=nvim
+
 ##############################
 # For bat:
 
@@ -107,6 +109,7 @@ alias cpg="mamba activate CPG_stable"
 
 # Explorator:
 export ETS_TOOLKIT="qt"
+export ETS_QT4_IMPORTS=1
 export QT_API="pyside6"
 # get rid of error "double free or corruption (!prev)"
 export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
