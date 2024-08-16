@@ -250,6 +250,9 @@ local on_attach = function(client, bufnr)
   if client.name == 'ruff' then
     client.server_capabilities.hoverProvider = false
   end
+  if client.name == 'texlab' then
+    client.server_capabilities.inlayHintsProvider = false
+  end
 end
 
 require('lspconfig').ruff.setup {
@@ -304,6 +307,14 @@ require('lspconfig').pylsp.setup {
 
 require('lspconfig').texlab.setup {
   on_attach = on_attach,
+  settings = {
+    texlab = {
+      inlayHints = {
+        labelDefinitions = false,
+        labelReferences = false,
+      },
+    },
+  },
 }
 
 require('lspconfig').clangd.setup {
