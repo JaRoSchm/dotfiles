@@ -261,6 +261,20 @@ require('lspconfig').ruff.setup {
     configurationPreference = "filesystemFirst",
   }
 }
+
+-- require('lspconfig').pylyzer.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   settings = {
+--     python = {
+--       checkOnType = true,
+--       diagnostics = false,
+--       inlayHints = true,
+--       smartCompletion = true
+--     }
+--   }
+-- }
+
 require('lspconfig').pylsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
