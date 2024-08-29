@@ -252,48 +252,32 @@ local on_attach = function(client, bufnr)
   end
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 require('lspconfig').ruff.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     configurationPreference = "filesystemFirst",
   }
 }
+
+-- require('lspconfig').pylyzer.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   settings = {
+--     python = {
+--       checkOnType = true,
+--       diagnostics = false,
+--       inlayHints = true,
+--       smartCompletion = true
+--     }
+--   }
+-- }
+
 require('lspconfig').pylsp.setup {
+  capabilities = capabilities,
   on_attach = on_attach,
-  settings = {
-    pylsp = {
-      plugins = {
-        autopep8 = {
-          enabled = false
-        },
-        flake8 = {
-          enabled = false
-        },
-        mccabe = {
-          enabled = false
-        },
-        pycodestyle = {
-          enabled = false
-        },
-        pyflakes = {
-          enabled = false
-        },
-        pylint = {
-          enabled = false
-        },
-        yapf = {
-          enabled = false
-        },
-        ruff = {
-          enabled = false,
-          formatEnabled = false
-        },
-        rope_autoimport = {
-          enabled = true
-        },
-      }
-    }
-  },
   python = {
     analysis = {
       -- Ignore all files for analysis to exclusively use Ruff for linting
@@ -304,14 +288,25 @@ require('lspconfig').pylsp.setup {
 
 require('lspconfig').texlab.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    texlab = {
+      inlayHints = {
+        -- labelDefinitions = false,
+        labelReferences = false,
+      },
+    },
+  },
 }
 
 require('lspconfig').clangd.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 require('lspconfig').julials.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 -- snippets
@@ -414,24 +409,6 @@ cmp.setup.cmdline(':', {
   }),
   matching = { disallow_symbol_nonprefix_matching = false }
 })
-
--- Completion: Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig')['ruff'].setup {
-  capabilities = capabilities
-}
-require('lspconfig')['pylsp'].setup {
-  capabilities = capabilities
-}
-require('lspconfig')['texlab'].setup {
-  capabilities = capabilities
-}
-require('lspconfig')['clangd'].setup {
-  capabilities = capabilities
-}
-require('lspconfig')['julials'].setup {
-  capabilities = capabilities
-}
 
 -- copilot
 vim.keymap.set('i', '<Right>', 'copilot#Accept("\\<CR>")', {
