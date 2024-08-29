@@ -116,21 +116,7 @@ export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
-##############################
-# For Python:
-
-# use poetry
-export PATH=~/.poetry/bin:$PATH
-
 compinit
-
-# use pipx
-export PATH=~/.local/bin:$PATH
-
-if command -v pyenv 1>/dev/null 2>&1; then
- eval "$(pyenv init - zsh)"
- eval "$(pyenv virtualenv-init - zsh)"
-fi
 
 ##############################
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

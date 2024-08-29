@@ -1,13 +1,9 @@
-brew install pyenv
-pyenv install 3.8.5
-pyenv global 3.8.5
-brew install pipx
-pipx ensurepath
-pipx install python-lsp-server
-pipx install ruff
-pipx inject python-lsp-server pylsp-rope
-pipx inject python-lsp-server pyls-memestra
-pipx install proselint
-pipx install vitables
+brew install uv
 
-# install miniconda
+uv tool install ruff --python="/opt/homebrew/bin/python3"
+uv tool install vitables --python="/opt/homebrew/bin/python3"
+uv tool install proselint --python="/opt/homebrew/bin/python3"
+uv tool install pylyzer --python="/opt/homebrew/bin/python3"
+uv tool install python-lsp-server --with pyls-memestra --with pylsp-rope --python="/opt/homebrew/bin/python3"
+
+# install miniforge
