@@ -139,6 +139,8 @@ vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, {noremap
 vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {noremap = true, silent = true})
 vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, {noremap = true, silent = true})
 vim.keymap.set('n', 'gt', require('telescope.builtin').lsp_type_definitions, {noremap = true, silent = true})
+-- run shell command "get_article" with current word as argument
+vim.keymap.set('n', '<leader>ga', ':!get_article <C-r><C-w><CR>', {noremap = true, silent = true})
 vim.api.nvim_create_user_command('W', 'w', {})
 vim.api.nvim_create_user_command('Wq', 'wq', {})
 vim.api.nvim_create_user_command('Q', 'q', {})
