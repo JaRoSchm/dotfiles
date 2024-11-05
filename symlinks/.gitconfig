@@ -17,3 +17,17 @@
     insteadOf = cpg:
 [pull]
     rebase = false
+
+# https://news.ycombinator.com/item?id=42035536
+[alias]
+    lol = !git --no-pager log --graph --decorate --abbrev-commit --all --date=local -25 --pretty=short
+    # shows branches in fzf, hit enter on one and you checkout that branch
+    sw = !git checkout $(git branch -a --format '%(refname:short)' | sed 's~origin/~~' | sort | uniq | fzf)
+    # shows recent branches
+    rb = !git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short) %(objectname:short) %(committerdate:format:%F)' | column -t | sort -k3
+    # shows all unstaged files in fzf and you can use space to toggle them,
+    # then hitting enter finishes adding/staging them
+    fza = "!git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add"
+    # deletes local branches that don't exist in the remote (equivalent to git
+    # remote prune origin?)
+    gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
