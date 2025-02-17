@@ -74,8 +74,8 @@ export PYTHONPATH=${REPOSITORIES}//:${PYTHONPATH}
 export PATH=${REPOSITORIES}/CPG/bin:$PATH
 export EDITOR=vim
 
-alias iterator="conda activate CPG_stable; CC=gcc-14 pythonw ${REPOSITORIES}/iterator/iterator "
-alias explorator="conda activate CPG_stable; CC=gcc-14 python ${REPOSITORIES}/explorator/explorator "
+alias iterator="cpg; CC=gcc-14 pythonw ${REPOSITORIES}/iterator/iterator "
+alias explorator="cpg; CC=gcc-14 python ${REPOSITORIES}/explorator/explorator "
 alias cdr="cd ~/Devel/Repositories/"
 
 export BIBINPUTS=${REPOSITORIES}/Bibtex:${BIBINPUTS}
@@ -105,7 +105,8 @@ export SCRATCH=~/scratch/
 
 # Activate:
 # conda activate CPG_stable
-alias cpg="mamba activate CPG_stable"
+# alias cpg="mamba activate CPG_stable"
+alias cpg="pixi_activate CPG_stable"
 
 # Explorator:
 export ETS_TOOLKIT="qt"
@@ -158,3 +159,9 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+
+pixi_activate() {
+    env="${1:-dev310}"
+    # pixi shell --manifest-path=/home/jschmidt/pixi/${env}/pixi.toml
+    eval "$(pixi shell-hook --shell=zsh --manifest-path=/home/jschmidt/pixi/${env}/pixi.toml)"
+}
