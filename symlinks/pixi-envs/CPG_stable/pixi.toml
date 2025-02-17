@@ -3,7 +3,7 @@ authors = ["Jan Robert Schmidt <jan_robert.schmidt@tu-dresden.de>"]
 channels = ["conda-forge"]
 description = "Add a short description here"
 name = "CPG_stable"
-platforms = ["linux-64"]
+platforms = ["linux-64", "osx-arm64"]
 version = "0.1.0"
 
 [tasks]

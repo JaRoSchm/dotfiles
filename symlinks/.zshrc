@@ -150,7 +150,7 @@ unset __conda_setup
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!
 export MAMBA_EXE='/Users/janrobertschmidt/mambaforge/condabin/mamba';
-export MAMBA_ROOT_PREFIX='/Users/janrobertschmidt/mambaforge';
+export MAMBA_ROOT_PREFIX='/Users/janrobertschmidt/.local/share/mamba';
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
@@ -160,8 +160,10 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
+export PATH="/Users/janrobertschmidt/.pixi/bin:$PATH"
+
 pixi_activate() {
     env="${1:-dev310}"
-    # pixi shell --manifest-path=/home/jschmidt/pixi/${env}/pixi.toml
-    eval "$(pixi shell-hook --shell=zsh --manifest-path=/home/jschmidt/pixi/${env}/pixi.toml)"
+    # pixi shell --manifest-path=$HOME/pixi/${env}/pixi.toml
+    eval "$(pixi shell-hook --shell=zsh --manifest-path=$HOME/pixi/${env}/pixi.toml)"
 }
