@@ -1,0 +1,46 @@
+version = 1
+
+[envs.lazygit]
+channels = ["conda-forge"]
+dependencies = { lazygit = "*" }
+exposed = { lazygit = "lazygit" }
+
+[envs.git-delta]
+channels = ["conda-forge"]
+dependencies = { git-delta = "*" }
+exposed = { delta = "delta" }
+
+[envs.difftastic]
+channels = ["conda-forge"]
+dependencies = { difftastic = "*" }
+exposed = { difft = "difft" }
+
+[envs.texlab]
+channels = ["conda-forge"]
+dependencies = { texlab = "*" }
+exposed = { texlab = "texlab" }
+
+[envs.uv]
+channels = ["conda-forge"]
+dependencies = { uv = "*" }
+exposed = { uv = "uv", uvx = "uvx" }
+
+[envs.ruff]
+channels = ["conda-forge"]
+dependencies = { ruff = "*" }
+exposed = { ruff = "ruff" }
+
+[envs.pylyzer]
+channels = ["conda-forge"]
+dependencies = { pylyzer = "*" }
+exposed = { pylyzer = "pylyzer" }
+
+[envs.basedpyright]
+channels = ["conda-forge"]
+dependencies = { basedpyright = "*" }
+exposed = { basedpyright = "basedpyright", basedpyright-langserver = "basedpyright-langserver" }
+
+[envs.grayskull]
+channels = ["conda-forge"]
+dependencies = { grayskull = "*" }
+exposed = { grayskull = "grayskull", greyskull = "greyskull", conda-grayskull = "conda-grayskull", conda-greyskull = "conda-greyskull" }
