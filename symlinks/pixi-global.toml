@@ -30,17 +30,32 @@ channels = ["conda-forge"]
 dependencies = { ruff = "*" }
 exposed = { ruff = "ruff" }
 
-[envs.pylyzer]
-channels = ["conda-forge"]
-dependencies = { pylyzer = "*" }
-exposed = { pylyzer = "pylyzer" }
+# [envs.pylyzer]
+# channels = ["conda-forge"]
+# dependencies = { pylyzer = "*" }
+# exposed = { pylyzer = "pylyzer" }
 
-[envs.basedpyright]
-channels = ["conda-forge"]
-dependencies = { basedpyright = "*" }
-exposed = { basedpyright = "basedpyright", basedpyright-langserver = "basedpyright-langserver" }
+# [envs.basedpyright]
+# channels = ["conda-forge"]
+# dependencies = { basedpyright = "*" }
+# exposed = { basedpyright = "basedpyright", basedpyright-langserver = "basedpyright-langserver" }
 
 [envs.grayskull]
 channels = ["conda-forge"]
 dependencies = { grayskull = "*" }
 exposed = { grayskull = "grayskull", greyskull = "greyskull", conda-grayskull = "conda-grayskull", conda-greyskull = "conda-greyskull" }
+
+[envs.proselint]
+channels = ["conda-forge"]
+dependencies = { proselint = "*" }
+exposed = { proselint = "proselint" }
+
+[envs.feedrattler]
+channels = ["conda-forge"]
+dependencies = { feedrattler = "*" }
+exposed = { feedrattler = "feedrattler" }
+
+# [envs.python-lsp-server-base]
+# channels = ["conda-forge"]
+# dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }
+# exposed = { pylsp = "pylsp" }

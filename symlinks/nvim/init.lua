@@ -249,6 +249,11 @@ local on_attach = function(client, bufnr)
     client.server_capabilities.documentRangeFormattingProvider = false
     client.server_capabilities.diagnosticProvider = false
   end
+  -- if client.name == 'basedpyright' then
+  --   client.server_capabilities.documentFormattingProvider = false
+  --   client.server_capabilities.documentRangeFormattingProvider = false
+  --   client.server_capabilities.diagnosticProvider = false
+  -- end
   if client.name == 'ruff' then
     client.server_capabilities.hoverProvider = false
   end
@@ -277,6 +282,40 @@ require('lspconfig').ruff.setup {
 --   }
 -- }
 
+-- require('lspconfig').basedpyright.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   settings = {
+--     basedpyright = {
+--       analysis = {
+--         typeCheckingMode = "off",
+--         inlayHints = {
+--           variableTypes = false,
+--           functionReturnTypes = false,
+--           callArgumentNames = false,
+--         }
+--       }
+--     }
+--   }
+-- }
+
+-- require('lspconfig').pyright.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   -- settings = {
+--   --   basedpyright = {
+--   --     analysis = {
+--   --       typeCheckingMode = "off",
+--   --       inlayHints = {
+--   --         variableTypes = false,
+--   --         functionReturnTypes = false,
+--   --         callArgumentNames = false,
+--   --       }
+--   --     }
+--   --   }
+--   -- }
+-- }
+
 require('lspconfig').pylsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -286,6 +325,16 @@ require('lspconfig').pylsp.setup {
       ignore = { '*' },
     },
   },
+  -- settings = {
+  --   pylsp = {
+  --     plugins = {
+  --       jedi = {
+  --         extra_paths = { os.getenv('CONDA_PREFIX') .. '/bin' },
+  --         prioritize_extra_paths = true,
+  --       }
+  --     }
+  --   }
+  -- },
 }
 
 require('lspconfig').texlab.setup {
@@ -422,7 +471,7 @@ vim.g.copilot_no_tab_map = true
 -- vimtex
 vim.g.tex_flavor = 'latex'
 vim.g.vimtex_view_general_viewer = 'okular'
--- vim.g.vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
 vim.g.vimtex_complete_enabled = 0
 
 -- tagbar
