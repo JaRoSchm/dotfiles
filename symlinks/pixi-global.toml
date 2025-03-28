@@ -55,7 +55,17 @@ channels = ["conda-forge"]
 dependencies = { feedrattler = "*" }
 exposed = { feedrattler = "feedrattler" }
 
+[envs.vitables]
+channels = ["conda-forge"]
+dependencies = { vitables = "*", pyside6 = "*" }
+exposed = { vitables = "vitables" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }
 # exposed = { pylsp = "pylsp" }
+
+# [envs.jedi-language-server]
+# channels = ["conda-forge"]
+# dependencies = { jedi-language-server = "*" }
+# exposed = { jedi-language-server = "jedi-language-server" }

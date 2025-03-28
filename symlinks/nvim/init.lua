@@ -50,19 +50,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.opt.clipboard = 'unnamedplus'
 
 -- border around floating windows
-vim.diagnostic.config({
-  float = {
-    border = 'single',
-  },
-})
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  { border = 'single' }
-)
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  { border = 'single' }
-)
+vim.opt.winborder = 'single'
 
 -- relative line numbers with auto switching
 vim.opt.relativenumber = true
@@ -325,17 +313,12 @@ require('lspconfig').pylsp.setup {
       ignore = { '*' },
     },
   },
-  -- settings = {
-  --   pylsp = {
-  --     plugins = {
-  --       jedi = {
-  --         extra_paths = { os.getenv('CONDA_PREFIX') .. '/bin' },
-  --         prioritize_extra_paths = true,
-  --       }
-  --     }
-  --   }
-  -- },
 }
+
+-- require('lspconfig').jedi_language_server.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- }
 
 require('lspconfig').texlab.setup {
   on_attach = on_attach,
@@ -346,6 +329,8 @@ require('lspconfig').texlab.setup {
         -- labelDefinitions = false,
         labelReferences = false,
       },
+      bibtexFormatter = 'tex-fmt',
+      latexFormatter = 'tex-fmt',
     },
   },
 }
