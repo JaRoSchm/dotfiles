@@ -42,7 +42,7 @@ exposed = { ruff = "ruff" }
 
 [envs.grayskull]
 channels = ["conda-forge"]
-dependencies = { grayskull = "*" }
+dependencies = { grayskull = "*", conda-recipe-manager = "*" }
 exposed = { grayskull = "grayskull", greyskull = "greyskull", conda-grayskull = "conda-grayskull", conda-greyskull = "conda-greyskull" }
 
 [envs.proselint]
@@ -59,6 +59,11 @@ exposed = { feedrattler = "feedrattler" }
 channels = ["conda-forge"]
 dependencies = { vitables = "*", pyside6 = "*" }
 exposed = { vitables = "vitables" }
+
+[envs.tex-fmt]
+channels = ["conda-forge"]
+dependencies = { tex-fmt = "*" }
+exposed = { tex-fmt = "tex-fmt" }
 
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
