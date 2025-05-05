@@ -84,7 +84,8 @@ Plug('tpope/vim-repeat')
 Plug('majutsushi/tagbar')
 Plug('cohama/lexima.vim')
 Plug('lervag/vimtex')
-Plug('github/copilot.vim')
+-- Plug('github/copilot.vim')
+Plug('zbirenbaum/copilot.lua')
 Plug('neomake/neomake')
 Plug('lewis6991/gitsigns.nvim')
 Plug('stevearc/oil.nvim') -- edit filesystem like a file
@@ -109,6 +110,7 @@ Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/cmp-cmdline')
 Plug('hrsh7th/cmp-nvim-lsp-signature-help')
 Plug('hrsh7th/nvim-cmp')
+-- Plug('Saghen/blink.cmp', { ['tag'] = '*' })
 
 -- colorscheme
 Plug('projekt0n/github-nvim-theme')
@@ -247,6 +249,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
+-- local capabilities = require('blink.cmp').get_lsp_capabilities()
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('lspconfig').ruff.setup {
@@ -446,12 +449,36 @@ cmp.setup.cmdline(':', {
   matching = { disallow_symbol_nonprefix_matching = false }
 })
 
--- copilot
-vim.keymap.set('i', '<Right>', 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false
+-- require('blink.cmp').setup({
+--   keymap = {
+--     preset = 'enter' ,
+--     ['<TAB>'] = { 'select_next', 'fallback' },
+--     ['<S-TAB>'] = { 'select_prev', 'fallback' },
+--   },
+--   completion = {
+--     documentation = {
+--       auto_show = true,
+--     },
+--   },
+-- })
+
+-- copilot.vim
+-- vim.keymap.set('i', '<Right>', 'copilot#Accept("\\<CR>")', {
+--   expr = true,
+--   replace_keycodes = false
+-- })
+-- vim.g.copilot_no_tab_map = true
+
+-- copilot.lua
+require('copilot').setup({
+  suggestion = {
+    enabled = true,
+    auto_trigger = true,
+    keymap = {
+      accept = '<Right>',
+    },
+  }
 })
-vim.g.copilot_no_tab_map = true
 
 -- vimtex
 vim.g.tex_flavor = 'latex'
