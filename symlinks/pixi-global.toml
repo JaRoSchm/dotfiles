@@ -65,6 +65,46 @@ channels = ["conda-forge"]
 dependencies = { tex-fmt = "*" }
 exposed = { tex-fmt = "tex-fmt" }
 
+[envs.ripgrep]
+channels = ["conda-forge"]
+dependencies = { ripgrep = "*" }
+exposed = { rg = "rg" }
+
+[envs.tmux]
+channels = ["conda-forge"]
+dependencies = { tmux = "*" }
+exposed = { tmux = "tmux" }
+
+[envs.latexmk]
+channels = ["conda-forge"]
+dependencies = { latexmk = "*" }
+exposed = { latexmk = "latexmk" }
+
+[envs.latexdiff]
+channels = ["conda-forge"]
+dependencies = { latexdiff = "*" }
+exposed = { latexdiff = "latexdiff", latexdiff-vc = "latexdiff-vc" }
+
+[envs.gh]
+channels = ["conda-forge"]
+dependencies = { gh = "*" }
+exposed = { gh = "gh" }
+
+[envs.fd-find]
+channels = ["conda-forge"]
+dependencies = { fd-find = "*" }
+exposed = { fd = "fd" }
+
+[envs.universal-ctags]
+channels = ["conda-forge"]
+dependencies = { universal-ctags = "*" }
+exposed = { ctags = "ctags", optscript = "optscript", readtags = "readtags" }
+
+[envs.lua-language-server]
+channels = ["conda-forge"]
+dependencies = { lua-language-server = "*" }
+exposed = { lua-language-server = "lua-language-server" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }
