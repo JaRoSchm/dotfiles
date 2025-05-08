@@ -67,7 +67,8 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
 -- autoinstall plug.vim
 local plug_path = vim.fn.stdpath('data') .. '/site/autoload/plug.vim'
 if vim.fn.empty(vim.fn.glob(plug_path)) > 0 then
-  vim.cmd('!curl -fLo ' .. plug_path .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+  vim.cmd('!curl -fLo ' ..
+    plug_path .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
 end
 
 -- load plugins
@@ -121,16 +122,16 @@ Plug('nvim-lualine/lualine.nvim')
 vim.call('plug#end')
 
 -- keymaps
-vim.keymap.set('n', '<leader>df', vim.lsp.buf.format, {noremap = true, silent = true})
-vim.keymap.set('n', '<leader>tb', ':TagbarToggle<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {noremap = true, silent = true})
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {noremap = true, silent = true})
-vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, {noremap = true, silent = true})
-vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {noremap = true, silent = true})
-vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, {noremap = true, silent = true})
-vim.keymap.set('n', 'gt', require('telescope.builtin').lsp_type_definitions, {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>df', vim.lsp.buf.format, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>tb', ':TagbarToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { noremap = true, silent = true })
+vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
+vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { noremap = true, silent = true })
+vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, { noremap = true, silent = true })
+vim.keymap.set('n', 'gt', require('telescope.builtin').lsp_type_definitions, { noremap = true, silent = true })
 -- run shell command "get_article" with current word as argument
-vim.keymap.set('n', '<leader>ga', ':!get_article <C-r><C-w><CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>ga', ':!get_article <C-r><C-w><CR>', { noremap = true, silent = true })
 vim.api.nvim_create_user_command('W', 'w', {})
 vim.api.nvim_create_user_command('Wq', 'wq', {})
 vim.api.nvim_create_user_command('Q', 'q', {})
@@ -139,11 +140,11 @@ vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, {})
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, {})
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {})
-vim.keymap.set('n', 'z=', require('telescope.builtin').spell_suggest, {noremap = true, silent = true})
+vim.keymap.set('n', 'z=', require('telescope.builtin').spell_suggest, { noremap = true, silent = true })
 
 -- clear hightlight from search after pressing <Esc>
 vim.opt.hlsearch = true
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { noremap = true, silent = true })
 
 function GermanSpellChecking()
   vim.opt.spelllang = 'de_de'
@@ -159,9 +160,9 @@ function SpellCheckingOff()
   vim.opt.spell = false
 end
 
-vim.keymap.set("n", "<leader>sg", GermanSpellChecking, {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>se", EnglishSpellChecking, {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>so", SpellCheckingOff, {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>sg", GermanSpellChecking, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>se", EnglishSpellChecking, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>so", SpellCheckingOff, { noremap = true, silent = true })
 
 -- colorscheme
 vim.opt.termguicolors = true
@@ -204,7 +205,7 @@ local function truncate_message(message)
 end
 
 function ShowDiagnosticsInCommandLine()
-  local diagnostics = vim.diagnostic.get(0, {lnum = vim.fn.line('.') - 1})
+  local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
 
   if #diagnostics == 0 then
     return
@@ -226,9 +227,9 @@ function ShowDiagnosticsInCommandLine()
   vim.api.nvim_echo({ { message, "WarningMsg" } }, false, {})
 end
 
-vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
-    callback = ShowDiagnosticsInCommandLine,
-    group = vim.api.nvim_create_augroup("ShowDiagnostics", {clear = true}),
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  callback = ShowDiagnosticsInCommandLine,
+  group = vim.api.nvim_create_augroup("ShowDiagnostics", { clear = true }),
 })
 
 
@@ -367,6 +368,56 @@ vim.lsp.enable('textlab')
 
 vim.lsp.enable('clangd')
 vim.lsp.enable('julials')
+
+-- taken from https://github.com/neovim/nvim-lspconfig/blob/master/lsp/lua_ls.lua
+vim.lsp.config('lua_ls', {
+  on_init = function(client)
+    if client.workspace_folders then
+      local path = client.workspace_folders[1].name
+      if
+          path ~= vim.fn.stdpath('config')
+          and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+      then
+        return
+      end
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most
+        -- likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Tell the language server how to find Lua modules same way as Neovim
+        -- (see `:h lua-module-load`)
+        path = {
+          'lua/?.lua',
+          'lua/?/init.lua',
+        },
+      },
+      -- Make the server aware of Neovim runtime files
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME
+          -- Depending on the usage, you might want to add additional paths
+          -- here.
+          -- '${3rd}/luv/library'
+          -- '${3rd}/busted/library'
+        }
+        -- Or pull in all of 'runtimepath'.
+        -- NOTE: this is a lot slower and will cause issues when working on
+        -- your own configuration.
+        -- See https://github.com/neovim/nvim-lspconfig/issues/3189
+        -- library = {
+        --   vim.api.nvim_get_runtime_file('', true),
+        -- }
+      }
+    })
+  end,
+  settings = {
+    Lua = {}
+  }
+})
 vim.lsp.enable('lua_ls')
 
 -- snippets
@@ -393,16 +444,16 @@ cmp.setup({
     ['<C-j>'] = cmp.mapping.scroll_docs(4),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping({
-       i = function(fallback)
-         if cmp.visible() and cmp.get_active_entry() then
-           cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-         else
-           fallback()
-         end
-       end,
-       s = cmp.mapping.confirm({ select = true }),
-       c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-     }),
+      i = function(fallback)
+        if cmp.visible() and cmp.get_active_entry() then
+          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+        else
+          fallback()
+        end
+      end,
+      s = cmp.mapping.confirm({ select = true }),
+      c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    }),
     ['<C-Space>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
@@ -427,14 +478,14 @@ cmp.setup({
     end,
   }),
   sources = cmp.config.sources({
-      { name = 'nvim_lsp_signature_help' },
-      { name = 'nvim_lsp' },
-      { name = 'snippets' },
-      { name = 'path' },
-    }, {
-      { name = 'buffer' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'nvim_lsp' },
+    { name = 'snippets' },
+    { name = 'path' },
+  }, {
+    { name = 'buffer' },
 
-    }
+  }
   ),
   window = {
     completion = cmp.config.window.bordered(),
@@ -444,9 +495,9 @@ cmp.setup({
   formatting = {
     format = function(entry, vim_item)
       vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
-    return vim_item
-  end
-}
+      return vim_item
+    end
+  }
 })
 
 -- Completion: Use buffer source for `/` and `?` (if you enabled `native_menu`,
@@ -527,9 +578,9 @@ require('lsp_signature').setup({
   doc_lines = 0,
   floating_window_above_cur_line = true,
   hint_prefix = {
-    above = "↙ ",  -- when the hint is on the line above the current line
-    current = "← ",  -- when the hint is on the same line
-    below = "↖ "  -- when the hint is on the line below the current line
+    above = "↙ ", -- when the hint is on the line above the current line
+    current = "← ", -- when the hint is on the same line
+    below = "↖ " -- when the hint is on the line below the current line
   }
 })
 
@@ -539,14 +590,14 @@ require('lualine').setup({
     theme = 'onelight',
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = {
       { 'buffers', mode = 4 },
     },
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
   },
 })
 
