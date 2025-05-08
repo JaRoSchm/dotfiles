@@ -233,34 +233,77 @@ vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
 
 
 -- LSP config
-local on_attach = function(client, bufnr)
-  if client.name == 'pylsp' then
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-    client.server_capabilities.diagnosticProvider = false
-  end
-  -- if client.name == 'basedpyright' then
-  --   client.server_capabilities.documentFormattingProvider = false
-  --   client.server_capabilities.documentRangeFormattingProvider = false
-  --   client.server_capabilities.diagnosticProvider = false
-  -- end
-  if client.name == 'ruff' then
-    client.server_capabilities.hoverProvider = false
-  end
-end
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
--- local capabilities = require('blink.cmp').get_lsp_capabilities()
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    if client.name == 'pylsp' then
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+      client.server_capabilities.diagnosticProvider = false
+    end
+    -- if client.name == 'basedpyright' then
+    --   client.server_capabilities.documentFormattingProvider = false
+    --   client.server_capabilities.documentRangeFormattingProvider = false
+    --   client.server_capabilities.diagnosticProvider = false
+    -- end
+    if client.name == 'ruff' then
+      client.server_capabilities.hoverProvider = false
+    end
+  end
+})
 
-require('lspconfig').ruff.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+vim.lsp.config('*', {
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+  -- capabilities = require('blink.cmp').get_lsp_capabilities(),
+})
+
+vim.lsp.config('ruff', {
   settings = {
     configurationPreference = "filesystemFirst",
-  }
-}
+  },
+})
+vim.lsp.enable('ruff')
 
--- require('lspconfig').pylyzer.setup {
+-- vim.lsp.config('pylsp', {
+--   settings = {
+--     pylsp = {
+--       plugins = {
+--         pyflakes = { enabled = false },
+--         flake8 = { enabled = false },
+--         pylint = { enabled = false },
+--         mypy = { enabled = false },
+--         black = { enabled = false },
+--         yapf = { enabled = false },
+--         isort = { enabled = false },
+--       }
+--     }
+--   }
+-- })
+vim.lsp.enable('pylsp')
+
+-- vim.lsp.config['ty'] = {
+--   cmd = { 'ty', 'server' },
+--   root_markers = {
+--     'pyproject.toml',
+--     'ruff.toml',
+--     '.ruff.toml',
+--     '.git',
+--     'setup.py',
+--     'setup.cfg',
+--   },
+--   filetypes = { 'python' },
+--   settings = {
+--     experimental = {
+--       completions = {
+--         enable = true,
+--       }
+--     }
+--   }
+-- }
+-- vim.lsp.enable('ty')
+
+-- vim.lsp.config('pylyzer', {
 --   capabilities = capabilities,
 --   on_attach = on_attach,
 --   settings = {
@@ -271,11 +314,10 @@ require('lspconfig').ruff.setup {
 --       smartCompletion = true
 --     }
 --   }
--- }
+-- })
+-- vim.lsp.enable('pylyzer')
 
--- require('lspconfig').basedpyright.setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
+-- vim.lsp.config('basepyright', {
 --   settings = {
 --     basedpyright = {
 --       analysis = {
@@ -288,44 +330,28 @@ require('lspconfig').ruff.setup {
 --       }
 --     }
 --   }
--- }
+-- })
+-- vim.lsp.enable('basepyright')
 
--- require('lspconfig').pyright.setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
---   -- settings = {
---   --   basedpyright = {
---   --     analysis = {
---   --       typeCheckingMode = "off",
---   --       inlayHints = {
---   --         variableTypes = false,
---   --         functionReturnTypes = false,
---   --         callArgumentNames = false,
---   --       }
---   --     }
---   --   }
---   -- }
--- }
+-- vim.lsp.config('pyright', {
+--   settings = {
+--     python = {
+--       analysis = {
+--         typeCheckingMode = "off",
+--         inlayHints = {
+--           variableTypes = false,
+--           functionReturnTypes = false,
+--           callArgumentNames = false,
+--         }
+--       }
+--     }
+--   }
+-- })
+-- vim.lsp.enable('pyright')
 
-require('lspconfig').pylsp.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  python = {
-    analysis = {
-      -- Ignore all files for analysis to exclusively use Ruff for linting
-      ignore = { '*' },
-    },
-  },
-}
+-- vim.lsp.enable('jedi_language_server')
 
--- require('lspconfig').jedi_language_server.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
-
-require('lspconfig').texlab.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+vim.lsp.config('textlab', {
   settings = {
     texlab = {
       inlayHints = {
@@ -336,17 +362,12 @@ require('lspconfig').texlab.setup {
       latexFormatter = 'tex-fmt',
     },
   },
-}
+})
+vim.lsp.enable('textlab')
 
-require('lspconfig').clangd.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-require('lspconfig').julials.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+vim.lsp.enable('clangd')
+vim.lsp.enable('julials')
+vim.lsp.enable('lua_ls')
 
 -- snippets
 require('snippets').setup({
