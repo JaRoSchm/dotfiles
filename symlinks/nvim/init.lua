@@ -243,14 +243,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
       client.server_capabilities.documentRangeFormattingProvider = false
       client.server_capabilities.diagnosticProvider = false
     end
+
+    if client.name == 'ruff' then
+      client.server_capabilities.hoverProvider = false
+    end
+
+    if client.name == 'ty' then
+      client.server_capabilities.inlayHintProvider = false
+    end
+
     -- if client.name == 'basedpyright' then
     --   client.server_capabilities.documentFormattingProvider = false
     --   client.server_capabilities.documentRangeFormattingProvider = false
     --   client.server_capabilities.diagnosticProvider = false
     -- end
-    if client.name == 'ruff' then
-      client.server_capabilities.hoverProvider = false
-    end
   end
 })
 
@@ -283,26 +289,26 @@ vim.lsp.enable('ruff')
 -- })
 vim.lsp.enable('pylsp')
 
--- vim.lsp.config['ty'] = {
---   cmd = { 'ty', 'server' },
---   root_markers = {
---     'pyproject.toml',
---     'ruff.toml',
---     '.ruff.toml',
---     '.git',
---     'setup.py',
---     'setup.cfg',
---   },
---   filetypes = { 'python' },
---   settings = {
---     experimental = {
---       completions = {
---         enable = true,
---       }
---     }
---   }
--- }
--- vim.lsp.enable('ty')
+vim.lsp.config['ty'] = {
+  cmd = { 'ty', 'server' },
+  root_markers = {
+    'pyproject.toml',
+    'ruff.toml',
+    '.ruff.toml',
+    '.git',
+    'setup.py',
+    'setup.cfg',
+  },
+  filetypes = { 'python' },
+  settings = {
+    experimental = {
+      completions = {
+        enable = true,
+      }
+    }
+  }
+}
+vim.lsp.enable('ty')
 
 -- vim.lsp.config('pylyzer', {
 --   capabilities = capabilities,
@@ -352,7 +358,7 @@ vim.lsp.enable('pylsp')
 
 -- vim.lsp.enable('jedi_language_server')
 
-vim.lsp.config('textlab', {
+vim.lsp.config('texlab', {
   settings = {
     texlab = {
       inlayHints = {
@@ -364,7 +370,7 @@ vim.lsp.config('textlab', {
     },
   },
 })
-vim.lsp.enable('textlab')
+vim.lsp.enable('texlab')
 
 vim.lsp.enable('clangd')
 vim.lsp.enable('julials')

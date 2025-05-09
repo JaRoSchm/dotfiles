@@ -105,6 +105,11 @@ channels = ["conda-forge"]
 dependencies = { lua-language-server = "*" }
 exposed = { lua-language-server = "lua-language-server" }
 
+[envs.ty]
+channels = ["conda-forge", "conda-forge/label/ty_alpha"]
+dependencies = { ty = "*" }
+exposed = { ty = "ty" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }
