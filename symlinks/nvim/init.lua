@@ -289,25 +289,17 @@ vim.lsp.enable('ruff')
 -- })
 vim.lsp.enable('pylsp')
 
-vim.lsp.config['ty'] = {
-  cmd = { 'ty', 'server' },
-  root_markers = {
-    'pyproject.toml',
-    'ruff.toml',
-    '.ruff.toml',
-    '.git',
-    'setup.py',
-    'setup.cfg',
-  },
-  filetypes = { 'python' },
+vim.lsp.config('ty', {
   settings = {
-    experimental = {
-      completions = {
-        enable = true,
+    ty = {
+      experimental = {
+        completions = {
+          enable = true,
+        }
       }
     }
   }
-}
+})
 vim.lsp.enable('ty')
 
 -- vim.lsp.config('pylyzer', {
