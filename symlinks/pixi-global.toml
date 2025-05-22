@@ -110,6 +110,11 @@ channels = ["conda-forge", "conda-forge/label/ty_alpha"]
 dependencies = { ty = "*" }
 exposed = { ty = "ty" }
 
+[envs.topgrade]
+channels = ["conda-forge"]
+dependencies = { topgrade = "*" }
+exposed = { topgrade = "topgrade" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }

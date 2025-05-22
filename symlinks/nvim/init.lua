@@ -252,6 +252,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
       client.server_capabilities.inlayHintProvider = false
     end
 
+    if client.name == 'pyrefly' then
+      client.server_capabilities.inlayHintProvider = false
+    end
+
     -- if client.name == 'basedpyright' then
     --   client.server_capabilities.documentFormattingProvider = false
     --   client.server_capabilities.documentRangeFormattingProvider = false
@@ -301,6 +305,20 @@ vim.lsp.config('ty', {
   }
 })
 vim.lsp.enable('ty')
+
+vim.lsp.config('pyrefly', {
+  settings = {
+    python = {
+      pyrefly = {
+        -- disables type checking and only uses completion, go-to-definition, ...
+        -- https://pyrefly.org/en/docs/IDE/#customization
+        disableTypeErrors = true,
+      }
+    }
+  }
+})
+-- missing docstring support, not ready to replace pylsp for me
+-- vim.lsp.enable('pyrefly')
 
 -- vim.lsp.config('pylyzer', {
 --   capabilities = capabilities,
