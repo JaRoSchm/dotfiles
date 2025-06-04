@@ -40,7 +40,9 @@ ln -sfv "$DOTFILES_DIR/symlinks/.vim" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.p10k.zsh" ~
 ln -sfv "$DOTFILES_DIR/symlinks/proselint.json" "$HOME/.config/proselint/config.json"
 ln -sfv "$DOTFILES_DIR/symlinks/nvim" "$HOME/.config"
+mkdir -p $HOME/.pixi/manifests
 ln -sfv "$DOTFILES_DIR/symlinks/pixi-global.toml" "$HOME/.pixi/manifests"
+mkdir -p $HOME/pixi
 ln -sfv "$DOTFILES_DIR/symlinks/pixi-envs/CPG_stable" "$HOME/pixi"
 
 source ~/.zshrc
