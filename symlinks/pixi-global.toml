@@ -115,6 +115,11 @@ channels = ["conda-forge"]
 dependencies = { topgrade = "*" }
 exposed = { topgrade = "topgrade" }
 
+[envs.pyrefly]
+channels = ["conda-forge"]
+dependencies = { pyrefly = "*" }
+exposed = { pyrefly = "pyrefly" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }
