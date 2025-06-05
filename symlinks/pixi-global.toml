@@ -120,6 +120,11 @@ channels = ["conda-forge"]
 dependencies = { pyrefly = "*" }
 exposed = { pyrefly = "pyrefly" }
 
+[envs.nvim]
+channels = ["conda-forge"]
+dependencies = { nvim = "*" }
+exposed = { nvim = "nvim" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }

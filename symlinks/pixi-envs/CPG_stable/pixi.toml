@@ -47,3 +47,6 @@ meson = ">=1.8.1,<2"
 scipy-stubs = ">=1.15.2.2,<2"
 cxroots = ">=3.0.2,<4"
 pynose = ">=1.5.4,<2"
+
+[target.linux-64.dependencies]
+qt6-wayland = ">=6.9.1,<7"
