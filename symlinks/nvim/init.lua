@@ -295,12 +295,10 @@ vim.lsp.enable('pylsp')
 
 vim.lsp.config('ty', {
   settings = {
-    python = {
-      ty = {
-        -- disable completion etc. for now
-        disableLanguageServices = true,
-      }
-    }
+    -- ty = {
+    --   -- disable completion etc. for now
+    --   disableLanguageServices = true,
+    -- }
   }
 })
 vim.lsp.enable('ty')
