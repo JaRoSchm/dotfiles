@@ -175,18 +175,19 @@ vim.lsp.inlay_hint.enable()
 
 -- Function to show diagnostics in the command line
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_lines = { current_line = true, severity = { min = "INFO" } },
   underline = true,
-  -- Highlight entire line for errors
-  -- Highlight the line number for warnings
+  severity_sort = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = '✗',
       [vim.diagnostic.severity.WARN] = '◆',
     },
+    -- Highlight entire line for errors
     linehl = {
       [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
     },
+    -- Highlight the line number for warnings
     numhl = {
       [vim.diagnostic.severity.WARN] = 'WarningMsg',
     },
@@ -194,49 +195,15 @@ vim.diagnostic.config({
   -- update_in_insert = true,
 })
 
-local function truncate_message(message)
-  local max_length = vim.v.echospace
-
-  if #message > max_length then
-    return message:sub(1, max_length - 3) .. "..."
-  end
-
-  return message
-end
-
-function ShowDiagnosticsInCommandLine()
-  local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
-
-  if #diagnostics == 0 then
-    return
-  end
-
-  -- Sort diagnostics by severity
-  table.sort(diagnostics, function(a, b)
-    return a.severity < b.severity
-  end)
-
-  local messages = {}
-  for _, diagnostic in ipairs(diagnostics) do
-    local source = diagnostic.source or 'Unknown'
-    local code = diagnostic.code or ''
-    table.insert(messages, string.format("[%s] %s: %s", source, code, diagnostic.message))
-  end
-  local message = table.concat(messages, ' | ')
-  message = truncate_message(message)
-  vim.api.nvim_echo({ { message, "WarningMsg" } }, false, {})
-end
-
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-  callback = ShowDiagnosticsInCommandLine,
-  group = vim.api.nvim_create_augroup("ShowDiagnostics", { clear = true }),
-})
-
 
 -- LSP config
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+    if not client then
+      return
+    end
 
     if client.name == 'pylsp' then
       client.server_capabilities.documentFormattingProvider = false
