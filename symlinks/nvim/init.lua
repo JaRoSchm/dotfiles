@@ -215,10 +215,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       client.server_capabilities.hoverProvider = false
     end
 
-    if client.name == 'ty' then
-      client.server_capabilities.inlayHintProvider = false
-    end
-
     if client.name == 'pyrefly' then
       client.server_capabilities.inlayHintProvider = false
     end
@@ -258,14 +254,18 @@ vim.lsp.enable('ruff')
 --     }
 --   }
 -- })
-vim.lsp.enable('pylsp')
+-- vim.lsp.enable('pylsp')
 
 vim.lsp.config('ty', {
   settings = {
-    -- ty = {
-    --   -- disable completion etc. for now
-    --   disableLanguageServices = true,
-    -- }
+    ty = {
+      inlayHints = {
+        variableTypes = false,
+      },
+      experimental = {
+        rename = true,
+      },
+    },
   }
 })
 vim.lsp.enable('ty')
@@ -555,7 +555,7 @@ require('lsp_signature').setup({
   handler_opts = {
     border = 'single',
   },
-  doc_lines = 0,
+  doc_lines = 10,
   floating_window_above_cur_line = true,
   hint_prefix = {
     above = "↙ ", -- when the hint is on the line above the current line
