@@ -257,6 +257,10 @@ vim.lsp.enable('ruff')
 -- vim.lsp.enable('pylsp')
 
 vim.lsp.config('ty', {
+  -- init_options = {
+  --   logFile = '/home/jschmidt/ty.log',
+  --   logLevel = 'debug',
+  -- },
   settings = {
     ty = {
       inlayHints = {
@@ -347,7 +351,7 @@ vim.lsp.config('texlab', {
 vim.lsp.enable('texlab')
 
 vim.lsp.enable('clangd')
-vim.lsp.enable('julials')
+-- vim.lsp.enable('julials')
 
 -- taken from https://github.com/neovim/nvim-lspconfig/blob/master/lsp/lua_ls.lua
 vim.lsp.config('lua_ls', {
@@ -449,7 +453,7 @@ cmp.setup({
     end,
     ['<S-Tab>'] = function(fallback)
       if not cmp.select_prev_item() then
-        if vim.bo.buftype ~= 'prompt' and has_words_before() then
+        if vim.bo.buftype ~= 'prompt' then
           cmp.complete()
         else
           fallback()

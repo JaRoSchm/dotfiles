@@ -107,6 +107,7 @@ exposed = { lua-language-server = "lua-language-server" }
 
 [envs.ty]
 channels = ["conda-forge", "conda-forge/label/ty_alpha"]
+# dependencies = { ty = ">=0.0.1a19,<0.0.1a20" }
 dependencies = { ty = "*" }
 exposed = { ty = "ty" }
 
@@ -124,11 +125,6 @@ exposed = { pyrefly = "pyrefly" }
 channels = ["conda-forge"]
 dependencies = { nvim = "*" }
 exposed = { nvim = "nvim" }
-
-[envs.conda-smithy]
-channels = ["conda-forge"]
-dependencies = { conda-smithy = "*" }
-exposed = { feedstocks = "feedstocks", conda-smithy = "conda-smithy" }
 
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
