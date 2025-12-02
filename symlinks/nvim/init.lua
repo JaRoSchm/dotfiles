@@ -99,6 +99,8 @@ Plug('nvim-telescope/telescope.nvim')
 -- lsp
 Plug('neovim/nvim-lspconfig')
 Plug('ray-x/lsp_signature.nvim')
+-- for including linters/formatters as lsp sources
+Plug('nvimtools/none-ls.nvim')
 
 -- snippets
 Plug('garymjr/nvim-snippets')
@@ -403,6 +405,20 @@ vim.lsp.config('lua_ls', {
   }
 })
 vim.lsp.enable('lua_ls')
+
+null_ls = require('null-ls')
+null_ls.setup({
+  sources = {
+    -- proselint
+    null_ls.builtins.diagnostics.proselint.with({
+      filetypes = { 'tex', 'markdown', 'text', 'rst' },
+      method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+    }),
+    null_ls.builtins.code_actions.proselint,
+    -- codespell
+    null_ls.builtins.diagnostics.codespell,
+  }
+})
 
 -- snippets
 require('snippets').setup({
