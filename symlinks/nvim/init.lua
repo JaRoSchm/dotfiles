@@ -241,21 +241,21 @@ vim.lsp.config('ruff', {
 })
 vim.lsp.enable('ruff')
 
--- vim.lsp.config('pylsp', {
---   settings = {
---     pylsp = {
---       plugins = {
---         pyflakes = { enabled = false },
---         flake8 = { enabled = false },
---         pylint = { enabled = false },
---         mypy = { enabled = false },
---         black = { enabled = false },
---         yapf = { enabled = false },
---         isort = { enabled = false },
---       }
---     }
---   }
--- })
+vim.lsp.config('pylsp', {
+  settings = {
+    pylsp = {
+      plugins = {
+        pyflakes = { enabled = false },
+        flake8 = { enabled = false },
+        pylint = { enabled = false },
+        mypy = { enabled = false },
+        black = { enabled = false },
+        yapf = { enabled = false },
+        isort = { enabled = false },
+      }
+    }
+  }
+})
 -- vim.lsp.enable('pylsp')
 
 vim.lsp.config('ty', {
@@ -268,9 +268,6 @@ vim.lsp.config('ty', {
       inlayHints = {
         variableTypes = false,
       },
-      experimental = {
-        rename = true,
-      },
     },
   }
 })
@@ -280,63 +277,44 @@ vim.lsp.config('pyrefly', {
   settings = {
     python = {
       pyrefly = {
-        -- disables type checking and only uses completion, go-to-definition, ...
-        -- https://pyrefly.org/en/docs/IDE/#customization
-        disableTypeErrors = true,
+        displayTypeErrors = 'force-on',
       }
     }
   }
 })
--- missing docstring support, not ready to replace pylsp for me
 -- vim.lsp.enable('pyrefly')
 
--- vim.lsp.config('pylyzer', {
---   capabilities = capabilities,
---   on_attach = on_attach,
---   settings = {
---     python = {
---       checkOnType = true,
---       diagnostics = false,
---       inlayHints = true,
---       smartCompletion = true
---     }
---   }
--- })
--- vim.lsp.enable('pylyzer')
-
--- vim.lsp.config('basepyright', {
---   settings = {
---     basedpyright = {
---       analysis = {
---         typeCheckingMode = "off",
---         inlayHints = {
---           variableTypes = false,
---           functionReturnTypes = false,
---           callArgumentNames = false,
---         }
---       }
---     }
---   }
--- })
+vim.lsp.config('basepyright', {
+  settings = {
+    basedpyright = {
+      analysis = {
+        typeCheckingMode = "off",
+        inlayHints = {
+          variableTypes = false,
+          functionReturnTypes = false,
+          callArgumentNames = false,
+        }
+      }
+    }
+  }
+})
 -- vim.lsp.enable('basepyright')
 
--- vim.lsp.config('pyright', {
---   settings = {
---     python = {
---       analysis = {
---         typeCheckingMode = "off",
---         inlayHints = {
---           variableTypes = false,
---           functionReturnTypes = false,
---           callArgumentNames = false,
---         }
---       }
---     }
---   }
--- })
+vim.lsp.config('pyright', {
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "off",
+        inlayHints = {
+          variableTypes = false,
+          functionReturnTypes = false,
+          callArgumentNames = false,
+        }
+      }
+    }
+  }
+})
 -- vim.lsp.enable('pyright')
-
--- vim.lsp.enable('jedi_language_server')
 
 vim.lsp.config('texlab', {
   settings = {
@@ -354,6 +332,8 @@ vim.lsp.enable('texlab')
 
 vim.lsp.enable('clangd')
 -- vim.lsp.enable('julials')
+
+-- vim.lsp.enable('zuban')
 
 -- taken from https://github.com/neovim/nvim-lspconfig/blob/master/lsp/lua_ls.lua
 vim.lsp.config('lua_ls', {
@@ -494,7 +474,9 @@ cmp.setup({
   -- limit width of completion menu
   formatting = {
     format = function(entry, vim_item)
-      vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
+      -- vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+      vim_item.menu = ""
+      -- vim_item.menu = string.sub(vim_item.menu, 1, 30)
       return vim_item
     end
   }

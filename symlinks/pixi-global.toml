@@ -30,11 +30,6 @@ channels = ["conda-forge"]
 dependencies = { ruff = "*" }
 exposed = { ruff = "ruff" }
 
-# [envs.pylyzer]
-# channels = ["conda-forge"]
-# dependencies = { pylyzer = "*" }
-# exposed = { pylyzer = "pylyzer" }
-
 # [envs.basedpyright]
 # channels = ["conda-forge"]
 # dependencies = { basedpyright = "*" }
@@ -106,8 +101,7 @@ dependencies = { lua-language-server = "*" }
 exposed = { lua-language-server = "lua-language-server" }
 
 [envs.ty]
-channels = ["conda-forge", "conda-forge/label/ty_alpha"]
-# dependencies = { ty = ">=0.0.1a19,<0.0.1a20" }
+channels = ["conda-forge"]
 dependencies = { ty = "*" }
 exposed = { ty = "ty" }
 
