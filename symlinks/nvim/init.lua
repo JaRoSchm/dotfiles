@@ -474,7 +474,7 @@ cmp.setup({
   -- limit width of completion menu
   formatting = {
     format = function(entry, vim_item)
-      -- vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+      vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
       vim_item.menu = ""
       -- vim_item.menu = string.sub(vim_item.menu, 1, 30)
       return vim_item
