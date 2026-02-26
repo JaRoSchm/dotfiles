@@ -17,7 +17,7 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- indention configuration
+-- indentation configuration
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.updatetime = 300
@@ -217,10 +217,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       client.server_capabilities.hoverProvider = false
     end
 
-    if client.name == 'pyrefly' then
-      client.server_capabilities.inlayHintProvider = false
-    end
-
     -- if client.name == 'basedpyright' then
     --   client.server_capabilities.documentFormattingProvider = false
     --   client.server_capabilities.documentRangeFormattingProvider = false
@@ -278,6 +274,9 @@ vim.lsp.config('pyrefly', {
     python = {
       pyrefly = {
         displayTypeErrors = 'force-on',
+        disabledLanguageServices = {
+          inlayHint = true,
+        }
       }
     }
   }
