@@ -125,6 +125,11 @@ channels = ["conda-forge"]
 dependencies = { codespell = "*" }
 exposed = { codespell = "codespell" }
 
+[envs.zellij]
+channels = ["conda-forge"]
+dependencies = { zellij = "*" }
+exposed = { zellij = "zellij" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }
