@@ -30,11 +30,6 @@ channels = ["conda-forge"]
 dependencies = { ruff = "*" }
 exposed = { ruff = "ruff" }
 
-# [envs.basedpyright]
-# channels = ["conda-forge"]
-# dependencies = { basedpyright = "*" }
-# exposed = { basedpyright = "basedpyright", basedpyright-langserver = "basedpyright-langserver" }
-
 [envs.grayskull]
 channels = ["conda-forge"]
 dependencies = { grayskull = "*", conda-recipe-manager = "*" }
@@ -130,6 +125,21 @@ channels = ["conda-forge"]
 dependencies = { zellij = "*" }
 exposed = { zellij = "zellij" }
 
+[envs.zuban]
+channels = ["conda-forge"]
+dependencies = { zuban = "*" }
+exposed = { zmypy = "zmypy", zuban = "zuban", zubanls = "zubanls" }
+
+[envs.opencode]
+channels = ["https://prefix.dev/github-releases", "conda-forge"]
+dependencies = { opencode = "*" , nodejs = "*" }
+exposed = { opencode = "opencode" }
+
+[envs.tree-sitter-cli]
+channels = ["conda-forge"]
+dependencies = { tree-sitter-cli = "*" }
+exposed = { tree-sitter = "tree-sitter" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }
@@ -139,3 +149,8 @@ exposed = { zellij = "zellij" }
 # channels = ["conda-forge"]
 # dependencies = { jedi-language-server = "*" }
 # exposed = { jedi-language-server = "jedi-language-server" }
+
+# [envs.basedpyright]
+# channels = ["conda-forge"]
+# dependencies = { basedpyright = "*" }
+# exposed = { basedpyright = "basedpyright", basedpyright-langserver = "basedpyright-langserver" }
