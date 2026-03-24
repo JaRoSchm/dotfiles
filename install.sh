@@ -34,6 +34,7 @@ ln -sfv "$DOTFILES_DIR/symlinks/.condarc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.gitconfig" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.gitignore" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.tmux.conf" ~
+ln -sfv "$DOTFILES_DIR/symlinks/.latexmkrc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.vimrc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.gvimrc" ~
 ln -sfv "$DOTFILES_DIR/symlinks/.vim" ~

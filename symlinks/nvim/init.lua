@@ -1,69 +1,3 @@
--- leader key to space
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- some distance while scrolling
-vim.opt.scrolloff = 5
-
--- use utf-8 encoding
-vim.opt.encoding = 'utf-8'
-
--- fold settings
-vim.opt.foldmethod = 'indent'
-vim.opt.foldlevel = 99
-
--- search options
-vim.opt.incsearch = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- indentation configuration
-vim.opt.expandtab = true
-vim.opt.autoindent = true
-vim.opt.updatetime = 300
-
--- show invisible characters
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
--- single status line
-vim.opt.laststatus = 3
-
--- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
-
--- current dir as working dir
-vim.opt.autochdir = true
-
--- directories
-vim.opt.undodir = vim.fn.stdpath('config') .. '/undofiles'
-vim.opt.directory = vim.fn.stdpath('config') .. '/swapfiles'
-vim.opt.backupdir = vim.fn.stdpath('config') .. '/backupfiles'
-
--- remove trailing whitespace on save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
-
--- use system clipboard
-vim.opt.clipboard = 'unnamedplus'
-
--- border around floating windows
-vim.opt.winborder = 'single'
-
--- relative line numbers with auto switching
-vim.opt.relativenumber = true
-vim.opt.number = true
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
-  pattern = { "*" },
-  command = [[set relativenumber]],
-})
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
-  pattern = { "*" },
-  command = [[set norelativenumber]],
-})
-
 -- autoinstall plug.vim
 local plug_path = vim.fn.stdpath('data') .. '/site/autoload/plug.vim'
 if vim.fn.empty(vim.fn.glob(plug_path)) > 0 then
@@ -77,19 +11,23 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
+-- set the 'path' option for miscellaneous file types
 Plug('tpope/vim-apathy')
 Plug('tpope/vim-fugitive')
 Plug('tpope/vim-surround')
-Plug('tpope/vim-sleuth') -- Detect tabstop and shiftwidth automatically
+-- Detect tabstop and shiftwidth automatically
+Plug('tpope/vim-sleuth')
 Plug('tpope/vim-repeat')
+
 Plug('majutsushi/tagbar')
+-- auto close parentheses
 Plug('cohama/lexima.vim')
 Plug('lervag/vimtex')
--- Plug('github/copilot.vim')
 Plug('zbirenbaum/copilot.lua')
 Plug('neomake/neomake')
 Plug('lewis6991/gitsigns.nvim')
-Plug('stevearc/oil.nvim') -- edit filesystem like a file
+-- edit filesystem like a file
+Plug('stevearc/oil.nvim')
 
 -- telescope and dependencies
 Plug('nvim-lua/plenary.nvim')
@@ -123,31 +61,98 @@ Plug('nvim-lualine/lualine.nvim')
 
 vim.call('plug#end')
 
+
+-- leader key to space
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- some distance while scrolling
+vim.opt.scrolloff = 5
+
+-- fold settings
+vim.opt.foldmethod = 'indent'
+vim.opt.foldlevel = 99
+
+-- search options
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- indentation configuration
+vim.opt.expandtab = true
+vim.opt.updatetime = 300
+
+-- show invisible characters
+vim.opt.list = true
+
+-- single status line
+vim.opt.laststatus = 3
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
+
+-- current dir as working dir
+-- vim.opt.autochdir = true
+
+-- directories
+vim.opt.undodir = vim.fn.stdpath('config') .. '/undofiles'
+vim.opt.directory = vim.fn.stdpath('config') .. '/swapfiles'
+vim.opt.backupdir = vim.fn.stdpath('config') .. '/backupfiles'
+
+-- remove trailing whitespace on save
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = { '*' },
+  command = [[%s/\s\+$//e]],
+})
+
+-- use system clipboard
+vim.opt.clipboard = 'unnamedplus'
+
+-- border around floating windows
+vim.opt.winborder = 'single'
+
+-- relative line numbers with auto switching
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave' }, {
+  pattern = { '*' },
+  command = [[set relativenumber]],
+})
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter' }, {
+  pattern = { '*' },
+  command = [[set norelativenumber]],
+})
+
 -- keymaps
-vim.keymap.set('n', '<leader>df', vim.lsp.buf.format, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>tb', ':TagbarToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>df', vim.lsp.buf.format, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { noremap = true, silent = true })
+
+-- lsp keymaps with telescope
 vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { noremap = true, silent = true })
 vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { noremap = true, silent = true })
 vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, { noremap = true, silent = true })
 vim.keymap.set('n', 'gt', require('telescope.builtin').lsp_type_definitions, { noremap = true, silent = true })
--- run shell command "get_article" with current word as argument
-vim.keymap.set('n', '<leader>ga', ':!get_article <C-r><C-w><CR>', { noremap = true, silent = true })
-vim.api.nvim_create_user_command('W', 'w', {})
-vim.api.nvim_create_user_command('Wq', 'wq', {})
-vim.api.nvim_create_user_command('Q', 'q', {})
-vim.api.nvim_create_user_command('Qa', 'qa', {})
 vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, {})
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, {})
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {})
 vim.keymap.set('n', 'z=', require('telescope.builtin').spell_suggest, { noremap = true, silent = true })
 
--- clear hightlight from search after pressing <Esc>
-vim.opt.hlsearch = true
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { noremap = true, silent = true })
+-- run shell command 'get_article' with current word as argument
+vim.keymap.set('n', '<leader>ga', ':!get_article <C-r><C-w><CR>', { noremap = true, silent = true })
 
+-- common typos for commands
+vim.api.nvim_create_user_command('W', 'w', {})
+vim.api.nvim_create_user_command('Wq', 'wq', {})
+vim.api.nvim_create_user_command('Q', 'q', {})
+vim.api.nvim_create_user_command('Qa', 'qa', {})
+
+-- clear highlight from search after pressing <Esc>
+vim.opt.hlsearch = true
+vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>', { noremap = true, silent = true })
+
+-- spell checking
 function GermanSpellChecking()
   vim.opt.spelllang = 'de_de'
   vim.opt.spell = true
@@ -162,9 +167,9 @@ function SpellCheckingOff()
   vim.opt.spell = false
 end
 
-vim.keymap.set("n", "<leader>sg", GermanSpellChecking, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>se", EnglishSpellChecking, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>so", SpellCheckingOff, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>sg', GermanSpellChecking, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>se', EnglishSpellChecking, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>so', SpellCheckingOff, { noremap = true, silent = true })
 
 -- colorscheme
 vim.opt.termguicolors = true
@@ -172,12 +177,9 @@ vim.opt.background = 'light'
 vim.cmd('colorscheme github_light_high_contrast')
 -- vim.cmd('colorscheme minimal_mod')
 
--- lsp config
-vim.lsp.inlay_hint.enable()
-
 -- Function to show diagnostics in the command line
 vim.diagnostic.config({
-  virtual_lines = { current_line = true, severity = { min = "INFO" } },
+  virtual_lines = { current_line = true, severity = { min = 'INFO' } },
   underline = true,
   severity_sort = true,
   signs = {
@@ -197,8 +199,9 @@ vim.diagnostic.config({
   -- update_in_insert = true,
 })
 
-
 -- LSP config
+vim.lsp.inlay_hint.enable()
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -207,11 +210,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    if client.name == 'pylsp' then
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-      client.server_capabilities.diagnosticProvider = false
-    end
+    -- if client.name == 'pylsp' then
+    --   client.server_capabilities.documentFormattingProvider = false
+    --   client.server_capabilities.documentRangeFormattingProvider = false
+    --   client.server_capabilities.diagnosticProvider = false
+    -- end
 
     if client.name == 'ruff' then
       client.server_capabilities.hoverProvider = false
@@ -232,7 +235,7 @@ vim.lsp.config('*', {
 
 vim.lsp.config('ruff', {
   settings = {
-    configurationPreference = "filesystemFirst",
+    configurationPreference = 'filesystemFirst',
   },
 })
 vim.lsp.enable('ruff')
@@ -287,7 +290,7 @@ vim.lsp.config('basepyright', {
   settings = {
     basedpyright = {
       analysis = {
-        typeCheckingMode = "off",
+        typeCheckingMode = 'off',
         inlayHints = {
           variableTypes = false,
           functionReturnTypes = false,
@@ -303,7 +306,7 @@ vim.lsp.config('pyright', {
   settings = {
     python = {
       analysis = {
-        typeCheckingMode = "off",
+        typeCheckingMode = 'off',
         inlayHints = {
           variableTypes = false,
           functionReturnTypes = false,
@@ -314,6 +317,8 @@ vim.lsp.config('pyright', {
   }
 })
 -- vim.lsp.enable('pyright')
+--
+-- vim.lsp.enable('zuban')
 
 vim.lsp.config('texlab', {
   settings = {
@@ -330,9 +335,8 @@ vim.lsp.config('texlab', {
 vim.lsp.enable('texlab')
 
 vim.lsp.enable('clangd')
--- vim.lsp.enable('julials')
 
--- vim.lsp.enable('zuban')
+-- vim.lsp.enable('julials')
 
 -- taken from https://github.com/neovim/nvim-lspconfig/blob/master/lsp/lua_ls.lua
 vim.lsp.config('lua_ls', {
@@ -405,6 +409,7 @@ require('snippets').setup({
   friendly_snippets = true,
 })
 
+-- CONTINUE HERE
 -- completion config
 local cmp = require('cmp')
 
@@ -474,7 +479,7 @@ cmp.setup({
   formatting = {
     format = function(entry, vim_item)
       vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
-      vim_item.menu = ""
+      vim_item.menu = ''
       -- vim_item.menu = string.sub(vim_item.menu, 1, 30)
       return vim_item
     end
@@ -536,8 +541,11 @@ require('copilot').setup({
 -- vimtex
 vim.g.tex_flavor = 'latex'
 vim.g.vimtex_view_general_viewer = 'okular'
-vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
+vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
 vim.g.vimtex_complete_enabled = 0
+-- vim.g.vimtex_quickfix_autoclose_after_keystrokes = 5
+vim.g.vimtex_quickfix_open_on_warning = 0
+vim.g.vimtex_toc_config = { split_pos = 'vert rightbelow' }
 
 -- tagbar
 vim.g.tagbar_sort = 0
@@ -559,9 +567,9 @@ require('lsp_signature').setup({
   doc_lines = 10,
   floating_window_above_cur_line = true,
   hint_prefix = {
-    above = "↙ ", -- when the hint is on the line above the current line
-    current = "← ", -- when the hint is on the same line
-    below = "↖ " -- when the hint is on the line below the current line
+    above = '↙ ', -- when the hint is on the line above the current line
+    current = '← ', -- when the hint is on the same line
+    below = '↖ ' -- when the hint is on the line below the current line
   }
 })
 
@@ -586,4 +594,23 @@ require('lualine').setup({
 require('telescope').setup()
 
 -- oil
-require("oil").setup()
+require('oil').setup()
+
+-- lexima
+vim.fn['lexima#add_rule']({
+  char = '$',
+  input_after = '$',
+  filetype = { 'tex' },
+})
+vim.fn['lexima#add_rule']({
+  char = '$',
+  at = [[\%#\$]],
+  leave = 1,
+  filetype = { 'tex' },
+})
+vim.fn['lexima#add_rule']({
+  char = '<BS>',
+  at = [[\$\%#\$]],
+  delete = 1,
+  filetype = { 'tex' },
+})
