@@ -10,6 +10,7 @@ Icon
 symlinks/.vim/bundle/*
 symlinks/.vim/autoload/plug.vim
 symlinks/.vim/autoload/plug.vim.old
+nvim-pack-lock.json
 
 # Thumbnails
 ._*

@@ -1,66 +1,70 @@
--- autoinstall plug.vim
-local plug_path = vim.fn.stdpath('data') .. '/site/autoload/plug.vim'
-if vim.fn.empty(vim.fn.glob(plug_path)) > 0 then
-  vim.cmd('!curl -fLo ' ..
-    plug_path .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
-end
+-- run :TSUpdate after updating nvim-treesitter
+-- see https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#hooks
+vim.api.nvim_create_autocmd('PackChanged', { callback = function(ev)
+  local name, kind = ev.data.spec.name, ev.data.kind
+  if name == 'nvim-treesitter' and kind == 'update' then
+    if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+    vim.cmd('TSUpdate')
+  end
+end })
 
--- load plugins
-local vim = vim
-local Plug = vim.fn['plug#']
+-- see guide https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack
+vim.pack.add({
+  -- set the 'path' option for miscellaneous file types
+  'https://github.com/tpope/vim-apathy',
+  'https://github.com/tpope/vim-fugitive',
+  'https://github.com/tpope/vim-surround',
+  -- Detect tabstop and shiftwidth automatically
+  'https://github.com/tpope/vim-sleuth',
+  'https://github.com/tpope/vim-repeat',
 
-vim.call('plug#begin')
+  'https://github.com/majutsushi/tagbar',
+  -- auto close parentheses
+  'https://github.com/cohama/lexima.vim',
+  'https://github.com/lervag/vimtex',
+  'https://github.com/zbirenbaum/copilot.lua',
+  'https://github.com/neomake/neomake',
+  'https://github.com/lewis6991/gitsigns.nvim',
+  -- edit filesystem like a file
+  'https://github.com/stevearc/oil.nvim',
 
--- set the 'path' option for miscellaneous file types
-Plug('tpope/vim-apathy')
-Plug('tpope/vim-fugitive')
-Plug('tpope/vim-surround')
--- Detect tabstop and shiftwidth automatically
-Plug('tpope/vim-sleuth')
-Plug('tpope/vim-repeat')
+  -- telescope and dependencies
+  'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/nvim-treesitter/nvim-treesitter',
+  'https://github.com/nvim-telescope/telescope.nvim',
 
-Plug('majutsushi/tagbar')
--- auto close parentheses
-Plug('cohama/lexima.vim')
-Plug('lervag/vimtex')
-Plug('zbirenbaum/copilot.lua')
-Plug('neomake/neomake')
-Plug('lewis6991/gitsigns.nvim')
--- edit filesystem like a file
-Plug('stevearc/oil.nvim')
+  -- lsp
+  'https://github.com/neovim/nvim-lspconfig',
+  'https://github.com/ray-x/lsp_signature.nvim',
+  -- for including linters/formatters as lsp sources
+  'https://github.com/nvimtools/none-ls.nvim',
 
--- telescope and dependencies
-Plug('nvim-lua/plenary.nvim')
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-Plug('nvim-telescope/telescope.nvim')
+  -- snippets
+  'https://github.com/garymjr/nvim-snippets',
+  'https://github.com/rafamadriz/friendly-snippets',
 
--- lsp
-Plug('neovim/nvim-lspconfig')
-Plug('ray-x/lsp_signature.nvim')
--- for including linters/formatters as lsp sources
-Plug('nvimtools/none-ls.nvim')
+  -- completion
+  'https://github.com/hrsh7th/cmp-nvim-lsp',
+  'https://github.com/hrsh7th/cmp-buffer',
+  'https://github.com/hrsh7th/cmp-path',
+  'https://github.com/hrsh7th/cmp-cmdline',
+  'https://github.com/hrsh7th/cmp-nvim-lsp-signature-help',
+  'https://github.com/hrsh7th/nvim-cmp',
+  -- {
+  --   src = 'https://github.com/Saghen/blink.cmp',
+  --   version = vim.version.range('1.x'),
+  -- },
 
--- snippets
-Plug('garymjr/nvim-snippets')
-Plug('rafamadriz/friendly-snippets')
+  -- colorscheme
+  'https://github.com/projekt0n/github-nvim-theme',
 
--- completion
-Plug('hrsh7th/cmp-nvim-lsp')
-Plug('hrsh7th/cmp-buffer')
-Plug('hrsh7th/cmp-path')
-Plug('hrsh7th/cmp-cmdline')
-Plug('hrsh7th/cmp-nvim-lsp-signature-help')
-Plug('hrsh7th/nvim-cmp')
--- Plug('Saghen/blink.cmp', { ['tag'] = '*' })
+  -- statusline
+  'https://github.com/nvim-lualine/lualine.nvim',
+})
 
--- colorscheme
-Plug('projekt0n/github-nvim-theme')
-
--- statusline
-Plug('nvim-lualine/lualine.nvim')
-
-vim.call('plug#end')
-
+-- see https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#update
+vim.api.nvim_create_user_command('PlugUpdate', 'lua vim.pack.update()', {})
+-- delete: :lua vim.pack.del({ 'nvim-lspconfig', 'nvim-treesitter' })
 
 -- leader key to space
 vim.g.mapleader = ' '
