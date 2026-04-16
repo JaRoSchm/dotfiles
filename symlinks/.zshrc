@@ -147,21 +147,21 @@ unset __mamba_setup
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/janrobertschmidt/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/janrobertschmidt/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/janrobertschmidt/mambaforge/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/janrobertschmidt/mambaforge/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/Users/janrobertschmidt/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/Users/janrobertschmidt/mambaforge/etc/profile.d/mamba.sh"
-fi
+# __conda_setup="$('/Users/janrobertschmidt/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/janrobertschmidt/mambaforge/etc/profile.d/conda.sh" ]; then
+#         . "/Users/janrobertschmidt/mambaforge/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/janrobertschmidt/mambaforge/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+#
+# if [ -f "/Users/janrobertschmidt/mambaforge/etc/profile.d/mamba.sh" ]; then
+#     . "/Users/janrobertschmidt/mambaforge/etc/profile.d/mamba.sh"
+# fi
 # <<< conda initialize <<<
 
 export PATH="/Users/janrobertschmidt/.pixi/bin:$PATH"

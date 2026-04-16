@@ -1,9 +1,9 @@
 [color]
     ui = true
 [user]
-    name = Jan Robert Schmidt
-    ; email = jaro.schmidt@gmail.com
-    email = jan_robert.schmidt@tu-dresden.de
+    name = Jan Möseritz-Schmidt
+    email = jaro.schmidt@gmail.com
+    ; email = jan_robert.schmidt@tu-dresden.de
 [core]
     editor = "vim"
     excludesfile = /Users/janrobertschmidt/.gitignore
