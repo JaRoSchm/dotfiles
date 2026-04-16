@@ -19,8 +19,6 @@ vim.pack.add({
   'https://github.com/tpope/vim-repeat',
 
   'https://github.com/majutsushi/tagbar',
-  -- auto close parentheses
-  'https://github.com/cohama/lexima.vim',
   'https://github.com/lervag/vimtex',
   'https://github.com/zbirenbaum/copilot.lua',
   'https://github.com/neomake/neomake',
@@ -60,6 +58,8 @@ vim.pack.add({
 
   -- statusline
   'https://github.com/nvim-lualine/lualine.nvim',
+
+  'https://github.com/nvim-mini/mini.nvim',
 })
 
 -- see https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#update
@@ -107,6 +107,11 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   pattern = { '*' },
   command = [[%s/\s\+$//e]],
 })
+
+-- automatically cd to project root
+require('mini.misc').setup()
+MiniMisc.setup_auto_root()
+MiniMisc.setup_termbg_sync()
 
 -- use system clipboard
 vim.opt.clipboard = 'unnamedplus'
@@ -413,7 +418,6 @@ require('snippets').setup({
   friendly_snippets = true,
 })
 
--- CONTINUE HERE
 -- completion config
 local cmp = require('cmp')
 
@@ -522,6 +526,7 @@ cmp.setup.cmdline(':', {
 --       auto_show = true,
 --     },
 --   },
+--   signature = { enabled = true },
 -- })
 
 -- copilot.vim
@@ -585,9 +590,9 @@ require('lualine').setup({
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
-    lualine_c = {
-      { 'buffers', mode = 4 },
-    },
+    -- lualine_c = {
+    --   { 'buffers', mode = 4 },
+    -- },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
@@ -600,21 +605,21 @@ require('telescope').setup()
 -- oil
 require('oil').setup()
 
--- lexima
-vim.fn['lexima#add_rule']({
-  char = '$',
-  input_after = '$',
-  filetype = { 'tex' },
-})
-vim.fn['lexima#add_rule']({
-  char = '$',
-  at = [[\%#\$]],
-  leave = 1,
-  filetype = { 'tex' },
-})
-vim.fn['lexima#add_rule']({
-  char = '<BS>',
-  at = [[\$\%#\$]],
-  delete = 1,
-  filetype = { 'tex' },
+-- mini.nvim plugins
+require('mini.pairs').setup()
+require('mini.indentscope').setup(
+  {
+    draw = {
+      animation = require('mini.indentscope').gen_animation.none(),
+    },
+  }
+)
+
+require('mini.starter').setup()
+require('mini.icons').setup()
+require('mini.tabline').setup({
+  format = function(buf_id, label)
+    local suffix = vim.bo[buf_id].modified and '+ ' or ''
+    return buf_id .. ':' .. MiniTabline.default_format(buf_id, label) .. suffix
+  end,
 })

@@ -131,14 +131,19 @@ dependencies = { zuban = "*" }
 exposed = { zmypy = "zmypy", zuban = "zuban", zubanls = "zubanls" }
 
 [envs.opencode]
-channels = ["https://prefix.dev/github-releases", "conda-forge"]
-dependencies = { opencode = "*" , nodejs = "*" }
+channels = ["https://prefix.dev/github-releases"]
+dependencies = { opencode = "*" }
 exposed = { opencode = "opencode" }
 
 [envs.tree-sitter-cli]
 channels = ["conda-forge"]
 dependencies = { tree-sitter-cli = "*" }
 exposed = { tree-sitter = "tree-sitter" }
+
+[envs.pi-coding-agent]
+channels = ["conda-forge"]
+dependencies = { pi-coding-agent = "*" }
+exposed = { pi = "pi" }
 
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
