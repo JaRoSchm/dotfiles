@@ -145,6 +145,11 @@ channels = ["conda-forge"]
 dependencies = { pi-coding-agent = "*" }
 exposed = { pi = "pi" }
 
+[envs.qpdf]
+channels = ["conda-forge"]
+dependencies = { qpdf = "*" }
+exposed = { fix-qdf = "fix-qdf", qpdf = "qpdf", zlib-flate = "zlib-flate" }
+
 # [envs.python-lsp-server-base]
 # channels = ["conda-forge"]
 # dependencies = { python-lsp-server-base = "*", pylsp-rope = "*" }

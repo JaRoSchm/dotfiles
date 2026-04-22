@@ -615,7 +615,6 @@ require('mini.indentscope').setup(
   }
 )
 
-require('mini.starter').setup()
 require('mini.icons').setup()
 require('mini.tabline').setup({
   format = function(buf_id, label)
