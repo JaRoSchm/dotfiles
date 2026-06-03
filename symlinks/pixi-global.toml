@@ -128,7 +128,7 @@ exposed = { zellij = "zellij" }
 [envs.zuban]
 channels = ["conda-forge"]
 dependencies = { zuban = "*" }
-exposed = { zmypy = "zmypy", zuban = "zuban", zubanls = "zubanls" }
+exposed = { zmypy = "zmypy", zuban = "zuban" }
 
 [envs.opencode]
 channels = ["https://prefix.dev/github-releases"]
