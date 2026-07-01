@@ -3,12 +3,12 @@ authors = ["Jan Möseritz-Schmidt <jan.moeseritz-schmidt@tu-dresden.de>"]
 channels = ["conda-forge"]
 description = "Add a short description here"
 name = "CPG_stable"
-platforms = ["linux-64", "osx-arm64"]
+platforms = [
+  "linux-64",
+  { platform = "osx-arm64", macos = "26.0" },
+]
 version = "0.1.0"
 preview = ["pixi-build"]
-
-[system-requirements]
-macos = "26.0"
 
 [tasks]
 

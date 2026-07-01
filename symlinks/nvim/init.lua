@@ -20,7 +20,14 @@ vim.pack.add({
 
   'https://github.com/majutsushi/tagbar',
   'https://github.com/lervag/vimtex',
+  -- suggestions from any provider
+  -- 'https://github.com/milanglacier/minuet-ai.nvim',
+  -- suggestions from copilot
   'https://github.com/zbirenbaum/copilot.lua',
+  -- for nes functionality with copilot.lua
+  'https://github.com/copilotlsp-nvim/copilot-lsp',
+  -- suggestions from copilot + agents
+  -- 'https://github.com/folke/sidekick.nvim',
   'https://github.com/neomake/neomake',
   'https://github.com/lewis6991/gitsigns.nvim',
   -- edit filesystem like a file
@@ -276,6 +283,9 @@ vim.lsp.config('ty', {
       inlayHints = {
         variableTypes = false,
       },
+      completions = {
+        completeFunctionParentheses = true,
+      },
     },
   }
 })
@@ -397,6 +407,17 @@ vim.lsp.config('lua_ls', {
   }
 })
 vim.lsp.enable('lua_ls')
+
+vim.lsp.config('yamlls', {
+  settings = {
+    yaml = {
+      format = {
+        bracketSpacing = true,
+      },
+    },
+  },
+})
+vim.lsp.enable('yamlls')
 
 null_ls = require('null-ls')
 null_ls.setup({
@@ -529,13 +550,6 @@ cmp.setup.cmdline(':', {
 --   signature = { enabled = true },
 -- })
 
--- copilot.vim
--- vim.keymap.set('i', '<Right>', 'copilot#Accept("\\<CR>")', {
---   expr = true,
---   replace_keycodes = false
--- })
--- vim.g.copilot_no_tab_map = true
-
 -- copilot.lua
 require('copilot').setup({
   suggestion = {
@@ -544,8 +558,62 @@ require('copilot').setup({
     keymap = {
       accept = '<Right>',
     },
+  },
+  nes = {
+    enabled = true,
+    keymap = {
+      accept = '<leader>y',
+      dismiss = '<Esc>'
+    },
   }
 })
+require('copilot-lsp').setup({})
+
+-- sidekick.nvim
+-- require('copilot').setup({})
+-- vim.lsp.enable('copilot-language-server')
+-- require('sidekick').setup({})
+
+-- minuet-ai.nvim
+-- require('minuet').setup({
+--   provider = 'openai_compatible',
+--   n_completions = 1,
+--   -- number of characters before and after the cursor to send as context
+--   context_window = 16000,
+--   provider_options = {
+--     openai_compatible = {
+--       api_key = 'SCADS_AI_API_KEY',
+--       end_point = 'https://llm.scads.ai/v1/chat/completions',
+--       model = 'alias-code',
+--       name = 'TUD:AI',
+--     },
+--   },
+--   cmp = {
+--     enable_auto_complete = false,
+--   },
+--   blink = {
+--     enable_auto_complete = false,
+--   },
+--   virtualtext = {
+--     auto_trigger_ft = { '*'},
+--     keymap = {
+--       accept = '<Right>',
+--       accept_line = '<C-Right>',
+--     },
+--     show_on_completion_menu = true,
+--   },
+--   duet = {
+--     provider = 'openai_compatible',
+--     provider_options = {
+--       openai_compatible = {
+--         api_key = 'SCADS_AI_API_KEY',
+--         end_point = 'https://llm.scads.ai/v1/chat/completions',
+--         model = 'alias-ha',
+--         name = 'TUD:AI',
+--       }
+--     }
+--   },
+-- })
 
 -- vimtex
 vim.g.tex_flavor = 'latex'
